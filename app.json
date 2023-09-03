@@ -4,27 +4,24 @@
     "slug": "Tern",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./app/assets/logo-icon.png",
+    "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./app/assets/logo-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./app/assets/adaptive-icon .png",
+        "backgroundColor": "#000"
       }
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
+    "plugins": ["expo-router"],
+    "scheme": "tern"
   }
 }
