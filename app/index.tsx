@@ -1,5 +1,6 @@
-import Home from "./screens/Home";
+import { Redirect } from "expo-router";
 
-export default function Page() {
-  return <Home />;
-}
+const App = () => {
+  return <Redirect href="/Home" />;
+};
+export default App;

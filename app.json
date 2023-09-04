@@ -4,10 +4,10 @@
     "slug": "Tern",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/logo-icon.png",
+    "icon": "./assets/logo-icon.png",
     "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./app/assets/splash-screen-image.png",
+      "image": "./assets/splash-screen-image.png",
       "resizeMode": "cover",
       "backgroundColor": "#00000"
     },
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/assets/adaptive-icon .png",
+        "foregroundImage": "./assets/adaptive-icon .png",
         "backgroundColor": "#00000"
       }
     },
