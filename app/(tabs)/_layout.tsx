@@ -1,5 +1,6 @@
 import { Tabs } from "expo-router";
-import { Text } from "react-native";
+import { Icon } from "@gluestack-ui/themed";
+import { Home, StickyNote, User, Wrench } from "lucide-react-native";
 
 const TabLayout = () => {
   return (
@@ -7,10 +8,8 @@ const TabLayout = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          borderRadius: 12,
-          margin: 10,
-          position: "absolute",
-          paddingBottom: 6,
+          backgroundColor: "black",
+          borderTopWidth: 0,
         },
       }}
     >
@@ -18,28 +17,28 @@ const TabLayout = () => {
         name="Home"
         options={{
           title: "Home",
-          tabBarIcon: () => <Text>🐱</Text>,
+          tabBarIcon: () => <Icon as={Home} color={"white"} />,
         }}
       />
       <Tabs.Screen
         name="Garage"
         options={{
           title: "Garage",
-          tabBarIcon: () => <Text>🐶</Text>,
+          tabBarIcon: () => <Icon as={Wrench} color={"white"} />,
         }}
       />
       <Tabs.Screen
         name="Journal"
         options={{
           title: "Journal",
-          tabBarIcon: () => <Text>🐶</Text>,
+          tabBarIcon: () => <Icon as={StickyNote} color={"white"} />,
         }}
       />
       <Tabs.Screen
         name="Profile"
         options={{
           title: "Profile",
-          tabBarIcon: () => <Text>🐶</Text>,
+          tabBarIcon: () => <Icon as={User} color={"white"} />,
         }}
       />
     </Tabs>

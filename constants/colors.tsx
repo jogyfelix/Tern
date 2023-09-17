@@ -1,3 +1,4 @@
 export default {
-  DARK_BACKGROUND: "#000000",
+  BLACK: "#000000",
+  WHITE: "#FFFFFF",
 };
