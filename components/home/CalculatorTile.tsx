@@ -4,9 +4,15 @@ import { Fuel } from "lucide-react-native";
 import { Icon } from "@gluestack-ui/themed";
 import { config } from "../../gluestack-style.config";
 
-const CalculatorTile = ({ label }: { label: string }) => {
+const CalculatorTile = ({
+  label,
+  onPress,
+}: {
+  label: string;
+  onPress: () => void;
+}) => {
   return (
-    <ParentView>
+    <ParentView onPress={onPress}>
       <IconParent>
         <Icon as={Fuel} color={config.tokens.colors.primary} size="lg" />
       </IconParent>
