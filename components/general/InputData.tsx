@@ -1,32 +1,38 @@
 import {
-  Icon,
   Input,
   InputField,
   InputIcon,
   InputSlot,
   VStack,
 } from "@gluestack-ui/themed";
-import { Fuel } from "lucide-react-native";
-import { config } from "../../gluestack-style.config";
+import { Menu } from "lucide-react-native";
 import { Text } from "react-native";
+import colors from "../../constants/colors";
+import fonts from "../../constants/fonts";
 
-const InputData = () => {
+const InputData = ({ title }: { title: string }) => {
   return (
     <VStack>
-      <Text style={{ color: "white" }}>Hello</Text>
+      <Text
+        style={{
+          color: colors.white,
+          marginBottom: 6,
+          fontFamily: fonts.default,
+        }}
+      >
+        {title}
+      </Text>
       <Input
         variant="outline"
-        size="lg"
+        size="xl"
         isDisabled={false}
         isInvalid={false}
         isReadOnly={false}
-        style={{ borderColor: "white" }}
+        style={{ borderColor: "white", borderRadius: 8 }}
       >
-        <InputField placeholder="Hello" placeholderTextColor={"green"} />
-        <InputSlot>
-          <InputIcon>
-            <Icon as={Fuel} color={config.tokens.colors.primary} size="lg" />
-          </InputIcon>
+        <InputField />
+        <InputSlot paddingEnd={6} onPress={() => console.log("clicked")}>
+          <InputIcon as={Menu} color={colors.white} />
         </InputSlot>
       </Input>
     </VStack>

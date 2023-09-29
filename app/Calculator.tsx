@@ -7,10 +7,10 @@ import PrimaryBtn from "../components/general/PrimaryBtn";
 
 const Calculator = () => {
   return (
-    <ParentView type="flex-start">
+    <ParentView type="space-between">
       <CalculatorMain />
-      <InputData />
-      <InputData />
+      <InputData title="Cost/liter" />
+      <InputData title="Distance" />
       <SliderData />
       <PrimaryBtn />
     </ParentView>

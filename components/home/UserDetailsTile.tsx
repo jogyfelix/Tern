@@ -1,6 +1,7 @@
 import { styled } from "@gluestack-style/react";
 import { View } from "react-native";
 import { Text } from "react-native";
+import colors from "../../constants/colors";
 
 const UserDetailsTile = ({
   name,
@@ -38,7 +39,7 @@ const Question = styled(Text, {
 });
 
 const Avatar = styled(View, {
-  bg: "$primary",
+  bg: colors.primary,
   h: 48,
   w: 48,
   borderRadius: 48,

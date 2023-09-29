@@ -3,6 +3,7 @@ import { Pressable, View, Text } from "react-native";
 import { Fuel } from "lucide-react-native";
 import { Icon } from "@gluestack-ui/themed";
 import { config } from "../../gluestack-style.config";
+import colors from "../../constants/colors";
 
 const CalculatorTile = ({
   label,
@@ -23,7 +24,7 @@ const CalculatorTile = ({
 
 const ParentView = styled(Pressable, {
   h: 80,
-  bg: "$tileBg",
+  bg: colors.cardBg,
   borderRadius: 16,
   alignItems: "center",
   flexDirection: "row",
@@ -31,13 +32,13 @@ const ParentView = styled(Pressable, {
 });
 
 const IconParent = styled(View, {
-  bg: "$tileImageBgDark",
+  bg: colors.black1,
   borderRadius: 22,
   padding: 16,
 });
 
 const Title = styled(Text, {
-  color: "$white",
+  color: colors.white,
   fontFamily: "Alata-Regular",
   fontSize: 20,
   marginStart: 16,
