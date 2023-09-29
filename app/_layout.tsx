@@ -1,6 +1,5 @@
 import {
   GluestackUIProvider,
-  Icon,
   StyledProvider,
   config,
 } from "@gluestack-ui/themed";
@@ -9,7 +8,7 @@ import { config as styledConfig } from "../gluestack-style.config";
 
 const BaseStackLayout = () => (
   <GluestackUIProvider config={config.theme}>
-    <StyledProvider config={styledConfig}>
+    <StyledProvider config={config.theme}>
       <Stack screenOptions={{ statusBarColor: "black" }}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
@@ -18,6 +17,7 @@ const BaseStackLayout = () => (
             headerTitleAlign: "center",
             headerStyle: { backgroundColor: "black" },
             headerTintColor: "white",
+            headerTitleStyle: { fontFamily: "Alata-Regular" },
           }}
         />
       </Stack>

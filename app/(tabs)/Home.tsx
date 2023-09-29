@@ -7,7 +7,7 @@ import { useRouter } from "expo-router";
 const Home = () => {
   const navigation = useRouter();
   return (
-    <ParentView>
+    <ParentView type="space-between">
       <UserDetailsTile
         name="Jogy Felix"
         question="How’s your day ? blah blah"
