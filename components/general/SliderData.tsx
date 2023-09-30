@@ -10,6 +10,7 @@ import {
 import { Text, View } from "react-native";
 import colors from "../../constants/colors";
 import fonts from "../../constants/fonts";
+import dimensions from "../../constants/dimensions";
 
 const SliderData = () => {
   return (
@@ -28,7 +29,7 @@ const SliderData = () => {
           paddingTop: 24,
           paddingBottom: 8,
           paddingHorizontal: 16,
-          borderRadius: 8,
+          borderRadius: dimensions.inputBorder,
           borderWidth: 1,
           borderColor: colors.borderColor,
         }}

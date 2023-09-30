@@ -4,20 +4,21 @@ import {
   config,
 } from "@gluestack-ui/themed";
 import { Stack } from "expo-router";
-import { config as styledConfig } from "../gluestack-style.config";
+import fonts from "../constants/fonts";
+import colors from "../constants/colors";
 
 const BaseStackLayout = () => (
   <GluestackUIProvider config={config.theme}>
     <StyledProvider config={config.theme}>
-      <Stack screenOptions={{ statusBarColor: "black" }}>
+      <Stack screenOptions={{ statusBarColor: colors.black }}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
           name="Calculator"
           options={{
             headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "black" },
+            headerStyle: { backgroundColor: colors.black },
             headerTintColor: "white",
-            headerTitleStyle: { fontFamily: "Alata-Regular" },
+            headerTitleStyle: { fontFamily: fonts.default },
           }}
         />
       </Stack>

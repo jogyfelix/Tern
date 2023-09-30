@@ -1,5 +1,6 @@
 import { styled } from "@gluestack-style/react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import dimensions from "../../constants/dimensions";
 
 const ParentView = ({
   type = "space-between",
@@ -14,8 +15,7 @@ const ParentView = ({
 const View = styled(SafeAreaView, {
   backgroundColor: "black",
   flex: 1,
-
-  padding: 16,
+  padding: dimensions.defaultParentPadding,
 });
 
 export default ParentView;

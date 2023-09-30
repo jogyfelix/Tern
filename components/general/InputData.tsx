@@ -9,6 +9,7 @@ import { Menu } from "lucide-react-native";
 import { Text } from "react-native";
 import colors from "../../constants/colors";
 import fonts from "../../constants/fonts";
+import dimensions from "../../constants/dimensions";
 
 const InputData = ({
   title,
@@ -36,7 +37,7 @@ const InputData = ({
         isInvalid={false}
         isReadOnly={false}
         borderColor={colors.borderColor}
-        style={{ borderRadius: 8 }}
+        borderRadius={dimensions.inputBorder}
       >
         <InputField
           bg={colors.cardBg1}

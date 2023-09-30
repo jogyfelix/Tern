@@ -2,8 +2,8 @@ import { styled } from "@gluestack-style/react";
 import { Pressable, View, Text } from "react-native";
 import { Fuel } from "lucide-react-native";
 import { Icon } from "@gluestack-ui/themed";
-import { config } from "../../gluestack-style.config";
 import colors from "../../constants/colors";
+import dimensions from "../../constants/dimensions";
 
 const CalculatorTile = ({
   label,
@@ -15,7 +15,7 @@ const CalculatorTile = ({
   return (
     <ParentView onPress={onPress}>
       <IconParent>
-        <Icon as={Fuel} color={config.tokens.colors.primary} size="lg" />
+        <Icon as={Fuel} color={colors.primary} size="lg" />
       </IconParent>
       <Title>{label}</Title>
     </ParentView>
@@ -25,7 +25,7 @@ const CalculatorTile = ({
 const ParentView = styled(Pressable, {
   h: 80,
   bg: colors.cardBg,
-  borderRadius: 16,
+  borderRadius: dimensions.cardBorder,
   alignItems: "center",
   flexDirection: "row",
   paddingStart: 16,
