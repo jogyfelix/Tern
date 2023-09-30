@@ -4,7 +4,11 @@ export default {
   secondary1: "#3D655D",
   secondary2: "#33484D",
   black: "#000000",
+  black1: "#08090A",
   white: "#FFFFFF",
   cardBg: "#1B1B1D",
-  black1: "#08090A",
+  cardBg1: "#131313",
+  borderColor: "#2F2F2F",
+  text: "#DBDBDB",
+  text1: "#848484",
 };

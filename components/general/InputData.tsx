@@ -10,30 +10,48 @@ import { Text } from "react-native";
 import colors from "../../constants/colors";
 import fonts from "../../constants/fonts";
 
-const InputData = ({ title }: { title: string }) => {
+const InputData = ({
+  title,
+  placeholder,
+  enableMenu = false,
+}: {
+  title: string;
+  placeholder: string;
+  enableMenu?: boolean;
+}) => {
   return (
-    <VStack>
+    <VStack space="sm">
       <Text
         style={{
           color: colors.white,
-          marginBottom: 6,
           fontFamily: fonts.default,
         }}
       >
         {title}
       </Text>
       <Input
-        variant="outline"
-        size="xl"
+        variant="rounded"
+        size="lg"
         isDisabled={false}
         isInvalid={false}
         isReadOnly={false}
-        style={{ borderColor: "white", borderRadius: 8 }}
+        borderColor={colors.borderColor}
+        style={{ borderRadius: 8 }}
       >
-        <InputField />
-        <InputSlot paddingEnd={6} onPress={() => console.log("clicked")}>
-          <InputIcon as={Menu} color={colors.white} />
-        </InputSlot>
+        <InputField
+          bg={colors.cardBg1}
+          placeholder={placeholder}
+          paddingStart={4}
+        />
+        {enableMenu && (
+          <InputSlot
+            bg={colors.cardBg1}
+            paddingEnd={6}
+            onPress={() => console.log("clicked")}
+          >
+            <InputIcon as={Menu} color={colors.text} />
+          </InputSlot>
+        )}
       </Input>
     </VStack>
   );
