@@ -4,29 +4,17 @@ import CalculatorMain from '../components/calculator/CalculatorMain';
 import InputData from '../components/general/InputData';
 import PrimaryBtn from '../components/general/PrimaryBtn';
 import SliderData from '../components/general/SliderData';
-import {
-  Actionsheet,
-  ActionsheetBackdrop,
-  ActionsheetContent,
-  Icon,
-  VStack,
-  ActionsheetDragIndicatorWrapper,
-  ActionsheetDragIndicator,
-  RadioGroup,
-  RadioIndicator,
-  RadioLabel,
-  RadioIcon,
-  Radio,
-  HStack,
-} from '@gluestack-ui/themed';
+import { Icon, VStack } from '@gluestack-ui/themed';
 import { useNavigation } from 'expo-router';
 import colors from '../constants/colors';
 import { Pressable } from 'react-native';
-import { CircleIcon, Menu } from 'lucide-react-native';
+import { Menu } from 'lucide-react-native';
+import CalculatorSettings from '../components/calculator/CalculatorSettings';
 
 const Calculator = (): ReactNode => {
   const navigation = useNavigation();
   const [showMenu, setShowMenu] = useState(false);
+  const [settings, setSettings] = useState(['IND (₹)', 'Kilometers', 'Liters']);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -50,37 +38,13 @@ const Calculator = (): ReactNode => {
         <SliderData />
       </VStack>
       <PrimaryBtn />
-      <Actionsheet
+      <CalculatorSettings
         isOpen={showMenu}
         onClose={() => {
           setShowMenu(false);
         }}
-        zIndex={999}
-      >
-        <ActionsheetBackdrop />
-        <ActionsheetContent zIndex={999} bgColor={colors.cardBg} alignItems="flex-start">
-          <ActionsheetDragIndicatorWrapper>
-            <ActionsheetDragIndicator />
-          </ActionsheetDragIndicatorWrapper>
-
-          <RadioGroup>
-            <HStack space="2xl" backgroundColor="red">
-              <Radio value="Credit Card">
-                <RadioIndicator>
-                  <RadioIcon as={CircleIcon} />
-                </RadioIndicator>
-                <RadioLabel>Credit Card</RadioLabel>
-              </Radio>
-              <Radio value="Cash On Delivery">
-                <RadioIndicator>
-                  <RadioIcon as={CircleIcon} />
-                </RadioIndicator>
-                <RadioLabel>Cash On Delivery</RadioLabel>
-              </Radio>
-            </HStack>
-          </RadioGroup>
-        </ActionsheetContent>
-      </Actionsheet>
+        setSettings={setSettings}
+      />
     </ParentView>
   );
 };
