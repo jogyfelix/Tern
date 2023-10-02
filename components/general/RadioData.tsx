@@ -1,6 +1,6 @@
-import React, { type Dispatch, type SetStateAction, type ReactNode } from 'react';
-import { RadioGroup, RadioIndicator, RadioLabel, RadioIcon, Radio, HStack } from '@gluestack-ui/themed';
-import { Circle } from 'lucide-react-native';
+import React, { type Dispatch, type SetStateAction, type ReactElement } from 'react';
+import { RadioGroup, RadioIndicator, RadioLabel, RadioIcon, Radio, HStack, styled } from '@gluestack-ui/themed';
+import { CircleIcon } from 'lucide-react-native';
 import { Text } from 'react-native';
 import fonts from '../../constants/fonts';
 import colors from '../../constants/colors';
@@ -8,25 +8,21 @@ import colors from '../../constants/colors';
 interface Props {
   data: string[];
   title: string;
-  setSettings: Dispatch<SetStateAction<string[]>>;
+  defaultValue: string;
+  setValue: Dispatch<SetStateAction<string>>;
 }
 
-const RadioData = ({ data, title, setSettings }: Props): ReactNode => {
+const RadioData = ({ data, title, defaultValue = '', setValue }: Props): ReactElement => {
   return (
-    <RadioGroup>
-      <Text style={{ fontFamily: fonts.default, color: colors.white, fontSize: 20, marginBottom: 12 }}>{title} :</Text>
+    <RadioGroup value={defaultValue} onChange={setValue}>
+      <Title>{title} :</Title>
       <HStack space="xl">
         {data.map((value, index) => {
           return (
-            <Radio
-              value={value}
-              onChange={(isSelected) => {
-                console.log(value, 'selected');
-              }}
-              key={index}
-              size="sm"
-            >
-              <RadioIndicator></RadioIndicator>
+            <Radio value={value} key={index} size="sm">
+              <RadioIndicator borderColor={colors.text1}>
+                <RadioIcon as={CircleIcon} fill={colors.primary} />
+              </RadioIndicator>
               <RadioLabel marginStart={4} fontFamily={fonts.default} color={colors.text} fontSize={16}>
                 {value}
               </RadioLabel>
@@ -38,4 +34,6 @@ const RadioData = ({ data, title, setSettings }: Props): ReactNode => {
   );
 };
 
-export default RadioData;
+const Title = styled(Text, { fontFamily: fonts.default, color: colors.white, fontSize: 20, marginBottom: 12 });
+
+export default React.memo(RadioData);

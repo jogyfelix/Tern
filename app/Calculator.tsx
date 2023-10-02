@@ -1,4 +1,4 @@
-import React, { type ReactNode, useLayoutEffect, useState } from 'react';
+import React, { type ReactElement, useLayoutEffect, useState } from 'react';
 import ParentView from '../components/general/ParentView';
 import CalculatorMain from '../components/calculator/CalculatorMain';
 import InputData from '../components/general/InputData';
@@ -11,10 +11,12 @@ import { Pressable } from 'react-native';
 import { Menu } from 'lucide-react-native';
 import CalculatorSettings from '../components/calculator/CalculatorSettings';
 
-const Calculator = (): ReactNode => {
+const Calculator = (): ReactElement => {
   const navigation = useNavigation();
   const [showMenu, setShowMenu] = useState(false);
-  const [settings, setSettings] = useState(['IND (₹)', 'Kilometers', 'Liters']);
+  const [currency, setCurrency] = useState('IND (₹)');
+  const [distanceUnit, setDistanceUnit] = useState('Kilometers');
+  const [fuelUnit, setFuelUnit] = useState('Liters');
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -43,7 +45,12 @@ const Calculator = (): ReactNode => {
         onClose={() => {
           setShowMenu(false);
         }}
-        setSettings={setSettings}
+        currency={currency}
+        distanceUnit={distanceUnit}
+        fuelUnit={fuelUnit}
+        setCurrency={setCurrency}
+        setDistanceUnit={setDistanceUnit}
+        setFuelUnit={setFuelUnit}
       />
     </ParentView>
   );

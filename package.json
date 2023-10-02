@@ -18,8 +18,8 @@
     ]
   },
   "dependencies": {
-    "@gluestack-style/react": "^0.2.47",
-    "@gluestack-ui/themed": "^0.1.44",
+    "@gluestack-style/react": "^0.2.51",
+    "@gluestack-ui/themed": "^0.1.53",
     "@gluestack-ui/utils": "^0.1.9",
     "expo": "~49.0.8",
     "expo-constants": "~14.4.2",

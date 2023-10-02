@@ -1,4 +1,4 @@
-import React, { type Dispatch, type SetStateAction, type ReactNode } from 'react';
+import React, { type Dispatch, type SetStateAction, type ReactElement, useMemo } from 'react';
 import {
   Actionsheet,
   ActionsheetBackdrop,
@@ -9,15 +9,37 @@ import {
 } from '@gluestack-ui/themed';
 import colors from '../../constants/colors';
 import RadioData from '../general/RadioData';
-import SecondaryBtn from '../general/SecondaryBtn';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  setSettings: Dispatch<SetStateAction<string[]>>;
+  currency: string;
+  distanceUnit: string;
+  fuelUnit: string;
+  setCurrency: Dispatch<SetStateAction<string>>;
+  setDistanceUnit: Dispatch<SetStateAction<string>>;
+  setFuelUnit: Dispatch<SetStateAction<string>>;
 }
 
-const CalculatorSettings = ({ isOpen, onClose, setSettings }: Props): ReactNode => {
+const CalculatorSettings = ({
+  isOpen,
+  onClose,
+  currency,
+  distanceUnit,
+  fuelUnit,
+  setCurrency,
+  setDistanceUnit,
+  setFuelUnit,
+}: Props): ReactElement => {
+  const MemoizedCurrency = useMemo(() => {
+    return <RadioData data={['IND (₹)', 'USD ($)', 'GBP (£)']} title="Currency" defaultValue={currency} setValue={setCurrency} />;
+  }, [currency]);
+  const MemoizedDistance = useMemo(() => {
+    return <RadioData data={['Miles', 'Kilometers']} title="Distance Unit" defaultValue={distanceUnit} setValue={setDistanceUnit} />;
+  }, [distanceUnit]);
+  const MemoizedFuel = useMemo(() => {
+    return <RadioData data={['Liters', 'Gallons']} title="Fuel Unit" defaultValue={fuelUnit} setValue={setFuelUnit} />;
+  }, [fuelUnit]);
   return (
     <Actionsheet isOpen={isOpen} onClose={onClose} zIndex={999}>
       <ActionsheetBackdrop />
@@ -25,13 +47,10 @@ const CalculatorSettings = ({ isOpen, onClose, setSettings }: Props): ReactNode 
         <ActionsheetDragIndicatorWrapper>
           <ActionsheetDragIndicator />
         </ActionsheetDragIndicatorWrapper>
-        <VStack space="4xl" w={'100%'} flex={1} padding={16}>
-          <VStack space="4xl" marginBottom={24}>
-            <RadioData data={['IND (₹)', 'USD ($)', 'GBP (£)']} title="Currency" />
-            <RadioData data={['Miles', 'Kilometers']} title="Distance Unit" />
-            <RadioData data={['Liters', 'Gallons']} title="Fuel Unit" />
-          </VStack>
-          <SecondaryBtn title="Save" />
+        <VStack space="4xl" w={'100%'} padding={16}>
+          {MemoizedCurrency}
+          {MemoizedDistance}
+          {MemoizedFuel}
         </VStack>
       </ActionsheetContent>
     </Actionsheet>
