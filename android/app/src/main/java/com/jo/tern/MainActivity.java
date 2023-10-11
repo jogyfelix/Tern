@@ -1,4 +1,4 @@
-package com.tern;
+package com.jo.tern;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

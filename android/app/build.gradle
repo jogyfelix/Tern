@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.tern"
+    namespace "com.jo.tern"
     defaultConfig {
-        applicationId "com.tern"
+        applicationId "com.jo.tern"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 5
