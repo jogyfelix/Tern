@@ -1,6 +1,6 @@
 import React, { type ReactElement, useLayoutEffect, useState } from 'react';
 import { Badge, BadgeText, Icon, VStack } from '@gluestack-ui/themed';
-import { Pressable, StatusBar, TouchableOpacity } from 'react-native';
+import { Pressable, StatusBar, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { Menu } from 'lucide-react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ParentView from '../../components/general/ParentView';
@@ -36,6 +36,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [sharePerPerson, setSharePerPerson] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
+  const { height } = useWindowDimensions();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -67,9 +68,8 @@ const Calculator = ({ navigation }: Props): ReactElement => {
     <ParentView type="space-between">
       <StatusBar backgroundColor={theme.COLORS.black} />
       <KeyboardAwareScrollView
-        // style={{marginTop: 16}}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ justifyContent: 'space-between', flex: 1 }}
+        contentContainerStyle={{ justifyContent: 'space-around', height: height / 1.2 }}
       >
         <CalculatorMain
           totalPrice={totalPrice}
