@@ -1,17 +1,16 @@
-import React, {type ReactElement, useLayoutEffect, useState} from 'react';
-import {Icon, VStack} from '@gluestack-ui/themed';
-import {Pressable, StatusBar} from 'react-native';
-import {Menu} from 'lucide-react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import React, { type ReactElement, useLayoutEffect, useState } from 'react';
+import { Icon, VStack } from '@gluestack-ui/themed';
+import { Pressable, StatusBar } from 'react-native';
+import { Menu } from 'lucide-react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ParentView from '../../components/general/ParentView';
 import CalculatorMain from '../../components/calculator/CalculatorMain';
 import InputData from '../../components/general/InputData';
-import SliderData from '../../components/general/SliderData';
 import PrimaryBtn from '../../components/general/PrimaryBtn';
 import CalculatorSettings from '../../components/calculator/CalculatorSettings';
 import NumberOfPeopleInput from '../../components/calculator/NumberOfPeopleInput';
-import {NavigationProp, ParamListBase} from '@react-navigation/native';
-import {theme} from '../../constants/theme';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { theme } from '../../constants/theme';
 
 interface Props {
   navigation: NavigationProp<ParamListBase>;
@@ -25,7 +24,7 @@ const TopMenu = (onPress: () => void) => {
   );
 };
 
-const Calculator = ({navigation}: Props): ReactElement => {
+const Calculator = ({ navigation }: Props): ReactElement => {
   const [showMenu, setShowMenu] = useState(false);
   const [showCustomPeople, setCustomPeople] = useState(false);
   const [currency, setCurrency] = useState('IND (₹)');
@@ -33,7 +32,7 @@ const Calculator = ({navigation}: Props): ReactElement => {
   const [fuelPrice, setFuelPrice] = useState(0);
   const [distance, setDistance] = useState(0);
   const [fuelEffeciency, setFuelEffeciency] = useState(0);
-  const [numberOfPeople, setNumberOfPeople] = useState(1);
+  const [numberOfPeople, setNumberOfPeople] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [sharePerPerson, setSharePerPerson] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
@@ -67,20 +66,22 @@ const Calculator = ({navigation}: Props): ReactElement => {
   return (
     <ParentView type="space-between">
       <StatusBar backgroundColor={theme.COLORS.black} />
-      <CalculatorMain
-        totalPrice={totalPrice}
-        sharePerPerson={sharePerPerson}
-        totalQuantity={totalQuantity}
-        fuelPrice={fuelPrice}
-        numberOfPeople={numberOfPeople}
-        currency={currency}
-        distanceUnit={distanceUnit}
-      />
-
       <KeyboardAwareScrollView
-        style={{marginTop: 16}}
-        showsVerticalScrollIndicator={false}>
-        <VStack space="lg" paddingBottom={24}>
+        // style={{marginTop: 16}}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ justifyContent: 'space-between', flex: 1 }}
+      >
+        <CalculatorMain
+          totalPrice={totalPrice}
+          sharePerPerson={sharePerPerson}
+          totalQuantity={totalQuantity}
+          fuelPrice={fuelPrice}
+          numberOfPeople={numberOfPeople}
+          currency={currency}
+          distanceUnit={distanceUnit}
+        />
+
+        <VStack space="lg">
           <InputData
             title="Fuel Price"
             placeholder="Fuel price (per liter/gallon)"
@@ -106,14 +107,22 @@ const Calculator = ({navigation}: Props): ReactElement => {
               setDistance(Number(value));
             }}
           />
-          <SliderData
+          <InputData
+            title="Distance"
+            placeholder="Number of people"
+            value={numberOfPeople.toString()}
+            setValue={(value: string) => {
+              setNumberOfPeople(Number(value));
+            }}
+          />
+          {/* <SliderData
             setValue={setNumberOfPeople}
             setCustom={setCustomPeople}
-          />
+          /> */}
         </VStack>
-      </KeyboardAwareScrollView>
-      <PrimaryBtn onPress={calculations} />
 
+        <PrimaryBtn onPress={calculations} />
+      </KeyboardAwareScrollView>
       <CalculatorSettings
         isOpen={showMenu}
         onClose={() => {

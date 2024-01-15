@@ -1,9 +1,9 @@
-import {styled} from '@gluestack-style/react';
-import {Text, View, useWindowDimensions} from 'react-native';
-import {Divider, HStack} from '@gluestack-ui/themed';
+import { styled } from '@gluestack-style/react';
+import { Text, View, useWindowDimensions } from 'react-native';
+import { Divider, HStack } from '@gluestack-ui/themed';
 import Calc from '../../../assets/svg/calculator-abstract.svg';
-import React, {type ReactElement} from 'react';
-import {theme} from '../../constants/theme';
+import React, { type ReactElement } from 'react';
+import { theme } from '../../constants/theme';
 
 interface Props {
   fuelPrice: number;
@@ -24,10 +24,10 @@ const CalculatorMain = ({
   currency,
   distanceUnit,
 }: Props): ReactElement => {
-  const {height} = useWindowDimensions();
+  const { height } = useWindowDimensions();
   return (
-    <Parent height={height / 2.8}>
-      <View style={{position: 'absolute', end: 0, top: 0}}>
+    <Parent height={height / 3}>
+      <View style={{ position: 'absolute', end: 0, top: 0 }}>
         <Calc />
       </View>
 
@@ -35,17 +35,10 @@ const CalculatorMain = ({
         style={{
           flex: 1,
           justifyContent: 'flex-end',
-        }}>
-        <TextComponent
-          fontSize={48}
-          textAlign="center"
-          numberOfLines={1}
-          ellipsizeMode="tail">
-          {currency.startsWith('I')
-            ? '₹'
-            : currency.startsWith('U')
-            ? '$'
-            : '£'}
+        }}
+      >
+        <TextComponent fontSize={48} textAlign="center" numberOfLines={1} ellipsizeMode="tail">
+          {currency.startsWith('I') ? '₹' : currency.startsWith('U') ? '$' : '£'}
           {totalPrice}
         </TextComponent>
         <TextComponent
@@ -53,7 +46,8 @@ const CalculatorMain = ({
           ellipsizeMode="tail"
           fontSize={24}
           textAlign="center"
-          color={theme.COLORS.text}>
+          color={theme.COLORS.text}
+        >
           {totalQuantity} {distanceUnit === 'Kilometers' ? 'Liters' : 'Gallons'}
         </TextComponent>
       </View>
@@ -62,7 +56,8 @@ const CalculatorMain = ({
         style={{
           flex: 0.6,
           justifyContent: 'flex-end',
-        }}>
+        }}
+      >
         <Divider bgColor={theme.COLORS.borderColor} />
         <HStack justifyContent="space-between" marginTop={24}>
           <View>
@@ -73,12 +68,9 @@ const CalculatorMain = ({
               numberOfLines={1}
               ellipsizeMode="tail"
               textAlign="center"
-              color={theme.COLORS.text}>
-              {currency.startsWith('I')
-                ? '₹'
-                : currency.startsWith('U')
-                ? '$'
-                : '£'}
+              color={theme.COLORS.text}
+            >
+              {currency.startsWith('I') ? '₹' : currency.startsWith('U') ? '$' : '£'}
               {fuelPrice}
             </TextComponent>
           </View>
@@ -89,12 +81,9 @@ const CalculatorMain = ({
               numberOfLines={1}
               ellipsizeMode="tail"
               textAlign="center"
-              color={theme.COLORS.text}>
-              {currency.startsWith('I')
-                ? '₹'
-                : currency.startsWith('U')
-                ? '$'
-                : '£'}
+              color={theme.COLORS.text}
+            >
+              {currency.startsWith('I') ? '₹' : currency.startsWith('U') ? '$' : '£'}
               {sharePerPerson}
             </TextComponent>
           </View>

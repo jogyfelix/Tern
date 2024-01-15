@@ -1,14 +1,8 @@
-import {
-  Input,
-  InputField,
-  InputIcon,
-  InputSlot,
-  VStack,
-} from '@gluestack-ui/themed';
-import {Menu} from 'lucide-react-native';
-import {Text} from 'react-native';
-import React, {type ReactElement} from 'react';
-import {theme} from '../../constants/theme';
+import { Input, InputField, InputIcon, InputSlot, VStack } from '@gluestack-ui/themed';
+import { Menu } from 'lucide-react-native';
+import { Text } from 'react-native';
+import React, { type ReactElement } from 'react';
+import { theme } from '../../constants/theme';
 
 interface Props {
   title: string;
@@ -26,7 +20,7 @@ const InputData = ({
   setValue,
 }: Props): ReactElement => {
   const onChange = (text: string): void => {
-    if (isNaN(text)) {
+    if (isNaN(Number(text))) {
       return;
     }
     setValue(text);
@@ -34,21 +28,22 @@ const InputData = ({
 
   return (
     <VStack space="sm">
-      <Text
+      {/* <Text
         style={{
           color: theme.COLORS.white,
           fontFamily: theme.FONTS.default,
         }}>
         {title}
-      </Text>
+      </Text> */}
       <Input
         variant="rounded"
         size="lg"
         isDisabled={false}
         isInvalid={false}
         isReadOnly={false}
-        borderColor={theme.COLORS.borderColor}
-        borderRadius={theme.DIMENSIONS.inputBorder}>
+        borderWidth={0}
+        borderRadius={theme.DIMENSIONS.inputBorder}
+      >
         <InputField
           color={theme.COLORS.white}
           bg={theme.COLORS.cardBg1}
@@ -59,6 +54,7 @@ const InputData = ({
           onChangeText={onChange}
           keyboardType="decimal-pad"
           cursorColor={theme.COLORS.primary}
+          fontSize={14}
         />
         {enableMenu && (
           <InputSlot
@@ -66,7 +62,8 @@ const InputData = ({
             paddingEnd={6}
             onPress={() => {
               console.log('clicked');
-            }}>
+            }}
+          >
             <InputIcon as={Menu} color={theme.COLORS.text} />
           </InputSlot>
         )}
