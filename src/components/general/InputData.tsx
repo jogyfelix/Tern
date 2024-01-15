@@ -1,6 +1,5 @@
 import { Input, InputField, InputIcon, InputSlot, VStack } from '@gluestack-ui/themed';
 import { Menu } from 'lucide-react-native';
-import { Text } from 'react-native';
 import React, { type ReactElement } from 'react';
 import { theme } from '../../constants/theme';
 
@@ -10,6 +9,7 @@ interface Props {
   enableMenu?: boolean;
   value: string;
   setValue: (value: string) => void;
+  onSubmitEditing?: () => void;
 }
 
 const InputData = ({
@@ -18,6 +18,7 @@ const InputData = ({
   enableMenu = false,
   value,
   setValue,
+  onSubmitEditing,
 }: Props): ReactElement => {
   const onChange = (text: string): void => {
     if (isNaN(Number(text))) {
@@ -55,6 +56,7 @@ const InputData = ({
           keyboardType="decimal-pad"
           cursorColor={theme.COLORS.primary}
           fontSize={14}
+          onSubmitEditing={onSubmitEditing}
         />
         {enableMenu && (
           <InputSlot

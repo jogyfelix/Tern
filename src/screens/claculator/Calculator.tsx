@@ -1,6 +1,6 @@
 import React, { type ReactElement, useLayoutEffect, useState } from 'react';
-import { Icon, VStack } from '@gluestack-ui/themed';
-import { Pressable, StatusBar } from 'react-native';
+import { Badge, BadgeText, Icon, VStack } from '@gluestack-ui/themed';
+import { Pressable, StatusBar, TouchableOpacity } from 'react-native';
 import { Menu } from 'lucide-react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ParentView from '../../components/general/ParentView';
@@ -107,18 +107,42 @@ const Calculator = ({ navigation }: Props): ReactElement => {
               setDistance(Number(value));
             }}
           />
-          <InputData
+          {/* <InputData
             title="Distance"
             placeholder="Number of people"
             value={numberOfPeople.toString()}
             setValue={(value: string) => {
               setNumberOfPeople(Number(value));
             }}
-          />
+          /> */}
           {/* <SliderData
             setValue={setNumberOfPeople}
             setCustom={setCustomPeople}
           /> */}
+
+          <TouchableOpacity
+            onPress={() => {
+              setCustomPeople(true);
+            }}
+          >
+            <Badge
+              size="lg"
+              variant="solid"
+              borderRadius={8}
+              action="info"
+              alignSelf="center"
+              bg={theme.COLORS.cardBg}
+              padding={6}
+            >
+              <BadgeText
+                fontFamily={theme.FONTS.default}
+                color={theme.COLORS.text}
+                textTransform="none"
+              >
+                more options
+              </BadgeText>
+            </Badge>
+          </TouchableOpacity>
         </VStack>
 
         <PrimaryBtn onPress={calculations} />

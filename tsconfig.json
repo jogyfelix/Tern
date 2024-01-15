@@ -1,4 +1,4 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
-  "include": ["assets", "custom.d.ts"]
+  "include": ["assets", "assets/svg/", "custom.d.ts"]
 }

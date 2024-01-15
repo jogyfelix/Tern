@@ -1,4 +1,4 @@
-import React, {type ReactElement} from 'react';
+import React, { type ReactElement } from 'react';
 import {
   Actionsheet,
   ActionsheetBackdrop,
@@ -8,7 +8,7 @@ import {
   VStack,
 } from '@gluestack-ui/themed';
 import InputData from '../general/InputData';
-import {theme} from '../../constants/theme';
+import { theme } from '../../constants/theme';
 
 interface Props {
   isOpen: boolean;
@@ -17,12 +17,7 @@ interface Props {
   setValue: (value: string) => void;
 }
 
-const NumberOfPeopleInput = ({
-  isOpen,
-  onClose,
-  value,
-  setValue,
-}: Props): ReactElement => {
+const NumberOfPeopleInput = ({ isOpen, onClose, value, setValue }: Props): ReactElement => {
   return (
     <Actionsheet isOpen={isOpen} onClose={onClose} zIndex={999}>
       <ActionsheetBackdrop />
@@ -30,17 +25,13 @@ const NumberOfPeopleInput = ({
         <ActionsheetDragIndicatorWrapper>
           <ActionsheetDragIndicator />
         </ActionsheetDragIndicatorWrapper>
-        <VStack
-          space="4xl"
-          w={'100%'}
-          paddingHorizontal={16}
-          paddingTop={16}
-          paddingBottom={48}>
+        <VStack space="4xl" w={'100%'} paddingHorizontal={16} paddingTop={16} paddingBottom={48}>
           <InputData
             title="Number of People"
             placeholder="Enter number of people"
             value={value}
             setValue={setValue}
+            onSubmitEditing={onClose}
           />
         </VStack>
       </ActionsheetContent>

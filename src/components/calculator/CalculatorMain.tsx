@@ -59,10 +59,10 @@ const CalculatorMain = ({
         }}
       >
         <Divider bgColor={theme.COLORS.borderColor} />
-        <HStack justifyContent="space-between" marginTop={24}>
-          <View>
+        <HStack marginTop={24}>
+          <View style={{ flex: 1 }}>
             <TextComponent color={theme.COLORS.text1}>
-              per {distanceUnit === 'Kilometers' ? 'Liters' : 'Gallons'}
+              per {distanceUnit === 'Kilometers' ? 'liters' : 'gallons'}
             </TextComponent>
             <TextComponent
               numberOfLines={1}
@@ -75,8 +75,8 @@ const CalculatorMain = ({
             </TextComponent>
           </View>
 
-          <View>
-            <TextComponent color={theme.COLORS.text1}>Each Share</TextComponent>
+          <View style={{ flex: 1 }}>
+            <TextComponent color={theme.COLORS.text1}>each share</TextComponent>
             <TextComponent
               numberOfLines={1}
               ellipsizeMode="tail"
@@ -88,8 +88,8 @@ const CalculatorMain = ({
             </TextComponent>
           </View>
 
-          <View>
-            <TextComponent color={theme.COLORS.text1}>People</TextComponent>
+          <View style={{ flex: 1 }}>
+            <TextComponent color={theme.COLORS.text1}>people</TextComponent>
             <TextComponent textAlign="center" color={theme.COLORS.text}>
               {numberOfPeople}
             </TextComponent>
