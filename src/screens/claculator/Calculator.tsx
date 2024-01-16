@@ -69,19 +69,18 @@ const Calculator = ({ navigation }: Props): ReactElement => {
       <StatusBar backgroundColor={theme.COLORS.black} />
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ justifyContent: 'space-around', height: height / 1.2 }}
+        contentContainerStyle={{ justifyContent: 'space-between', height: height / 1.2 }}
       >
-        <CalculatorMain
-          totalPrice={totalPrice}
-          sharePerPerson={sharePerPerson}
-          totalQuantity={totalQuantity}
-          fuelPrice={fuelPrice}
-          numberOfPeople={numberOfPeople}
-          currency={currency}
-          distanceUnit={distanceUnit}
-        />
-
         <VStack space="lg">
+          <CalculatorMain
+            totalPrice={totalPrice}
+            sharePerPerson={sharePerPerson}
+            totalQuantity={totalQuantity}
+            fuelPrice={fuelPrice}
+            numberOfPeople={numberOfPeople}
+            currency={currency}
+            distanceUnit={distanceUnit}
+          />
           <InputData
             title="Fuel Price"
             placeholder="Fuel price (per liter/gallon)"
@@ -107,19 +106,6 @@ const Calculator = ({ navigation }: Props): ReactElement => {
               setDistance(Number(value));
             }}
           />
-          {/* <InputData
-            title="Distance"
-            placeholder="Number of people"
-            value={numberOfPeople.toString()}
-            setValue={(value: string) => {
-              setNumberOfPeople(Number(value));
-            }}
-          /> */}
-          {/* <SliderData
-            setValue={setNumberOfPeople}
-            setCustom={setCustomPeople}
-          /> */}
-
           <TouchableOpacity
             onPress={() => {
               setCustomPeople(true);

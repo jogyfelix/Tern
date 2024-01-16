@@ -1,4 +1,5 @@
-import { getDefaultConfig, mergeConfig } from '@react-native/metro-config';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 
 /**
  * Metro configuration
@@ -19,4 +20,4 @@ config.resolver = {
   sourceExts: [...resolver.sourceExts, 'svg'],
 };
 
-export default mergeConfig(config);
+module.exports = mergeConfig(config);
