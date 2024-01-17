@@ -110,54 +110,56 @@ const Calculator = ({ navigation }: Props): ReactElement => {
             currency={currency}
             distanceUnit={distanceUnit}
           />
-          <InputData
-            title="Fuel Price"
-            placeholder="Fuel price (per liter/gallon)"
-            value={fuelPrice.toString()}
-            setValue={(value: string) => {
-              setFuelPrice(Number(value));
-            }}
-          />
-          <InputData
-            title="Fuel Efficiency"
-            placeholder="Miles per Gallon/Kilometers per Liter"
-            value={fuelEffeciency.toString()}
-            setValue={(value: string) => {
-              setFuelEffeciency(Number(value));
-            }}
-          />
+          <VStack marginTop={28} space="lg">
+            <InputData
+              title="Fuel Price"
+              placeholder="Fuel price (per liter/gallon)"
+              value={fuelPrice.toString()}
+              setValue={(value: string) => {
+                setFuelPrice(Number(value));
+              }}
+            />
+            <InputData
+              title="Fuel Efficiency"
+              placeholder="Miles per Gallon/Kilometers per Liter"
+              value={fuelEffeciency.toString()}
+              setValue={(value: string) => {
+                setFuelEffeciency(Number(value));
+              }}
+            />
 
-          <InputData
-            title="Distance"
-            placeholder="Total distance (miles/kilometers)"
-            value={distance.toString()}
-            setValue={(value: string) => {
-              setDistance(Number(value));
-            }}
-          />
-          <TouchableOpacity
-            onPress={() => {
-              setCustomPeople(true);
-            }}
-          >
-            <Badge
-              size="lg"
-              variant="solid"
-              borderRadius={8}
-              action="info"
-              alignSelf="center"
-              bg={theme.COLORS.cardBg}
-              padding={6}
+            <InputData
+              title="Distance"
+              placeholder="Total distance (miles/kilometers)"
+              value={distance.toString()}
+              setValue={(value: string) => {
+                setDistance(Number(value));
+              }}
+            />
+            <TouchableOpacity
+              onPress={() => {
+                setCustomPeople(true);
+              }}
             >
-              <BadgeText
-                fontFamily={theme.FONTS.default}
-                color={theme.COLORS.text}
-                textTransform="none"
+              <Badge
+                size="lg"
+                variant="solid"
+                borderRadius={8}
+                action="info"
+                alignSelf="center"
+                bg={theme.COLORS.cardBg}
+                padding={6}
               >
-                more options
-              </BadgeText>
-            </Badge>
-          </TouchableOpacity>
+                <BadgeText
+                  fontFamily={theme.FONTS.default}
+                  color={theme.COLORS.text}
+                  textTransform="none"
+                >
+                  more options
+                </BadgeText>
+              </Badge>
+            </TouchableOpacity>
+          </VStack>
         </VStack>
 
         <PrimaryBtn title="Calculate" onPress={calculations} />

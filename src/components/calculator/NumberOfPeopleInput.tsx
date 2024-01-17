@@ -20,6 +20,7 @@ interface Props {
 const NumberOfPeopleInput = ({ isOpen, onClose, value, setValue }: Props): ReactElement => {
   const fling = Gesture.Fling()
     .direction(Directions.DOWN)
+    .runOnJS(true)
     .onStart(() => {
       onClose();
     });
