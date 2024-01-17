@@ -1,5 +1,14 @@
 import React, { type ReactElement, useLayoutEffect, useState } from 'react';
-import { Badge, BadgeText, Icon, VStack } from '@gluestack-ui/themed';
+import {
+  Badge,
+  BadgeText,
+  Icon,
+  Toast,
+  ToastDescription,
+  ToastTitle,
+  VStack,
+  useToast,
+} from '@gluestack-ui/themed';
 import { Pressable, StatusBar, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { Menu } from 'lucide-react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -32,11 +41,12 @@ const Calculator = ({ navigation }: Props): ReactElement => {
   const [fuelPrice, setFuelPrice] = useState(0);
   const [distance, setDistance] = useState(0);
   const [fuelEffeciency, setFuelEffeciency] = useState(0);
-  const [numberOfPeople, setNumberOfPeople] = useState(0);
+  const [numberOfPeople, setNumberOfPeople] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [sharePerPerson, setSharePerPerson] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const { height } = useWindowDimensions();
+  const toast = useToast();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -48,20 +58,39 @@ const Calculator = ({ navigation }: Props): ReactElement => {
   }, [navigation]);
 
   const calculations = (): void => {
-    if (distanceUnit === 'Kilometers') {
-      const requiredFuel = distance / fuelEffeciency;
-      const cost = requiredFuel * fuelPrice;
-      const share = cost / numberOfPeople;
-      setTotalQuantity(Math.ceil(requiredFuel));
-      setTotalPrice(Math.ceil(cost));
-      setSharePerPerson(Math.ceil(share));
+    if (distance > 0 && fuelPrice > 0 && fuelEffeciency > 0) {
+      if (distanceUnit === 'Kilometers') {
+        const requiredFuel = distance / fuelEffeciency;
+        const cost = requiredFuel * fuelPrice;
+        const share = cost / (numberOfPeople == 0 ? 1 : numberOfPeople);
+        setTotalQuantity(Math.ceil(requiredFuel));
+        setTotalPrice(Math.ceil(cost));
+        setSharePerPerson(Math.ceil(share));
+      } else {
+        const requiredFuel = (distance * 0.621371) / fuelEffeciency;
+        const cost = requiredFuel * fuelPrice;
+        const share = cost / (numberOfPeople == 0 ? 1 : numberOfPeople);
+        setTotalQuantity(Math.ceil(requiredFuel));
+        setTotalPrice(Math.ceil(cost));
+        setSharePerPerson(Math.ceil(share));
+      }
     } else {
-      const requiredFuel = (distance * 0.621371) / fuelEffeciency;
-      const cost = requiredFuel * fuelPrice;
-      const share = cost / numberOfPeople;
-      setTotalQuantity(Math.ceil(requiredFuel));
-      setTotalPrice(Math.ceil(cost));
-      setSharePerPerson(Math.ceil(share));
+      toast.show({
+        placement: 'bottom',
+        render: ({ id }) => {
+          const toastId = 'toast-' + id;
+          return (
+            <Toast nativeID={toastId} action="info" variant="solid">
+              <VStack space="xs">
+                <ToastTitle>New Message</ToastTitle>
+                <ToastDescription>
+                  Hey, just wanted to touch base and see how you doing. Let catch up soon!
+                </ToastDescription>
+              </VStack>
+            </Toast>
+          );
+        },
+      });
     }
   };
   return (
