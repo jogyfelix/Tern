@@ -1,19 +1,13 @@
-import React, {
-  type Dispatch,
-  type SetStateAction,
-  type ReactElement,
-  useMemo,
-} from 'react';
-import {
-  Actionsheet,
-  ActionsheetBackdrop,
-  ActionsheetContent,
-  VStack,
-  ActionsheetDragIndicatorWrapper,
-  ActionsheetDragIndicator,
-} from '@gluestack-ui/themed';
+import React, { type Dispatch, type SetStateAction, type ReactElement, useMemo } from 'react';
+import { Actionsheet, ActionsheetBackdrop, ActionsheetContent, VStack } from '@gluestack-ui/themed';
 import RadioData from '../general/RadioData';
-import {theme} from '../../constants/theme';
+import { theme } from '../../constants/theme';
+import {
+  Directions,
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from 'react-native-gesture-handler';
 
 interface Props {
   isOpen: boolean;
@@ -61,17 +55,24 @@ const CalculatorSettings = ({
     );
   }, [distanceUnit]);
 
+  const fling = Gesture.Fling()
+    .direction(Directions.DOWN)
+    .onStart(() => {
+      onClose();
+    });
+
   return (
     <Actionsheet isOpen={isOpen} onClose={onClose} zIndex={999}>
       <ActionsheetBackdrop />
       <ActionsheetContent zIndex={999} bgColor={theme.COLORS.cardBg}>
-        <ActionsheetDragIndicatorWrapper>
-          <ActionsheetDragIndicator />
-        </ActionsheetDragIndicatorWrapper>
-        <VStack space="4xl" w={'100%'} padding={16}>
-          {MemoizedCurrency}
-          {MemoizedDistance}
-        </VStack>
+        <GestureHandlerRootView style={{ width: '100%' }}>
+          <GestureDetector gesture={fling}>
+            <VStack space="4xl" w={'100%'} padding={16}>
+              {MemoizedCurrency}
+              {MemoizedDistance}
+            </VStack>
+          </GestureDetector>
+        </GestureHandlerRootView>
       </ActionsheetContent>
     </Actionsheet>
   );

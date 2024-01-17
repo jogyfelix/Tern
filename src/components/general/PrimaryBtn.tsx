@@ -3,12 +3,18 @@ import React, { type ReactElement } from 'react';
 import { theme } from '../../constants/theme';
 
 interface Props {
+  title: string;
   onPress: () => void;
   marginVertical?: number;
   marginHorizontal?: number;
 }
 
-const PrimaryBtn = ({ onPress, marginVertical = 0, marginHorizontal = 0 }: Props): ReactElement => {
+const PrimaryBtn = ({
+  title,
+  onPress,
+  marginVertical = 0,
+  marginHorizontal = 0,
+}: Props): ReactElement => {
   return (
     <Button
       size="xl"
@@ -22,7 +28,7 @@ const PrimaryBtn = ({ onPress, marginVertical = 0, marginHorizontal = 0 }: Props
       marginVertical={marginVertical}
       marginHorizontal={marginHorizontal}
     >
-      <ButtonText fontFamily={theme.FONTS.default}>Calculate</ButtonText>
+      <ButtonText fontFamily={theme.FONTS.default}>{title}</ButtonText>
     </Button>
   );
 };

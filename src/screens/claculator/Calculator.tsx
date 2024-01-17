@@ -131,7 +131,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
           </TouchableOpacity>
         </VStack>
 
-        <PrimaryBtn onPress={calculations} />
+        <PrimaryBtn title="Calculate" onPress={calculations} />
       </KeyboardAwareScrollView>
       <CalculatorSettings
         isOpen={showMenu}
