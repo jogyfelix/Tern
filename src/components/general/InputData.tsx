@@ -4,7 +4,6 @@ import React, { type ReactElement } from 'react';
 import { theme } from '../../constants/theme';
 
 interface Props {
-  title: string;
   placeholder: string;
   enableMenu?: boolean;
   value: string;
@@ -13,7 +12,6 @@ interface Props {
 }
 
 const InputData = ({
-  title,
   placeholder,
   enableMenu = false,
   value,
@@ -29,13 +27,6 @@ const InputData = ({
 
   return (
     <VStack space="sm">
-      {/* <Text
-        style={{
-          color: theme.COLORS.white,
-          fontFamily: theme.FONTS.default,
-        }}>
-        {title}
-      </Text> */}
       <Input
         variant="rounded"
         size="lg"

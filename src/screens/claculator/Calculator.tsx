@@ -1,16 +1,6 @@
 import React, { type ReactElement, useLayoutEffect, useState, useCallback } from 'react';
-import {
-  Badge,
-  BadgeText,
-  Icon,
-  Toast,
-  ToastDescription,
-  ToastTitle,
-  VStack,
-  useToast,
-} from '@gluestack-ui/themed';
-import { Pressable, StatusBar, TouchableOpacity, useWindowDimensions } from 'react-native';
-import { Menu } from 'lucide-react-native';
+import { Toast, ToastDescription, VStack, useToast } from '@gluestack-ui/themed';
+import { StatusBar, useWindowDimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ParentView from '../../components/general/ParentView';
 import CalculatorMain from '../../components/calculator/CalculatorMain';
@@ -21,24 +11,18 @@ import NumberOfPeopleInput from '../../components/calculator/NumberOfPeopleInput
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { theme } from '../../constants/theme';
 import { useSharedValue, withSpring } from 'react-native-reanimated';
+import strings from '../../constants/strings';
+import { AddPeople, TopMenu } from './components';
 
 interface Props {
   navigation: NavigationProp<ParamListBase>;
 }
 
-const TopMenu = (onPress: () => void) => {
-  return (
-    <Pressable onPress={onPress}>
-      <Icon as={Menu} color={theme.COLORS.white} size="lg" />
-    </Pressable>
-  );
-};
-
 const Calculator = ({ navigation }: Props): ReactElement => {
   const [showMenu, setShowMenu] = useState(false);
   const [showCustomPeople, setCustomPeople] = useState(false);
   const [enableCalc, setEnableCalc] = useState(true);
-  const [currency, setCurrency] = useState('IND (₹)');
+  const [currency, setCurrency] = useState<currencyType>('IND (₹)');
   const [distanceUnit, setDistanceUnit] = useState('Kilometers');
   const [fuelPrice, setFuelPrice] = useState(0);
   const [distance, setDistance] = useState(0);
@@ -93,15 +77,14 @@ const Calculator = ({ navigation }: Props): ReactElement => {
       setEnableCalc(false);
     } else {
       toast.show({
-        placement: 'bottom',
+        placement: 'top',
         render: ({ id }) => {
           const toastId = 'toast-' + id;
           return (
-            <Toast nativeID={toastId} action="info" variant="solid">
+            <Toast nativeID={toastId} action="info" variant="solid" bg={theme.COLORS.cardBg}>
               <VStack space="xs">
-                <ToastTitle>New Message</ToastTitle>
-                <ToastDescription>
-                  Hey, just wanted to touch base and see how you doing. Let catch up soon!
+                <ToastDescription color={theme.COLORS.text}>
+                  {strings.ADD_DETAILS_TOAST}{' '}
                 </ToastDescription>
               </VStack>
             </Toast>
@@ -130,8 +113,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
           />
           <VStack marginTop={28} space="lg">
             <InputData
-              title="Fuel Price"
-              placeholder="Fuel price (per liter/gallon)"
+              placeholder={strings.FUEL_PRICE}
               value={fuelPrice.toString()}
               setValue={(value: string) => {
                 if (Number(value) !== fuelPrice) {
@@ -141,8 +123,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
               }}
             />
             <InputData
-              title="Fuel Efficiency"
-              placeholder="Miles per Gallon/Kilometers per Liter"
+              placeholder={strings.FUEL_EFFECIENCY}
               value={fuelEffeciency.toString()}
               setValue={(value: string) => {
                 if (Number(value) !== fuelEffeciency) {
@@ -153,8 +134,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
             />
 
             <InputData
-              title="Distance"
-              placeholder="Total distance (miles/kilometers)"
+              placeholder={strings.DISTANCE}
               value={distance.toString()}
               setValue={(value: string) => {
                 if (Number(value) !== distance) {
@@ -163,36 +143,18 @@ const Calculator = ({ navigation }: Props): ReactElement => {
                 }
               }}
             />
-            <TouchableOpacity
+            <AddPeople
               onPress={() => {
                 setCustomPeople(true);
               }}
-            >
-              <Badge
-                size="lg"
-                variant="solid"
-                borderRadius={8}
-                action="info"
-                alignSelf="center"
-                bg={theme.COLORS.cardBg}
-                padding={6}
-              >
-                <BadgeText
-                  fontFamily={theme.FONTS.default}
-                  color={theme.COLORS.text}
-                  textTransform="none"
-                >
-                  more options
-                </BadgeText>
-              </Badge>
-            </TouchableOpacity>
+            />
           </VStack>
         </VStack>
 
         {!enableCalc ? (
-          <PrimaryBtn title="Clear" onPress={clear} />
+          <PrimaryBtn title={strings.CLEAR} onPress={clear} />
         ) : (
-          <PrimaryBtn title="Calculate" onPress={calculations} />
+          <PrimaryBtn title={strings.CALCULATE} onPress={calculations} />
         )}
       </KeyboardAwareScrollView>
       <CalculatorSettings

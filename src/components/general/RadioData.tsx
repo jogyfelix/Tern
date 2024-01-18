@@ -1,8 +1,4 @@
-import React, {
-  type Dispatch,
-  type SetStateAction,
-  type ReactElement,
-} from 'react';
+import React, { type Dispatch, type SetStateAction, type ReactElement } from 'react';
 import {
   RadioGroup,
   RadioIndicator,
@@ -12,44 +8,31 @@ import {
   HStack,
   styled,
 } from '@gluestack-ui/themed';
-import {CircleIcon} from 'lucide-react-native';
-import {Text} from 'react-native';
-import {theme} from '../../constants/theme';
+import { CircleIcon } from 'lucide-react-native';
+import { Text } from 'react-native';
+import { theme } from '../../constants/theme';
 
 interface Props {
   data: string[];
   title: string;
   defaultValue?: string;
-  setValue?: Dispatch<SetStateAction<string>>;
+  setValue?: Dispatch<SetStateAction<any>>;
   type?: string;
 }
 
-const RadioData = ({
-  data,
-  title,
-  defaultValue = '',
-  setValue,
-  type,
-}: Props): ReactElement => {
+const RadioData = ({ data, title, defaultValue = '', setValue, type }: Props): ReactElement => {
   return (
     <RadioGroup
       value={
-        type === 'fuel'
-          ? defaultValue === 'Kilometers'
-            ? 'Liters'
-            : 'Gallons'
-          : defaultValue
+        type === 'fuel' ? (defaultValue === 'Kilometers' ? 'Liters' : 'Gallons') : defaultValue
       }
-      onChange={setValue}>
+      onChange={setValue}
+    >
       <Title>{title} :</Title>
       <HStack space="xl">
         {data.map((value, index) => {
           return (
-            <Radio
-              value={value}
-              key={index}
-              size="sm"
-              isDisabled={type === 'fuel'}>
+            <Radio value={value} key={index} size="sm" isDisabled={type === 'fuel'}>
               <RadioIndicator borderColor={theme.COLORS.text1}>
                 <RadioIcon as={CircleIcon} fill={theme.COLORS.primary} />
               </RadioIndicator>
@@ -57,7 +40,8 @@ const RadioData = ({
                 marginStart={4}
                 fontFamily={theme.FONTS.default}
                 color={theme.COLORS.text}
-                fontSize={16}>
+                fontSize={16}
+              >
                 {value}
               </RadioLabel>
             </Radio>

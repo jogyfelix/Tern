@@ -16,6 +16,7 @@ import {
   GestureDetector,
   GestureHandlerRootView,
 } from 'react-native-gesture-handler';
+import strings from '../../constants/strings';
 
 interface Props {
   isOpen: boolean;
@@ -43,13 +44,12 @@ const NumberOfPeopleInput = ({ isOpen, onClose, value, setValue }: Props): React
           <GestureDetector gesture={fling}>
             <VStack space="2xl" style={{ padding: 16 }}>
               <InputData
-                title="Number of People"
-                placeholder="Enter number of people"
+                placeholder={strings.NUMBER_OF_PEOPLE}
                 value={value}
                 setValue={setValue}
                 onSubmitEditing={onClose}
               />
-              <PrimaryBtn title="Add" onPress={onClose} />
+              <PrimaryBtn title={strings.ADD} onPress={onClose} />
             </VStack>
           </GestureDetector>
         </GestureHandlerRootView>

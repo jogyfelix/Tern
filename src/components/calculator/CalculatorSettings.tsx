@@ -21,7 +21,7 @@ interface Props {
   onClose: () => void;
   currency: string;
   distanceUnit: string;
-  setCurrency: Dispatch<SetStateAction<string>>;
+  setCurrency: Dispatch<SetStateAction<currencyType>>;
   setDistanceUnit: Dispatch<SetStateAction<string>>;
 }
 
