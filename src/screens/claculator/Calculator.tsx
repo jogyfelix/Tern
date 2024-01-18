@@ -20,6 +20,7 @@ import CalculatorSettings from '../../components/calculator/CalculatorSettings';
 import NumberOfPeopleInput from '../../components/calculator/NumberOfPeopleInput';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { theme } from '../../constants/theme';
+import { useSharedValue, withRepeat, withSpring } from 'react-native-reanimated';
 
 interface Props {
   navigation: NavigationProp<ParamListBase>;
@@ -47,6 +48,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
   const [totalQuantity, setTotalQuantity] = useState(0);
   const { height } = useWindowDimensions();
   const toast = useToast();
+  const scale = useSharedValue(1);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -58,6 +60,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
   }, [navigation]);
 
   const clear = useCallback(() => {
+    scale.value = withSpring(1, { mass: 2, damping: 20 });
     setTotalQuantity(0);
     setTotalPrice(0);
     setSharePerPerson(0);
@@ -70,6 +73,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
 
   const calculations = () => {
     if (distance > 0 && fuelPrice > 0 && fuelEffeciency > 0) {
+      scale.value = withSpring(2, { mass: 2, damping: 20 });
       if (distanceUnit === 'Kilometers') {
         const requiredFuel = distance / fuelEffeciency;
         const cost = requiredFuel * fuelPrice;
@@ -120,6 +124,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
             numberOfPeople={numberOfPeople}
             currency={currency}
             distanceUnit={distanceUnit}
+            scale={scale}
           />
           <VStack marginTop={28} space="lg">
             <InputData

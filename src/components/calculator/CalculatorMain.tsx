@@ -4,6 +4,7 @@ import { Divider, HStack } from '@gluestack-ui/themed';
 import Calc from '../../../assets/svg/calculator-abstract.svg';
 import React, { type ReactElement } from 'react';
 import { theme } from '../../constants/theme';
+import Animated, { SharedValue, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 
 interface Props {
   fuelPrice: number;
@@ -13,6 +14,7 @@ interface Props {
   totalQuantity: number;
   currency: string;
   distanceUnit: string;
+  scale: SharedValue<any>;
 }
 
 const CalculatorMain = ({
@@ -23,13 +25,21 @@ const CalculatorMain = ({
   totalQuantity,
   currency,
   distanceUnit,
+  scale,
 }: Props): ReactElement => {
   const { height } = useWindowDimensions();
+
+  const rStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: scale.value }],
+    };
+  });
+
   return (
     <Parent height={height / 3}>
-      <View style={{ position: 'absolute', end: 0, top: 0 }}>
+      <Animated.View style={[{ position: 'absolute', end: 0, top: 0 }, rStyle]}>
         <Calc />
-      </View>
+      </Animated.View>
 
       <View
         style={{
