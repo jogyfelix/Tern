@@ -25,7 +25,13 @@ export const AddPeople = ({ onPress }: { onPress: () => void }) => {
         bg={theme.COLORS.cardBg}
         padding={6}
       >
-        <BadgeText fontFamily={theme.FONTS.default} color={theme.COLORS.text} textTransform="none">
+        <BadgeText
+          fontFamily={theme.FONTS.default}
+          fontSize={12}
+          color={theme.COLORS.text}
+          textTransform="none"
+          textAlign="center"
+        >
           {strings.ADD_PEOPLE}
         </BadgeText>
       </Badge>
