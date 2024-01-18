@@ -1,4 +1,4 @@
-import React, { type ReactElement, useLayoutEffect, useState } from 'react';
+import React, { type ReactElement, useLayoutEffect, useState, useCallback } from 'react';
 import {
   Badge,
   BadgeText,
@@ -28,7 +28,7 @@ interface Props {
 const TopMenu = (onPress: () => void) => {
   return (
     <Pressable onPress={onPress}>
-      <Icon as={Menu} color={theme.COLORS.white} />
+      <Icon as={Menu} color={theme.COLORS.white} size="lg" />
     </Pressable>
   );
 };
@@ -57,7 +57,18 @@ const Calculator = ({ navigation }: Props): ReactElement => {
     });
   }, [navigation]);
 
-  const calculations = (): void => {
+  const clear = useCallback(() => {
+    setTotalQuantity(0);
+    setTotalPrice(0);
+    setSharePerPerson(0);
+    setNumberOfPeople(1);
+
+    setDistance(0);
+    setFuelPrice(0);
+    setFuelEffeciency(0);
+  }, []);
+
+  const calculations = () => {
     if (distance > 0 && fuelPrice > 0 && fuelEffeciency > 0) {
       if (distanceUnit === 'Kilometers') {
         const requiredFuel = distance / fuelEffeciency;
@@ -162,7 +173,11 @@ const Calculator = ({ navigation }: Props): ReactElement => {
           </VStack>
         </VStack>
 
-        <PrimaryBtn title="Calculate" onPress={calculations} />
+        {totalQuantity != 0 ? (
+          <PrimaryBtn title="Clear" onPress={clear} />
+        ) : (
+          <PrimaryBtn title="Calculate" onPress={calculations} />
+        )}
       </KeyboardAwareScrollView>
       <CalculatorSettings
         isOpen={showMenu}

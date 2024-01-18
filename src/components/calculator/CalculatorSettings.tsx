@@ -1,5 +1,12 @@
 import React, { type Dispatch, type SetStateAction, type ReactElement, useMemo } from 'react';
-import { Actionsheet, ActionsheetBackdrop, ActionsheetContent, VStack } from '@gluestack-ui/themed';
+import {
+  Actionsheet,
+  ActionsheetBackdrop,
+  ActionsheetContent,
+  ActionsheetDragIndicator,
+  ActionsheetDragIndicatorWrapper,
+  VStack,
+} from '@gluestack-ui/themed';
 import RadioData from '../general/RadioData';
 import { theme } from '../../constants/theme';
 import {
@@ -66,6 +73,9 @@ const CalculatorSettings = ({
     <Actionsheet isOpen={isOpen} onClose={onClose} zIndex={999}>
       <ActionsheetBackdrop />
       <ActionsheetContent zIndex={999} bgColor={theme.COLORS.cardBg}>
+        <ActionsheetDragIndicatorWrapper>
+          <ActionsheetDragIndicator />
+        </ActionsheetDragIndicatorWrapper>
         <GestureHandlerRootView style={{ width: '100%' }}>
           <GestureDetector gesture={fling}>
             <VStack space="4xl" w={'100%'} padding={16}>

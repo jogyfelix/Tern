@@ -1,5 +1,12 @@
 import React, { type ReactElement } from 'react';
-import { Actionsheet, ActionsheetBackdrop, ActionsheetContent, VStack } from '@gluestack-ui/themed';
+import {
+  Actionsheet,
+  ActionsheetBackdrop,
+  ActionsheetContent,
+  ActionsheetDragIndicator,
+  ActionsheetDragIndicatorWrapper,
+  VStack,
+} from '@gluestack-ui/themed';
 import InputData from '../general/InputData';
 import { theme } from '../../constants/theme';
 import PrimaryBtn from '../general/PrimaryBtn';
@@ -29,6 +36,9 @@ const NumberOfPeopleInput = ({ isOpen, onClose, value, setValue }: Props): React
     <Actionsheet isOpen={isOpen} onClose={onClose} zIndex={999}>
       <ActionsheetBackdrop />
       <ActionsheetContent zIndex={999} style={{ backgroundColor: theme.COLORS.cardBg }}>
+        <ActionsheetDragIndicatorWrapper>
+          <ActionsheetDragIndicator />
+        </ActionsheetDragIndicatorWrapper>
         <GestureHandlerRootView style={{ width: '100%' }}>
           <GestureDetector gesture={fling}>
             <VStack space="2xl" style={{ padding: 16 }}>
