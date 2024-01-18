@@ -23,7 +23,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
   const [showCustomPeople, setCustomPeople] = useState(false);
   const [enableCalc, setEnableCalc] = useState(true);
   const [currency, setCurrency] = useState<currencyType>('IND (₹)');
-  const [distanceUnit, setDistanceUnit] = useState('Kilometers');
+  const [distanceUnit, setDistanceUnit] = useState<distanceUnittType>('Kilometers');
   const [fuelPrice, setFuelPrice] = useState(0);
   const [distance, setDistance] = useState(0);
   const [fuelEffeciency, setFuelEffeciency] = useState(0);
@@ -50,10 +50,10 @@ const Calculator = ({ navigation }: Props): ReactElement => {
     setTotalPrice(0);
     setSharePerPerson(0);
     setNumberOfPeople(1);
-
     setDistance(0);
     setFuelPrice(0);
     setFuelEffeciency(0);
+    setEnableCalc(true);
   }, []);
 
   const calculations = () => {

@@ -1,6 +1,6 @@
 export default {
-  FUEL_PRICE: 'Fuel price',
-  FUEL_EFFECIENCY: 'Fuel effeciency',
+  FUEL_PRICE: 'Fuel price per unit',
+  FUEL_EFFECIENCY: 'Fuel effeciency per unit',
   DISTANCE: 'Distance',
   ADD_PEOPLE: 'Add people',
   CLEAR: 'Clear',
@@ -8,4 +8,9 @@ export default {
   ADD_DETAILS_TOAST: 'Please provide the necessary details to proceed with the calculation.',
   NUMBER_OF_PEOPLE: 'Number of people',
   ADD: 'Add',
+  PER: 'per',
+  EACH_SHARE: 'each share',
+  PEOPLE: 'people',
+  DISTANCE_UNIT: 'Distance Unit',
+  FUEL_UNIT: 'Fuel Unit',
 };

@@ -15,14 +15,15 @@ import {
   GestureDetector,
   GestureHandlerRootView,
 } from 'react-native-gesture-handler';
+import strings from '../../constants/strings';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   currency: string;
-  distanceUnit: string;
+  distanceUnit: distanceUnittType;
   setCurrency: Dispatch<SetStateAction<currencyType>>;
-  setDistanceUnit: Dispatch<SetStateAction<string>>;
+  setDistanceUnit: Dispatch<SetStateAction<distanceUnittType>>;
 }
 
 const CalculatorSettings = ({
@@ -48,13 +49,13 @@ const CalculatorSettings = ({
       <VStack space="2xl">
         <RadioData
           data={['Miles', 'Kilometers']}
-          title="Distance Unit"
+          title={strings.DISTANCE_UNIT}
           defaultValue={distanceUnit}
           setValue={setDistanceUnit}
         />
         <RadioData
           data={['Liters', 'Gallons']}
-          title="Fuel Unit"
+          title={strings.FUEL_UNIT}
           defaultValue={distanceUnit}
           type="fuel"
         />

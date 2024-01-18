@@ -4,7 +4,8 @@ import { Divider, HStack } from '@gluestack-ui/themed';
 import Calc from '../../../assets/svg/calculator-abstract.svg';
 import React, { type ReactElement } from 'react';
 import { theme } from '../../constants/theme';
-import Animated, { SharedValue, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import Animated, { SharedValue, useAnimatedStyle } from 'react-native-reanimated';
+import strings from '../../constants/strings';
 
 interface Props {
   fuelPrice: number;
@@ -13,7 +14,7 @@ interface Props {
   totalPrice: number;
   totalQuantity: number;
   currency: string;
-  distanceUnit: string;
+  distanceUnit: distanceUnittType;
   scale: SharedValue<any>;
 }
 
@@ -72,7 +73,7 @@ const CalculatorMain = ({
         <HStack marginTop={24}>
           <View style={{ flex: 1 }}>
             <TextComponent color={theme.COLORS.text1}>
-              per {distanceUnit === 'Kilometers' ? 'liters' : 'gallons'}
+              {strings.PER} {distanceUnit === 'Kilometers' ? 'liters' : 'gallons'}
             </TextComponent>
             <TextComponent
               numberOfLines={1}
@@ -86,7 +87,7 @@ const CalculatorMain = ({
           </View>
 
           <View style={{ flex: 1 }}>
-            <TextComponent color={theme.COLORS.text1}>each share</TextComponent>
+            <TextComponent color={theme.COLORS.text1}>{strings.EACH_SHARE}</TextComponent>
             <TextComponent
               numberOfLines={1}
               ellipsizeMode="tail"
@@ -99,7 +100,7 @@ const CalculatorMain = ({
           </View>
 
           <View style={{ flex: 1 }}>
-            <TextComponent color={theme.COLORS.text1}>people</TextComponent>
+            <TextComponent color={theme.COLORS.text1}>{strings.PEOPLE}</TextComponent>
             <TextComponent textAlign="center" color={theme.COLORS.text}>
               {numberOfPeople}
             </TextComponent>
@@ -115,6 +116,7 @@ const Parent = styled(View, {
   padding: 16,
   borderRadius: 16,
   justifyContent: 'center',
+  overflow: 'hidden',
 });
 
 const TextComponent = styled(Text, {
