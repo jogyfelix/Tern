@@ -20,5 +20,5 @@ export const theme = {
     text: '#DBDBDB',
     text1: '#848484',
   },
-  FONTS: {default: 'Alata-Regular', primary: 'LilyScriptOne-Regular'},
+  FONTS: { default: 'Alata-Regular', primary: 'LilyScriptOne-Regular' },
 };

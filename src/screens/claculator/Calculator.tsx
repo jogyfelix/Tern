@@ -20,7 +20,7 @@ import CalculatorSettings from '../../components/calculator/CalculatorSettings';
 import NumberOfPeopleInput from '../../components/calculator/NumberOfPeopleInput';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { theme } from '../../constants/theme';
-import { useSharedValue, withRepeat, withSpring } from 'react-native-reanimated';
+import { useSharedValue, withSpring } from 'react-native-reanimated';
 
 interface Props {
   navigation: NavigationProp<ParamListBase>;
@@ -37,6 +37,7 @@ const TopMenu = (onPress: () => void) => {
 const Calculator = ({ navigation }: Props): ReactElement => {
   const [showMenu, setShowMenu] = useState(false);
   const [showCustomPeople, setCustomPeople] = useState(false);
+  const [enableCalc, setEnableCalc] = useState(true);
   const [currency, setCurrency] = useState('IND (₹)');
   const [distanceUnit, setDistanceUnit] = useState('Kilometers');
   const [fuelPrice, setFuelPrice] = useState(0);
@@ -89,6 +90,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
         setTotalPrice(Math.ceil(cost));
         setSharePerPerson(Math.ceil(share));
       }
+      setEnableCalc(false);
     } else {
       toast.show({
         placement: 'bottom',
@@ -132,7 +134,10 @@ const Calculator = ({ navigation }: Props): ReactElement => {
               placeholder="Fuel price (per liter/gallon)"
               value={fuelPrice.toString()}
               setValue={(value: string) => {
-                setFuelPrice(Number(value));
+                if (Number(value) !== fuelPrice) {
+                  setFuelPrice(Number(value));
+                  setEnableCalc(true);
+                }
               }}
             />
             <InputData
@@ -140,7 +145,10 @@ const Calculator = ({ navigation }: Props): ReactElement => {
               placeholder="Miles per Gallon/Kilometers per Liter"
               value={fuelEffeciency.toString()}
               setValue={(value: string) => {
-                setFuelEffeciency(Number(value));
+                if (Number(value) !== fuelEffeciency) {
+                  setFuelEffeciency(Number(value));
+                  setEnableCalc(true);
+                }
               }}
             />
 
@@ -149,7 +157,10 @@ const Calculator = ({ navigation }: Props): ReactElement => {
               placeholder="Total distance (miles/kilometers)"
               value={distance.toString()}
               setValue={(value: string) => {
-                setDistance(Number(value));
+                if (Number(value) !== distance) {
+                  setDistance(Number(value));
+                  setEnableCalc(true);
+                }
               }}
             />
             <TouchableOpacity
@@ -178,7 +189,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
           </VStack>
         </VStack>
 
-        {totalQuantity != 0 ? (
+        {!enableCalc ? (
           <PrimaryBtn title="Clear" onPress={clear} />
         ) : (
           <PrimaryBtn title="Calculate" onPress={calculations} />
@@ -202,7 +213,10 @@ const Calculator = ({ navigation }: Props): ReactElement => {
         }}
         value={numberOfPeople.toString()}
         setValue={(value: string) => {
-          setNumberOfPeople(Number(value));
+          if (Number(value) !== numberOfPeople) {
+            setNumberOfPeople(Number(value));
+            setEnableCalc(true);
+          }
         }}
       />
     </ParentView>

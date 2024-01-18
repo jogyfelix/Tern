@@ -1,10 +1,11 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import Calculator from './screens/claculator/Calculator';
-import {GluestackUIProvider, StyledProvider} from '@gluestack-ui/themed';
-import {config} from '@gluestack-ui/config';
-import {theme} from './constants/theme';
+import { GluestackUIProvider, StyledProvider } from '@gluestack-ui/themed';
+import { config } from '@gluestack-ui/config';
+import { theme } from './constants/theme';
+import screenNames from './constants/screenNames';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,14 +16,14 @@ const App = () => {
         <StyledProvider config={config}>
           <Stack.Navigator>
             <Stack.Screen
-              name="Calculator"
+              name={screenNames.CALCULATOR_SCREEN}
               component={Calculator}
               options={{
                 headerTitle: 'Fuel Calculator',
                 headerTitleAlign: 'center',
-                headerStyle: {backgroundColor: theme.COLORS.black},
+                headerStyle: { backgroundColor: theme.COLORS.black },
                 headerTintColor: 'white',
-                headerTitleStyle: {fontFamily: theme.FONTS.default},
+                headerTitleStyle: { fontFamily: theme.FONTS.default },
               }}
             />
           </Stack.Navigator>
