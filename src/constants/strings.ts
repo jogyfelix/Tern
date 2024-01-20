@@ -1,6 +1,6 @@
 export default {
-  FUEL_PRICE: 'Fuel price per unit',
-  FUEL_EFFECIENCY: 'Fuel effeciency per unit',
+  FUEL_PRICE: 'Fuel price',
+  FUEL_EFFECIENCY: 'Fuel effeciency',
   DISTANCE: 'Distance',
   ADD_PEOPLE: 'Add people',
   CLEAR: 'Clear',

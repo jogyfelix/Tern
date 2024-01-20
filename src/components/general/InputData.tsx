@@ -1,9 +1,11 @@
 import { Input, InputField, InputIcon, InputSlot, VStack } from '@gluestack-ui/themed';
 import { Menu } from 'lucide-react-native';
-import React, { type ReactElement } from 'react';
+import React, { type ReactElement, MutableRefObject } from 'react';
 import { theme } from '../../constants/theme';
 
 interface Props {
+  reference?: MutableRefObject<any>;
+  keyType?: 'next' | 'done';
   placeholder: string;
   enableMenu?: boolean;
   value: string;
@@ -12,6 +14,8 @@ interface Props {
 }
 
 const InputData = ({
+  reference,
+  keyType = 'done',
   placeholder,
   enableMenu = false,
   value,
@@ -37,6 +41,7 @@ const InputData = ({
         borderRadius={theme.DIMENSIONS.inputBorder}
       >
         <InputField
+          ref={reference}
           color={theme.COLORS.white}
           bg={theme.COLORS.cardBg1}
           placeholder={placeholder}
@@ -48,6 +53,7 @@ const InputData = ({
           cursorColor={theme.COLORS.primary}
           fontSize={14}
           onSubmitEditing={onSubmitEditing}
+          returnKeyType={keyType}
         />
         {enableMenu && (
           <InputSlot

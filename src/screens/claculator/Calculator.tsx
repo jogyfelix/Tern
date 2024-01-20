@@ -1,4 +1,4 @@
-import React, { type ReactElement, useLayoutEffect, useState, useCallback } from 'react';
+import React, { type ReactElement, useLayoutEffect, useState, useCallback, useRef } from 'react';
 import { Toast, ToastDescription, VStack, useToast } from '@gluestack-ui/themed';
 import { StatusBar, useWindowDimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -34,6 +34,9 @@ const Calculator = ({ navigation }: Props): ReactElement => {
   const { height } = useWindowDimensions();
   const toast = useToast();
   const scale = useSharedValue(1);
+  const fuelPriceRef = useRef();
+  const fuelEffeciencyRef = useRef();
+  const distanceRef = useRef();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -113,33 +116,40 @@ const Calculator = ({ navigation }: Props): ReactElement => {
           />
           <VStack marginTop={28} space="lg">
             <InputData
+              reference={fuelPriceRef}
+              keyType="next"
               placeholder={strings.FUEL_PRICE}
               value={fuelPrice.toString()}
               setValue={(value: string) => {
                 if (Number(value) !== fuelPrice) {
                   setFuelPrice(Number(value));
-                  setEnableCalc(true);
+                  !enableCalc && setEnableCalc(true);
                 }
               }}
+              onSubmitEditing={() => fuelEffeciencyRef.current.focus()}
             />
             <InputData
+              reference={fuelEffeciencyRef}
+              keyType="next"
               placeholder={strings.FUEL_EFFECIENCY}
               value={fuelEffeciency.toString()}
               setValue={(value: string) => {
                 if (Number(value) !== fuelEffeciency) {
                   setFuelEffeciency(Number(value));
-                  setEnableCalc(true);
+                  !enableCalc && setEnableCalc(true);
                 }
               }}
+              onSubmitEditing={() => distanceRef.current.focus()}
             />
 
             <InputData
+              reference={distanceRef}
               placeholder={strings.DISTANCE}
               value={distance.toString()}
               setValue={(value: string) => {
                 if (Number(value) !== distance) {
                   setDistance(Number(value));
-                  setEnableCalc(true);
+                  !enableCalc && setEnableCalc(true);
                 }
               }}
             />
