@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
+import ParentView from '../../components/general/ParentView';
+import Logo from '../../../assets/svg/tern-logo.svg';
 
 const Login = () => {
   return (
-    <View>
-      <Text>Hello</Text>
-    </View>
+    <ParentView type="flex-start">
+      <Logo />
+    </ParentView>
   );
 };
 

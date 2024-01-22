@@ -16,7 +16,7 @@ const App = () => {
     <NavigationContainer>
       <GluestackUIProvider config={config}>
         <StyledProvider config={config}>
-          <Stack.Navigator initialRouteName="login">
+          <Stack.Navigator initialRouteName={screenNames.LOGIN_SCREEN}>
             <Stack.Screen
               name={screenNames.CALCULATOR_SCREEN}
               component={Calculator}
@@ -28,8 +28,14 @@ const App = () => {
                 headerTitleStyle: { fontFamily: theme.FONTS.default },
               }}
             />
-            <Stack.Screen name="boo" component={HomeBottomNav} />
-            <Stack.Screen name="login" component={Login} />
+            <Stack.Screen name={screenNames.BOTTOM_TAB} component={HomeBottomNav} />
+            <Stack.Screen
+              name={screenNames.LOGIN_SCREEN}
+              component={Login}
+              options={{
+                headerShown: false,
+              }}
+            />
           </Stack.Navigator>
         </StyledProvider>
       </GluestackUIProvider>
