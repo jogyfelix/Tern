@@ -72,7 +72,7 @@ const Login = ({ navigation }: Props) => {
         <Animated.View entering={SlideInDown.delay(280).duration(2000)}>
           <TextBtn
             title={strings.SKIP}
-            onPress={() => navigation.navigate(screenNames.BOTTOM_TAB)}
+            onPress={() => navigation?.navigate(screenNames.BOTTOM_TAB)}
           />
         </Animated.View>
       </VStack>
