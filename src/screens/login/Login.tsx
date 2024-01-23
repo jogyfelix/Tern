@@ -4,6 +4,7 @@ import ParentView from '../../components/general/ParentView';
 import Logo from '../../../assets/svg/tern-logo.svg';
 import SocialAuthBtn from '../../components/general/SocialAuthBtn';
 import strings from '../../constants/strings';
+import screenNames from '../../constants/screenNames';
 import TextBtn from '../../components/general/TextBtn';
 import { theme } from '../../constants/theme';
 import { VStack } from '@gluestack-ui/themed';
@@ -14,8 +15,13 @@ import Animated, {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
-const Login = () => {
+interface Props {
+  navigation?: NavigationProp<ParamListBase>;
+}
+
+const Login = ({ navigation }: Props) => {
   const logoFadeShared = useSharedValue(0);
   const titleFadeShared = useSharedValue(0);
   const subTitleFadeShared = useSharedValue(0);
@@ -66,9 +72,7 @@ const Login = () => {
         <Animated.View entering={SlideInDown.delay(280).duration(2000)}>
           <TextBtn
             title={strings.SKIP}
-            onPress={() => {
-              console.log('here');
-            }}
+            onPress={() => navigation.navigate(screenNames.BOTTOM_TAB)}
           />
         </Animated.View>
       </VStack>
