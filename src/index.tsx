@@ -6,7 +6,7 @@ import { GluestackUIProvider, StyledProvider } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
 import { theme } from './constants/theme';
 import screenNames from './constants/screenNames';
-import HomeBottomNav from './navigation/homeBottomNav';
+import HomeBottomNav from './navigation/HomeBottomNav';
 import Login from './screens/login/Login';
 
 const Stack = createNativeStackNavigator();
