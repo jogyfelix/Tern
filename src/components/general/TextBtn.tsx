@@ -20,7 +20,7 @@ const ButtonText = styled(Text, {
   color: theme.COLORS.text1,
   fontFamily: theme.FONTS.default,
   fontSize: 18,
-  fontWeight: 'bold',
+
   marginStart: 8,
   textAlign: 'center',
 });
