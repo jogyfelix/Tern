@@ -6,6 +6,8 @@ import { GluestackUIProvider, StyledProvider } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
 import { theme } from './constants/theme';
 import screenNames from './constants/screenNames';
+import HomeBottomNav from './navigation/HomeBottomNav';
+import Login from './screens/login/Login';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +16,7 @@ const App = () => {
     <NavigationContainer>
       <GluestackUIProvider config={config}>
         <StyledProvider config={config}>
-          <Stack.Navigator>
+          <Stack.Navigator initialRouteName={screenNames.LOGIN_SCREEN}>
             <Stack.Screen
               name={screenNames.CALCULATOR_SCREEN}
               component={Calculator}
@@ -24,6 +26,18 @@ const App = () => {
                 headerStyle: { backgroundColor: theme.COLORS.black },
                 headerTintColor: 'white',
                 headerTitleStyle: { fontFamily: theme.FONTS.default },
+              }}
+            />
+            <Stack.Screen
+              name={screenNames.BOTTOM_TAB}
+              component={HomeBottomNav}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name={screenNames.LOGIN_SCREEN}
+              component={Login}
+              options={{
+                headerShown: false,
               }}
             />
           </Stack.Navigator>
