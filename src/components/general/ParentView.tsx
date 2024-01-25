@@ -5,12 +5,14 @@ import { theme } from '../../constants/theme';
 
 const ParentView = ({
   type = 'space-between',
+  paddingBottom = 0,
   children,
 }: {
-  type: 'space-between' | 'flex-start' | 'space-evenly' | 'space-around';
+  type?: 'space-between' | 'flex-start' | 'space-evenly' | 'space-around';
+  paddingBottom?: number;
   children: ReactNode;
 }) => {
-  return <View style={{ justifyContent: type }}>{children}</View>;
+  return <View style={{ justifyContent: type, paddingBottom }}>{children}</View>;
 };
 
 const View = styled(SafeAreaView, {

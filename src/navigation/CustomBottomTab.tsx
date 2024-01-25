@@ -2,6 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import Animated, {
   FadeInDown,
+  SlideInDown,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -27,7 +28,7 @@ const CustomBottomTab = ({ state, descriptors, navigation }: props) => {
     };
   });
   return (
-    <View style={styles.navContainer}>
+    <Animated.View style={styles.navContainer} entering={SlideInDown.duration(1000)}>
       <Animated.View style={[styles.selectedContainer, rStyle]} />
       {state.routes.map(
         (route: { key: string | number; name: any; params: any }, index: number) => {
@@ -81,6 +82,7 @@ const CustomBottomTab = ({ state, descriptors, navigation }: props) => {
           return (
             // eslint-disable-next-line react/jsx-key
             <TouchableOpacity
+              key={index}
               accessibilityRole="button"
               accessibilityState={isFocused ? { selected: true } : {}}
               accessibilityLabel={options.tabBarAccessibilityLabel}
@@ -108,7 +110,7 @@ const CustomBottomTab = ({ state, descriptors, navigation }: props) => {
           );
         }
       )}
-    </View>
+    </Animated.View>
   );
 };
 
