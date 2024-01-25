@@ -17,4 +17,8 @@ export default {
   FUEL_UNIT: 'Fuel Unit',
   CONTINUE_WITH_GOOGLE: 'Continue with Google',
   SKIP: 'Skip',
+  HOME: 'Home',
+  PROFILE: 'Profile',
+  SERVICE: 'Service',
+  LEDGER: 'Ledger',
 };

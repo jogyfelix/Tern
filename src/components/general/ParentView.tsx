@@ -14,7 +14,7 @@ const ParentView = ({
 };
 
 const View = styled(SafeAreaView, {
-  backgroundColor: 'black',
+  backgroundColor: theme.COLORS.black,
   flex: 1,
   padding: theme.DIMENSIONS.defaultParentPadding,
 });

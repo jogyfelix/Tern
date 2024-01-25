@@ -16,7 +16,10 @@ const App = () => {
     <NavigationContainer>
       <GluestackUIProvider config={config}>
         <StyledProvider config={config}>
-          <Stack.Navigator initialRouteName={screenNames.LOGIN_SCREEN}>
+          <Stack.Navigator
+            initialRouteName={screenNames.LOGIN_SCREEN}
+            screenOptions={{ headerShown: false }}
+          >
             <Stack.Screen
               name={screenNames.CALCULATOR_SCREEN}
               component={Calculator}
