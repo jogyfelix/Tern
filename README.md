@@ -6,7 +6,7 @@
 
   <a href="https://play.google.com/store/apps/details?id=com.jo.tern">
   <div align="center">
-    <img width="40%" height="60px" src="promotional-assets/playstore.png" alt="Promo banner">
+    <img width="20%" height="10%" src="promotional-assets/playstore.png" alt="Promo banner">
   </div>
 </a>
   
