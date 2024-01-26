@@ -1,12 +1,14 @@
 <h1 align="center" style="font-size:28px; line-height:1"><b>Tern</b></h1>
 
  <div align="center">
-    <img width="95%" src="assets/svg/tern-logo.svg" alt="Promo banner">
+    <img width="95%" src="assets/svg/tern-logo.svg" alt="App icon">
   </div>
   
 Track fuel consumption, calculate costs, and log your vehicle's service history.
 
 ---
+
+# Features
 
 Fuel Calculator: Monitor your fuel consumption and calculate costs with ease. Tern's intuitive interface lets you input fuel data quickly, providing instant calculations for efficiency and expenses.
 
