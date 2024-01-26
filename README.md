@@ -1,8 +1,14 @@
 <h1 align="center" style="font-size:28px; line-height:1"><b>Tern</b></h1>
 
  <div align="center">
-    <img width="95%" src="assets/svg/tern-logo.svg" alt="App icon">
+    <img width="95%" src="tern-app/assets/svg/tern-logo.svg" alt="App icon">
   </div>
+
+  <a href="https://play.google.com/store/apps/details?id=com.jo.tern">
+  <div align="center">
+    <img width="95%" src="promotional-assets/playstore.png" alt="Promo banner">
+  </div>
+</a>
   
 Track fuel consumption, calculate costs, and log your vehicle's service history.
 
@@ -27,8 +33,6 @@ User-Friendly Interface: Tern is designed for simplicity and efficiency. Whether
 Cloud Sync: Securely store your data and access it across multiple devices. Tern ensures your information is synchronized, allowing you to manage your vehicle details seamlessly.
 
 Whether you're a car enthusiast or a bike lover, Tern caters to all your vehicle maintenance needs. Download now to experience the power of efficient fuel tracking, comprehensive service logging, and personalised reminders. Make every mile count with Tern - your go-to app for vehicle service tracking and maintenance management.
-
-
 
 This is a [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
