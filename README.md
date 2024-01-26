@@ -1,4 +1,9 @@
 <h1 align="center" style="font-size:28px; line-height:1"><b>Tern</b></h1>
+
+ <div align="center">
+    <img width="95%" src="assets/svg/tern-logo.svg" alt="Promo banner">
+  </div>
+  
 Track fuel consumption, calculate costs, and log your vehicle's service history.
 
 ---
