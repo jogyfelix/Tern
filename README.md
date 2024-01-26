@@ -9,6 +9,8 @@
     <img width="20%" height="10%" src="promotional-assets/playstore.png" alt="Playstore link">
   </div>
 </a>
+
+
   
 Track fuel consumption, calculate costs, and log your vehicle's service history.
 
