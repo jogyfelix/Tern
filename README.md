@@ -10,9 +10,9 @@
   </div>
 </a>
 
-
+---
   
-Track fuel consumption, calculate costs, and log your vehicle's service history.
+Track fuel, calculate fill-ups, and log service like a pro! Tern - your all-in-one app for smart fueling, cost control, and vehicle care. 
 
 ---
 
