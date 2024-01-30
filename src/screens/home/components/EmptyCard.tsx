@@ -20,7 +20,7 @@ const EmptyCard = ({ type, onPress }: props) => {
         padding={16}
         borderRadius={theme.DIMENSIONS.cardBorder}
       >
-        <VStack alignItems="flex-start" flex={1}>
+        <VStack alignItems="flex-start" flex={2}>
           <Text style={styles.title}>
             {type == 'garage' ? 'Add your first vehicle' : 'Add your first fuel entry'}
           </Text>
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   subTitle: { fontFamily: theme.FONTS.default, color: theme.COLORS.text1, fontSize: 16 },
-  icon: { marginEnd: 24 },
+  icon: { flex: 1, alignItems: 'center' },
 });
 
 export default EmptyCard;

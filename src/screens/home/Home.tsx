@@ -24,8 +24,11 @@ const Home = ({ navigation }: Props) => {
         </VStack>
         <Icon as={UserCircle} color={theme.COLORS.white} size="xl" />
       </HStack>
-      <EmptyCard type="garage" onPress={() => {}} />
-      <EmptyCard type="ledger" onPress={() => {}} />
+      <EmptyCard type="garage" onPress={() => navigation.navigate(screenNames.SERVICE_SCREEN)} />
+      <EmptyCard
+        type="ledger"
+        onPress={() => navigation.navigate(screenNames.FUEL_LEDGER_SCREEN)}
+      />
       <CalcCard onPress={() => navigation.navigate(screenNames.CALCULATOR_SCREEN)} />
     </ParentView>
   );

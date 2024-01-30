@@ -7,15 +7,15 @@ import {
   ActionsheetDragIndicatorWrapper,
   VStack,
 } from '@gluestack-ui/themed';
-import RadioData from '../general/RadioData';
-import { theme } from '../../constants/theme';
+import RadioData from '../../../components/general/RadioData';
+import { theme } from '../../../constants/theme';
 import {
   Directions,
   Gesture,
   GestureDetector,
   GestureHandlerRootView,
 } from 'react-native-gesture-handler';
-import strings from '../../constants/strings';
+import strings from '../../../constants/strings';
 
 interface Props {
   isOpen: boolean;

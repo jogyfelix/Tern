@@ -3,11 +3,11 @@ import { Toast, ToastDescription, VStack, useToast } from '@gluestack-ui/themed'
 import { StatusBar, useWindowDimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ParentView from '../../components/general/ParentView';
-import CalculatorMain from '../../components/calculator/CalculatorMain';
+import CalculatorMain from './components/CalculatorMain';
 import InputData from '../../components/general/InputData';
 import PrimaryBtn from '../../components/general/PrimaryBtn';
-import CalculatorSettings from '../../components/calculator/CalculatorSettings';
-import NumberOfPeopleInput from '../../components/calculator/NumberOfPeopleInput';
+import CalculatorSettings from './components/CalculatorSettings';
+import NumberOfPeopleInput from './components/NumberOfPeopleInput';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { theme } from '../../constants/theme';
 import { useSharedValue, withSpring } from 'react-native-reanimated';

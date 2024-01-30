@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import Animated, {
   FadeInDown,
   SlideInDown,
@@ -42,13 +42,7 @@ const CustomBottomTab = ({ state, descriptors, navigation }: props) => {
 
           const isFocused = state.index === index;
 
-          const onPress = () => {
-            const event = navigation.emit({
-              type: 'tabPress',
-              target: route.key,
-              canPreventDefault: true,
-            });
-
+          if (isFocused) {
             switch (index) {
               case 0:
                 translateX.value = withSpring(8, { damping: 20 });
@@ -66,6 +60,14 @@ const CustomBottomTab = ({ state, descriptors, navigation }: props) => {
                 translateX.value = withSpring(0, { damping: 20 });
                 break;
             }
+          }
+
+          const onPress = () => {
+            const event = navigation.emit({
+              type: 'tabPress',
+              target: route.key,
+              canPreventDefault: true,
+            });
 
             if (!isFocused && !event.defaultPrevented) {
               navigation.navigate(route.name, route.params);

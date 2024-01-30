@@ -7,16 +7,16 @@ import {
   ActionsheetDragIndicatorWrapper,
   VStack,
 } from '@gluestack-ui/themed';
-import InputData from '../general/InputData';
-import { theme } from '../../constants/theme';
-import PrimaryBtn from '../general/PrimaryBtn';
+import InputData from '../../../components/general/InputData';
+import { theme } from '../../../constants/theme';
+import PrimaryBtn from '../../../components/general/PrimaryBtn';
 import {
   Directions,
   Gesture,
   GestureDetector,
   GestureHandlerRootView,
 } from 'react-native-gesture-handler';
-import strings from '../../constants/strings';
+import strings from '../../../constants/strings';
 
 interface Props {
   isOpen: boolean;

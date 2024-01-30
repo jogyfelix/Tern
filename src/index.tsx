@@ -8,6 +8,7 @@ import { theme } from './constants/theme';
 import screenNames from './constants/screenNames';
 import HomeBottomNav from './navigation/HomeBottomNav';
 import Login from './screens/login/Login';
+import AddFuelEntry from './screens/fuel-ledger/AddFuelEntry';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,14 @@ const App = () => {
               name={screenNames.BOTTOM_TAB}
               component={HomeBottomNav}
               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name={screenNames.FUEL_ENTRY_SCREEN}
+              component={AddFuelEntry}
+              options={{
+                headerShown: false,
+                presentation: 'fullScreenModal',
+              }}
             />
             <Stack.Screen
               name={screenNames.LOGIN_SCREEN}
