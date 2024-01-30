@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   navContainer: {
     width: NAV_WIDTH,
     height: 82,
-    backgroundColor: theme.COLORS.cardBg,
+    backgroundColor: theme.COLORS.secondary,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 16,

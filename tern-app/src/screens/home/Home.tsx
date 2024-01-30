@@ -7,6 +7,8 @@ import { theme } from '../../constants/theme';
 import { HStack, Icon, VStack } from '@gluestack-ui/themed';
 import { UserCircle } from 'lucide-react-native';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import CalcCard from './components/CalcCard';
+import EmptyCard from './components/EmptyCard';
 
 interface Props {
   navigation: NavigationProp<ParamListBase>;
@@ -14,40 +16,17 @@ interface Props {
 
 const Home = ({ navigation }: Props) => {
   return (
-    <ParentView type="space-between" paddingBottom={112}>
-      <HStack justifyContent="space-between" alignItems="center">
+    <ParentView type="flex-start" paddingBottom={112}>
+      <HStack justifyContent="space-between" alignItems="center" marginBottom={16}>
         <VStack space="sm">
           <Text style={styles.greetingText}>How’s your day ?</Text>
           <Text style={styles.nameText}>Jogy Felix</Text>
         </VStack>
         <Icon as={UserCircle} color={theme.COLORS.white} size="xl" />
       </HStack>
-      <TouchableOpacity onPress={() => navigation.navigate(screenNames.CALCULATOR_SCREEN)}>
-        <HStack
-          alignItems="center"
-          justifyContent="space-between"
-          borderColor={theme.COLORS.borderColor}
-          borderWidth={1}
-          padding={16}
-          borderRadius={theme.DIMENSIONS.cardBorder}
-        >
-          <Text style={{ fontFamily: theme.FONTS.default, color: theme.COLORS.text, fontSize: 16 }}>
-            Fuel Calculator
-          </Text>
-          <VStack>
-            <Text
-              style={{ fontFamily: theme.FONTS.default, color: theme.COLORS.text, fontSize: 16 }}
-            >
-              $160
-            </Text>
-            <Text
-              style={{ fontFamily: theme.FONTS.default, color: theme.COLORS.text, fontSize: 16 }}
-            >
-              14 Jan
-            </Text>
-          </VStack>
-        </HStack>
-      </TouchableOpacity>
+      <EmptyCard type="garage" onPress={() => {}} />
+      <EmptyCard type="ledger" onPress={() => {}} />
+      <CalcCard onPress={() => navigation.navigate(screenNames.CALCULATOR_SCREEN)} />
     </ParentView>
   );
 };
