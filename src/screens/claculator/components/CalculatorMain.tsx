@@ -1,7 +1,7 @@
 import { styled } from '@gluestack-style/react';
 import { Text, View, useWindowDimensions } from 'react-native';
 import { Divider, HStack } from '@gluestack-ui/themed';
-import Calc from '../../assets/svg/calculator-abstract.svg';
+import Calc from '../../../../assets/svg/calculator-abstract.svg';
 import React, { type ReactElement } from 'react';
 import { theme } from '../../../constants/theme';
 import Animated, { SharedValue, useAnimatedStyle } from 'react-native-reanimated';

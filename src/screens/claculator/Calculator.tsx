@@ -126,7 +126,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
                   !enableCalc && setEnableCalc(true);
                 }
               }}
-              onSubmitEditing={() => fuelEffeciencyRef.current.focus()}
+              onSubmitEditing={() => fuelEffeciencyRef.current?.focus()}
             />
             <InputData
               reference={fuelEffeciencyRef}
@@ -139,7 +139,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
                   !enableCalc && setEnableCalc(true);
                 }
               }}
-              onSubmitEditing={() => distanceRef.current.focus()}
+              onSubmitEditing={() => distanceRef.current?.focus()}
             />
 
             <InputData
