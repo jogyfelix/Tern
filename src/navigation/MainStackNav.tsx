@@ -1,4 +1,4 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import screenNames from '../constants/screenNames';
 import Calculator from '../screens/claculator/Calculator';
@@ -7,7 +7,7 @@ import HomeBottomNav from './HomeBottomNav';
 import AddFuelEntry from '../screens/fuel-ledger/AddFuelEntry';
 import Login from '../screens/login/Login';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 const MainStackNav = () => {
   return (

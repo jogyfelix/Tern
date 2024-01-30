@@ -8,7 +8,7 @@ const ParentView = ({
   paddingBottom = 0,
   children,
 }: {
-  type?: 'space-between' | 'flex-start' | 'space-evenly' | 'space-around';
+  type?: 'space-between' | 'flex-start' | 'space-evenly' | 'space-around' | 'center';
   paddingBottom?: number;
   children: ReactNode;
 }) => {

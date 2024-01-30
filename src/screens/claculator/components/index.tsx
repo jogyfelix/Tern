@@ -7,7 +7,7 @@ import { Menu } from 'lucide-react-native';
 
 export const TopMenu = (onPress: () => void) => {
   return (
-    <Pressable onPress={onPress}>
+    <Pressable onPress={onPress} style={{ marginEnd: 16 }}>
       <Icon as={Menu} color={theme.COLORS.white} size="lg" />
     </Pressable>
   );
