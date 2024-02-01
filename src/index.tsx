@@ -20,6 +20,8 @@ const App = () => {
   );
 };
 
+//husky test
+
 const $container: ViewStyle = {
   flex: 1,
 };
