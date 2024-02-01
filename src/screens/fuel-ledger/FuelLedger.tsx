@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, SectionList, StyleSheet, StatusBar, useWindowDimensions } from 'react-native';
 import ParentView from '../../components/general/ParentView';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
@@ -43,6 +43,7 @@ const SCROLL_DISTANCE = MAX_HEADER_HEIGHT - MIN_HEADER_HEIGHT;
 
 const FuelLedger = ({ navigation }: Props) => {
   const scrollOffsetY = useSharedValue(0);
+  const [statusBarColor, setStatusBarColor] = useState(theme.COLORS.black);
 
   const rStyle = useAnimatedStyle(() => {
     return {
@@ -68,6 +69,7 @@ const FuelLedger = ({ navigation }: Props) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar animated backgroundColor={statusBarColor} />
       <Animated.View
         style={[
           {
@@ -97,11 +99,16 @@ const FuelLedger = ({ navigation }: Props) => {
       <SectionList
         sections={DATA}
         keyExtractor={(item, index) => item + index}
-        // style={{ marginTop: StatusBar.currentHeight }}
+        style={{ marginTop: StatusBar.currentHeight }}
         contentContainerStyle={{ marginHorizontal: 16 }}
         scrollEventThrottle={16}
         onScroll={(event) => {
           scrollOffsetY.value = withTiming(event.nativeEvent.contentOffset.y, { duration: 100 });
+          if (event.nativeEvent.contentOffset.y > MIN_HEADER_HEIGHT) {
+            setStatusBarColor(theme.COLORS.cardBg);
+          } else {
+            setStatusBarColor(theme.COLORS.black);
+          }
         }}
         renderItem={({ item }) => (
           <View style={styles.item}>
