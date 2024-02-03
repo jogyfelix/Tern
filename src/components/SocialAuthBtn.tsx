@@ -1,7 +1,7 @@
 import React, { type ReactNode } from 'react';
-import { theme } from '../../constants/theme';
+import { theme } from '../constants/theme';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
-import Google from '../../../assets/svg/google.svg';
+import Google from '../../assets/svg/google.svg';
 
 interface Props {
   title: string;

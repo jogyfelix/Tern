@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
-import { theme } from '../../constants/theme';
+import { theme } from '../constants/theme';
 import { AddIcon, Icon } from '@gluestack-ui/themed';
 
 type props = {

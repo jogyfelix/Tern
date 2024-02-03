@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { styled } from '@gluestack-style/react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { theme } from '../../constants/theme';
+import { theme } from '../constants/theme';
 
 const ParentView = ({
   type = 'space-between',

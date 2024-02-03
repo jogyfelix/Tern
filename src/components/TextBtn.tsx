@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { theme } from '../../constants/theme';
+import { theme } from '../constants/theme';
 import { Text, Pressable } from 'react-native';
 import { styled } from '@gluestack-style/react';
 

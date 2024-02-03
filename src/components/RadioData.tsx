@@ -10,7 +10,7 @@ import {
 } from '@gluestack-ui/themed';
 import { CircleIcon } from 'lucide-react-native';
 import { Text } from 'react-native';
-import { theme } from '../../constants/theme';
+import { theme } from '../constants/theme';
 
 interface Props {
   data: string[];

@@ -1,13 +1,12 @@
-import { Input, InputField, InputIcon, InputSlot, VStack } from '@gluestack-ui/themed';
-import { Menu } from 'lucide-react-native';
+import { Input, InputField, InputSlot, VStack } from '@gluestack-ui/themed';
 import React, { type ReactElement, MutableRefObject } from 'react';
-import { theme } from '../../constants/theme';
+import { theme } from '../constants/theme';
 
 interface Props {
   reference?: MutableRefObject<any>;
   keyType?: 'next' | 'done';
   placeholder: string;
-  enableMenu?: boolean;
+  rightIcon?: ReactElement;
   value: string;
   setValue: (value: string) => void;
   onSubmitEditing?: () => void;
@@ -17,7 +16,7 @@ const InputData = ({
   reference,
   keyType = 'done',
   placeholder,
-  enableMenu = false,
+  rightIcon,
   value,
   setValue,
   onSubmitEditing,
@@ -30,23 +29,20 @@ const InputData = ({
   };
 
   return (
-    <VStack space="sm">
+    <VStack>
       <Input
-        variant="rounded"
-        size="lg"
         isDisabled={false}
         isInvalid={false}
         isReadOnly={false}
         borderWidth={0}
+        height={44}
         borderRadius={theme.DIMENSIONS.inputBorder}
       >
         <InputField
           ref={reference}
           color={theme.COLORS.white}
-          bg={theme.COLORS.cardBg1}
+          backgroundColor={theme.COLORS.cardBg1}
           placeholder={placeholder}
-          paddingStart={4}
-          paddingVertical={0}
           value={value === '0' ? '' : value}
           onChangeText={onChange}
           keyboardType="decimal-pad"
@@ -55,17 +51,16 @@ const InputData = ({
           onSubmitEditing={onSubmitEditing}
           returnKeyType={keyType}
         />
-        {enableMenu && (
-          <InputSlot
-            bg={theme.COLORS.cardBg1}
-            paddingEnd={6}
-            onPress={() => {
-              console.log('clicked');
-            }}
-          >
-            <InputIcon as={Menu} color={theme.COLORS.text} />
-          </InputSlot>
-        )}
+
+        <InputSlot
+          backgroundColor={theme.COLORS.cardBg1}
+          paddingEnd={6}
+          onPress={() => {
+            console.log('clicked');
+          }}
+        >
+          {rightIcon}
+        </InputSlot>
       </Input>
     </VStack>
   );

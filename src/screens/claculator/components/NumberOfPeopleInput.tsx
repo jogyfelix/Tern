@@ -7,9 +7,9 @@ import {
   ActionsheetDragIndicatorWrapper,
   VStack,
 } from '@gluestack-ui/themed';
-import InputData from '../../../components/general/InputData';
+import InputData from '../../../components/InputData';
 import { theme } from '../../../constants/theme';
-import PrimaryBtn from '../../../components/general/PrimaryBtn';
+import PrimaryBtn from '../../../components/PrimaryBtn';
 import {
   Directions,
   Gesture,

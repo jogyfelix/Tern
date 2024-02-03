@@ -1,6 +1,6 @@
 import { Button, ButtonText } from '@gluestack-ui/themed';
 import React, { type ReactElement } from 'react';
-import { theme } from '../../constants/theme';
+import { theme } from '../constants/theme';
 
 interface Props {
   title: string;

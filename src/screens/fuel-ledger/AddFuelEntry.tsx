@@ -1,42 +1,50 @@
 import React from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import { View, StatusBar, useWindowDimensions } from 'react-native';
 import { theme } from '../../constants/theme';
-import InputData from '../../components/general/InputData';
-import PrimaryBtn from '../../components/general/PrimaryBtn';
+import InputData from '../../components/InputData';
+import InputDataLarge from '../../components/InputDataLarge';
+import PrimaryBtn from '../../components/PrimaryBtn';
+import { InputIcon, VStack } from '@gluestack-ui/themed';
+import { Banknote, Wallet } from 'lucide-react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import TopTabBar from '../../components/TopTabBar';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import DateSelector from '../../components/DataSelector';
 
-const AddFuelEntry = () => {
+interface Props {
+  navigation: NavigationProp<ParamListBase>;
+}
+
+const AddFuelEntry = ({ navigation }: Props) => {
+  const { height } = useWindowDimensions();
   return (
-    <View style={{ flex: 1, backgroundColor: theme.COLORS.black }}>
+    <View style={{ flex: 1, backgroundColor: theme.COLORS.black, justifyContent: 'space-between' }}>
       <StatusBar backgroundColor={theme.COLORS.cardBg} />
-      <View
-        style={[
-          {
-            backgroundColor: theme.COLORS.cardBg,
-            height: 200,
-          },
-        ]}
+      <TopTabBar
+        title="Add fuel entry"
+        backPress={() => {
+          navigation.goBack();
+        }}
+      />
+
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ justifyContent: 'space-between', height: height / 1.2 - 200 }}
       >
-        <Text
-          style={[
-            {
-              color: theme.COLORS.text,
-              fontSize: 24,
-              marginHorizontal: 16,
-              textAlign: 'center',
-              position: 'absolute',
-              bottom: 16,
-              fontFamily: theme.FONTS.default,
-            },
-          ]}
-        >
-          Add fuel entry
-        </Text>
-      </View>
-      <InputData placeholder="Cost" />
-      <InputData placeholder="Total amount" />
-      <InputData placeholder="Note" />
-      <InputData placeholder="Date" />
-      <PrimaryBtn title="Add entry" />
+        <VStack gap={28} marginTop={28} marginHorizontal={16}>
+          <DateSelector />
+          <InputData
+            placeholder="Cost"
+            rightIcon={<InputIcon as={Banknote} color={theme.COLORS.text} />}
+          />
+          <InputData
+            placeholder="Total amount"
+            rightIcon={<InputIcon as={Wallet} color={theme.COLORS.text} />}
+          />
+          <InputDataLarge placeholder="Note" />
+        </VStack>
+        <PrimaryBtn title="Add entry" marginHorizontal={16} />
+      </KeyboardAwareScrollView>
     </View>
   );
 };

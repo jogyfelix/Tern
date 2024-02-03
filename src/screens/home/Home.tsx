@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import ParentView from '../../components/general/ParentView';
+import ParentView from '../../components/ParentView';
 import strings from '../../constants/strings';
 import screenNames from '../../constants/screenNames';
 import { theme } from '../../constants/theme';

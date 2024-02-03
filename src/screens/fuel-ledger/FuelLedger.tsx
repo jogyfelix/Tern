@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, SectionList, StyleSheet, StatusBar, useWindowDimensions } from 'react-native';
-import ParentView from '../../components/general/ParentView';
+import { View, Text, SectionList, StyleSheet, StatusBar } from 'react-native';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import screenNames from '../../constants/screenNames';
-import Fab from '../../components/general/Fab';
+import Fab from '../../components/Fab';
 import Animated, {
   Extrapolate,
   interpolate,

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { Text, View, StyleSheet, StatusBar } from 'react-native';
-import ParentView from '../../components/general/ParentView';
+import ParentView from '../../components/ParentView';
 import Logo from '../../../assets/svg/tern-logo.svg';
-import SocialAuthBtn from '../../components/general/SocialAuthBtn';
+import SocialAuthBtn from '../../components/SocialAuthBtn';
 import strings from '../../constants/strings';
 import screenNames from '../../constants/screenNames';
-import TextBtn from '../../components/general/TextBtn';
+import TextBtn from '../../components/TextBtn';
 import { theme } from '../../constants/theme';
 import { VStack } from '@gluestack-ui/themed';
 import Animated, {

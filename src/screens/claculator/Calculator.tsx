@@ -1,11 +1,11 @@
 import React, { type ReactElement, useLayoutEffect, useState, useCallback, useRef } from 'react';
-import { Toast, ToastDescription, VStack, useToast } from '@gluestack-ui/themed';
+import { InputIcon, Toast, ToastDescription, VStack, useToast } from '@gluestack-ui/themed';
 import { StatusBar, useWindowDimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import ParentView from '../../components/general/ParentView';
+import ParentView from '../../components/ParentView';
 import CalculatorMain from './components/CalculatorMain';
-import InputData from '../../components/general/InputData';
-import PrimaryBtn from '../../components/general/PrimaryBtn';
+import InputData from '../../components/InputData';
+import PrimaryBtn from '../../components/PrimaryBtn';
 import CalculatorSettings from './components/CalculatorSettings';
 import NumberOfPeopleInput from './components/NumberOfPeopleInput';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
@@ -13,6 +13,7 @@ import { theme } from '../../constants/theme';
 import { useSharedValue, withSpring } from 'react-native-reanimated';
 import strings from '../../constants/strings';
 import { AddPeople, TopMenu } from './components';
+import { Banknote, LandPlot, Sparkles } from 'lucide-react-native';
 
 interface Props {
   navigation: NavigationProp<ParamListBase>;
@@ -120,6 +121,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
               keyType="next"
               placeholder={strings.FUEL_PRICE}
               value={fuelPrice.toString()}
+              rightIcon={<InputIcon as={Banknote} color={theme.COLORS.text} />}
               setValue={(value: string) => {
                 if (Number(value) !== fuelPrice) {
                   setFuelPrice(Number(value));
@@ -133,6 +135,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
               keyType="next"
               placeholder={strings.FUEL_EFFECIENCY}
               value={fuelEffeciency.toString()}
+              rightIcon={<InputIcon as={Sparkles} color={theme.COLORS.text} />}
               setValue={(value: string) => {
                 if (Number(value) !== fuelEffeciency) {
                   setFuelEffeciency(Number(value));
@@ -146,6 +149,7 @@ const Calculator = ({ navigation }: Props): ReactElement => {
               reference={distanceRef}
               placeholder={strings.DISTANCE}
               value={distance.toString()}
+              rightIcon={<InputIcon as={LandPlot} color={theme.COLORS.text} />}
               setValue={(value: string) => {
                 if (Number(value) !== distance) {
                   setDistance(Number(value));

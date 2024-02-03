@@ -7,7 +7,7 @@ import {
   ActionsheetDragIndicatorWrapper,
   VStack,
 } from '@gluestack-ui/themed';
-import RadioData from '../../../components/general/RadioData';
+import RadioData from '../../../components/RadioData';
 import { theme } from '../../../constants/theme';
 import {
   Directions,
