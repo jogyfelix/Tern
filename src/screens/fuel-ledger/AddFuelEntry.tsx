@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StatusBar, useWindowDimensions } from 'react-native';
+import { View, useWindowDimensions, StyleSheet } from 'react-native';
 import { theme } from '../../constants/theme';
 import InputData from '../../components/InputData';
 import InputDataLarge from '../../components/InputDataLarge';
@@ -20,7 +20,7 @@ const AddFuelEntry = ({ navigation }: Props) => {
   const { height } = useWindowDimensions();
   const isKeyboardVisible = useKeyboardVisiblity();
   return (
-    <View style={{ flex: 1, backgroundColor: theme.COLORS.black, justifyContent: 'space-between' }}>
+    <View style={styles.container}>
       <TopTabBar
         title="Add fuel entry"
         backPress={() => {
@@ -50,5 +50,9 @@ const AddFuelEntry = ({ navigation }: Props) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: theme.COLORS.black, justifyContent: 'space-between' },
+});
 
 export default AddFuelEntry;

@@ -38,7 +38,7 @@ const TopTabBar = ({ title, backPress, isKeyboardVisible }: props) => {
       backgroundColor: interpolateColor(
         scrollOffsetY.value,
         [0, SCROLL_DISTANCE],
-        ['transparent', theme.COLORS.cardBg]
+        [theme.COLORS.cardBg1, theme.COLORS.cardBg]
       ),
     };
   });
@@ -62,7 +62,7 @@ const TopTabBar = ({ title, backPress, isKeyboardVisible }: props) => {
     <View>
       <StatusBar
         animated
-        backgroundColor={isKeyboardVisible ? theme.COLORS.cardBg : theme.COLORS.black}
+        backgroundColor={isKeyboardVisible ? theme.COLORS.cardBg : theme.COLORS.cardBg1}
       />
       <Animated.View style={[styles.container, rStyle]}>
         <Pressable hitSlop={5} onPress={backPress}>
