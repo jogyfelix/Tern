@@ -5,6 +5,8 @@ export const theme = {
     buttonBorder: 12,
     cardBorder: 12,
     inputBorder: 8,
+    MAX_HEADER_HEIGHT: 200,
+    MIN_HEADER_HEIGHT: 60,
   },
   COLORS: {
     primary: '#EBBF58',

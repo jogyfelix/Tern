@@ -36,9 +36,7 @@ const DATA = [
   },
 ];
 
-const MAX_HEADER_HEIGHT = 200;
-const MIN_HEADER_HEIGHT = 70;
-const SCROLL_DISTANCE = MAX_HEADER_HEIGHT - MIN_HEADER_HEIGHT;
+const SCROLL_DISTANCE = theme.DIMENSIONS.MAX_HEADER_HEIGHT - theme.DIMENSIONS.MIN_HEADER_HEIGHT;
 
 const FuelLedger = ({ navigation }: Props) => {
   const scrollOffsetY = useSharedValue(0);
@@ -49,7 +47,7 @@ const FuelLedger = ({ navigation }: Props) => {
       height: interpolate(
         scrollOffsetY.value,
         [0, SCROLL_DISTANCE],
-        [MAX_HEADER_HEIGHT, MIN_HEADER_HEIGHT],
+        [theme.DIMENSIONS.MAX_HEADER_HEIGHT, theme.DIMENSIONS.MIN_HEADER_HEIGHT],
         Extrapolate.CLAMP
       ),
       backgroundColor: interpolateColor(
@@ -103,7 +101,7 @@ const FuelLedger = ({ navigation }: Props) => {
         scrollEventThrottle={16}
         onScroll={(event) => {
           scrollOffsetY.value = withTiming(event.nativeEvent.contentOffset.y, { duration: 100 });
-          if (event.nativeEvent.contentOffset.y > MIN_HEADER_HEIGHT) {
+          if (event.nativeEvent.contentOffset.y > theme.DIMENSIONS.MIN_HEADER_HEIGHT) {
             setStatusBarColor(theme.COLORS.cardBg);
           } else {
             setStatusBarColor(theme.COLORS.black);

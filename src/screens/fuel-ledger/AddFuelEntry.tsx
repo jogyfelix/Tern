@@ -10,6 +10,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import TopTabBar from '../../components/TopTabBar';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import DateSelector from '../../components/DataSelector';
+import { useKeyboardVisiblity } from '../../utils/useKeyboardVisiblity';
 
 interface Props {
   navigation: NavigationProp<ParamListBase>;
@@ -17,14 +18,15 @@ interface Props {
 
 const AddFuelEntry = ({ navigation }: Props) => {
   const { height } = useWindowDimensions();
+  const isKeyboardVisible = useKeyboardVisiblity();
   return (
     <View style={{ flex: 1, backgroundColor: theme.COLORS.black, justifyContent: 'space-between' }}>
-      <StatusBar backgroundColor={theme.COLORS.cardBg} />
       <TopTabBar
         title="Add fuel entry"
         backPress={() => {
           navigation.goBack();
         }}
+        isKeyboardVisible={isKeyboardVisible}
       />
 
       <KeyboardAwareScrollView
