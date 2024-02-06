@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 
 const Service = () => {
   return (
-    <View>
+    <View style={{ backgroundColor: 'green' }}>
       <Text>Hello</Text>
     </View>
   );
