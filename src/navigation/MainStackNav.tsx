@@ -5,6 +5,8 @@ import Calculator from '../screens/claculator/Calculator';
 import { theme } from '../constants/theme';
 import HomeBottomNav from './HomeBottomNav';
 import AddFuelEntry from '../screens/fuel-ledger/AddFuelEntry';
+import AddVehicle from '../screens/service/AddVehicle';
+import AddService from '../screens/service/AddService';
 import Login from '../screens/login/Login';
 
 const Stack = createStackNavigator();
@@ -33,7 +35,23 @@ const MainStackNav = () => {
         component={AddFuelEntry}
         options={{
           headerShown: false,
-          presentation: 'fullScreenModal',
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name={screenNames.ADD_VEHICLE_SCREEN}
+        component={AddVehicle}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name={screenNames.ADD_SERVICE_SCREEN}
+        component={AddService}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
         }}
       />
       <Stack.Screen

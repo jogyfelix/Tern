@@ -11,6 +11,12 @@ import Animated, {
 import { HStack, Icon } from '@gluestack-ui/themed';
 import { Fuel } from 'lucide-react-native';
 import { theme } from '../../constants/theme';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import screenNames from '../../constants/screenNames';
+
+interface Props {
+  navigation: NavigationProp<ParamListBase>;
+}
 
 const DATA = [
   {
@@ -49,7 +55,7 @@ const DATA = [
 
 const SCROLL_DISTANCE = theme.DIMENSIONS.MAX_HEADER_HEIGHT - theme.DIMENSIONS.MIN_HEADER_HEIGHT;
 
-const Service = () => {
+const Service = ({ navigation }: Props) => {
   const { width } = useWindowDimensions();
   const scrollOffsetY = useSharedValue(0);
 
@@ -144,7 +150,7 @@ const Service = () => {
         renderSectionHeader={({ section: { title } }) => <Text style={styles.header}>{title}</Text>}
       />
 
-      <Fab />
+      <Fab onPress={() => navigation.navigate(screenNames.ADD_VEHICLE_SCREEN)} />
     </View>
   );
 };
