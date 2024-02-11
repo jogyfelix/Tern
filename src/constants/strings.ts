@@ -22,3 +22,5 @@ export default {
   SERVICE: 'Service',
   LEDGER: 'Ledger',
 };
+
+export const RESET_APP = 'reset_application';

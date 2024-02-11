@@ -15,11 +15,11 @@ const App = () => {
       <GluestackUIProvider config={config}>
         <StyledProvider config={config}>
           <GestureHandlerRootView style={$container}>
-            {/* <Provider store={Store}>
-              <PersistGate persistor={Persistor}> */}
-            <MainStackNav />
-            {/* </PersistGate>
-            </Provider> */}
+            <Provider store={Store}>
+              <PersistGate persistor={Persistor}>
+                <MainStackNav />
+              </PersistGate>
+            </Provider>
           </GestureHandlerRootView>
         </StyledProvider>
       </GluestackUIProvider>
