@@ -3,15 +3,23 @@ import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { theme } from '../constants/theme';
 import { Calendar } from 'lucide-react-native';
+import moment from 'moment';
 
-const DateSelector = () => {
+type Props = {
+  datePress: () => void;
+  timePress: () => void;
+  date: Date;
+  time: Date;
+};
+
+const DateSelector = ({ datePress, timePress, date, time }: Props) => {
   return (
     <HStack justifyContent="space-between" alignItems="center">
-      <HStack alignItems="center" gap={10}>
+      <HStack alignItems="center" gap={10} onTouchEnd={datePress}>
         <View style={styles.container}>
           <Icon as={Calendar} color={theme.COLORS.text} />
         </View>
-        <Text style={styles.month}>February 2</Text>
+        <Text style={styles.month}>{moment(date).format('MMMM DD')}</Text>
       </HStack>
       <HStack
         alignItems="center"
@@ -19,11 +27,9 @@ const DateSelector = () => {
         backgroundColor={theme.COLORS.cardBg}
         padding={12}
         borderRadius={8}
+        onTouchEnd={timePress}
       >
-        <Text style={styles.text}>11</Text>
-        <Text style={styles.text}>:</Text>
-        <Text style={styles.text}>38</Text>
-        <Text style={styles.text}>PM</Text>
+        <Text style={styles.text}>{moment(time).format('h : mm A')}</Text>
       </HStack>
     </HStack>
   );

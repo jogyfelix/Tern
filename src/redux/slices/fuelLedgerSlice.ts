@@ -6,6 +6,7 @@ type fuelEntryType = {
   amount: number;
   quantity: number;
   date: Date;
+  time: Date;
 };
 
 type fuelLedgerType = {
