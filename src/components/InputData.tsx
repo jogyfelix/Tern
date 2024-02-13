@@ -10,6 +10,7 @@ interface Props {
   value: string;
   setValue: (value: string) => void;
   onSubmitEditing?: () => void;
+  keyboardType?: 'decimal-pad' | 'default';
 }
 
 const InputData = ({
@@ -20,9 +21,10 @@ const InputData = ({
   value,
   setValue,
   onSubmitEditing,
+  keyboardType = 'decimal-pad',
 }: Props): ReactElement => {
   const onChange = (text: string): void => {
-    if (isNaN(Number(text))) {
+    if (keyboardType == 'decimal-pad' && isNaN(Number(text))) {
       return;
     }
     setValue(text);
@@ -45,7 +47,7 @@ const InputData = ({
           placeholder={placeholder}
           value={value === '0' ? '' : value}
           onChangeText={onChange}
-          keyboardType="decimal-pad"
+          keyboardType={keyboardType}
           cursorColor={theme.COLORS.primary}
           fontSize={14}
           onSubmitEditing={onSubmitEditing}

@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type fuelEntryType = {
+export type fuelEntryType = {
   id: number;
   type: string;
   amount: number;
   quantity: number;
-  date: Date;
-  time: Date;
+  date: string;
+  time: string;
 };
 
 type fuelLedgerType = {
@@ -21,12 +21,12 @@ export const fuelLedgerSlice = createSlice({
   name: 'fuelLedger',
   initialState,
   reducers: {
-    setFuelLedgerDetails: (_, action) => {
-      return action.payload;
+    addFuelEntry: (state, action) => {
+      state.ledgerList = [...state.ledgerList, action.payload];
     },
   },
 });
 
-export const { setFuelLedgerDetails } = fuelLedgerSlice.actions;
+export const { addFuelEntry } = fuelLedgerSlice.actions;
 
 export default fuelLedgerSlice.reducer;

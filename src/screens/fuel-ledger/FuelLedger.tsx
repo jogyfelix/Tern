@@ -14,6 +14,7 @@ import Animated, {
 import { theme } from '../../constants/theme';
 import { HStack, Icon } from '@gluestack-ui/themed';
 import { Fuel } from 'lucide-react-native';
+import { useSelector } from 'react-redux';
 
 interface Props {
   navigation: NavigationProp<ParamListBase>;
@@ -59,6 +60,7 @@ const SCROLL_DISTANCE = theme.DIMENSIONS.MAX_HEADER_HEIGHT - theme.DIMENSIONS.MI
 const FuelLedger = ({ navigation }: Props) => {
   const scrollOffsetY = useSharedValue(0);
   const [statusBarColor, setStatusBarColor] = useState(theme.COLORS.cardBg1);
+  const ledgerList = useSelector((state: any) => state.fuelLedger);
 
   const rStyle = useAnimatedStyle(() => {
     return {
