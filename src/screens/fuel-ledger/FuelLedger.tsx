@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, SectionList, StyleSheet, StatusBar } from 'react-native';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import screenNames from '../../constants/screenNames';
@@ -60,7 +60,18 @@ const SCROLL_DISTANCE = theme.DIMENSIONS.MAX_HEADER_HEIGHT - theme.DIMENSIONS.MI
 const FuelLedger = ({ navigation }: Props) => {
   const scrollOffsetY = useSharedValue(0);
   const [statusBarColor, setStatusBarColor] = useState(theme.COLORS.cardBg1);
-  const ledgerList = useSelector((state: any) => state.fuelLedger);
+  const { ledgerList } = useSelector((state: any) => state.fuelLedger);
+
+  const formatList = () => {
+    ledgerList.map((value) => {
+      return {
+        title: value.time,
+        data: [],
+      };
+    });
+  };
+
+  useEffect(formatList, []);
 
   const rStyle = useAnimatedStyle(() => {
     return {

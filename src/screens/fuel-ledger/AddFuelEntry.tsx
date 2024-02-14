@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, useWindowDimensions, StyleSheet } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { View, useWindowDimensions, StyleSheet, Keyboard } from 'react-native';
 import { theme } from '../../constants/theme';
 import InputData from '../../components/InputData';
 import InputDataLarge from '../../components/InputDataLarge';
@@ -32,6 +32,10 @@ const AddFuelEntry = ({ navigation }: Props) => {
   const [quantity, setQuantity] = useState(0);
   const [note, setNote] = useState('');
   const ledger = useSelector((state: any) => state.fuelLedger.ledgerList);
+  const fuelTypeRef = useRef();
+  const totalAmountRef = useRef();
+  const totalQuantityRef = useRef();
+  const noteRef = useRef();
 
   const datePress = () => {
     setShowDate(true);
@@ -80,25 +84,40 @@ const AddFuelEntry = ({ navigation }: Props) => {
         <VStack gap={28} marginTop={28} marginHorizontal={16}>
           <DateSelector datePress={datePress} timePress={timePress} date={date} time={time} />
           <InputData
+            reference={fuelTypeRef}
             placeholder="Fuel Type"
             value={type}
             setValue={setType}
             keyboardType="default"
+            keyType="next"
+            onSubmitEditing={() => totalAmountRef.current?.focus()}
             rightIcon={<InputIcon as={Fuel} color={theme.COLORS.text} />}
           />
           <InputData
+            reference={totalAmountRef}
             placeholder="Total amount"
             value={amount.toString()}
+            keyType="next"
+            onSubmitEditing={() => totalQuantityRef.current?.focus()}
             setValue={(value: string) => setAmount(Number(value))}
             rightIcon={<InputIcon as={Banknote} color={theme.COLORS.text} />}
           />
           <InputData
+            reference={totalQuantityRef}
             placeholder="Total quantity"
             value={quantity.toString()}
+            keyType="next"
+            onSubmitEditing={() => noteRef.current?.focus()}
             setValue={(value: string) => setQuantity(Number(value))}
             rightIcon={<InputIcon as={Wallet} color={theme.COLORS.text} />}
           />
-          <InputDataLarge placeholder="Note" value={note} setValue={setNote} />
+          <InputDataLarge
+            reference={noteRef}
+            placeholder="Note"
+            value={note}
+            setValue={setNote}
+            keyType="done"
+          />
         </VStack>
         <PrimaryBtn title="Add entry" marginHorizontal={16} onPress={onPress} />
         {showDate && <RNDateTimePicker mode="date" value={date} onChange={onDateChange} />}
