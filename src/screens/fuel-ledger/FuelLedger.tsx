@@ -63,12 +63,17 @@ const FuelLedger = ({ navigation }: Props) => {
   const { ledgerList } = useSelector((state: any) => state.fuelLedger);
 
   const formatList = () => {
-    ledgerList.map((value) => {
-      return {
-        title: value.time,
-        data: [],
-      };
-    });
+    console.log(
+      ledgerList.map((value) => {
+        const temp = ledgerList.filter((filterVal) => {
+          return filterVal.time === value.time;
+        });
+        return {
+          title: value.time,
+          data: temp,
+        };
+      })
+    );
   };
 
   useEffect(formatList, []);
