@@ -105,6 +105,7 @@ const Service = ({ navigation }: Props) => {
                 width: width * 0.4,
                 borderRadius: 18,
               }}
+              onTouchEnd={() => navigation.navigate(screenNames.ADD_SERVICE_SCREEN)}
             />
             <View
               style={{

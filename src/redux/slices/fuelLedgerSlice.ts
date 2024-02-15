@@ -7,6 +7,7 @@ export type fuelEntryType = {
   quantity: number;
   date: string;
   time: string;
+  note: string;
 };
 
 type fuelLedgerType = {

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { View, useWindowDimensions, StyleSheet, Keyboard } from 'react-native';
+import { View, useWindowDimensions, StyleSheet } from 'react-native';
 import { theme } from '../../constants/theme';
 import InputData from '../../components/InputData';
 import InputDataLarge from '../../components/InputDataLarge';
@@ -64,6 +64,7 @@ const AddFuelEntry = ({ navigation }: Props) => {
       quantity,
       date: date.toISOString(),
       time: time.toISOString(),
+      note,
     };
     dispatch(addFuelEntry(newEntry));
   };

@@ -5,6 +5,7 @@ type vehiclesType = {
   type: string;
   name: string;
   make: string;
+  note: string;
 };
 
 type vehiclesListType = {
