@@ -56,7 +56,7 @@ const AddFuelEntry = ({ navigation }: Props) => {
   };
 
   const onPress = () => {
-    const newId = (ledger[ledger.length - 1].id || 0) + 1;
+    const newId = (ledger[ledger.length - 1]?.id ?? 0) + 1;
     const newEntry: fuelEntryType = {
       id: newId,
       type,

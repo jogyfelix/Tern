@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, SectionList, StyleSheet, StatusBar } from 'react-native';
+import {
+  View,
+  Text,
+  SectionList,
+  StyleSheet,
+  StatusBar,
+  SectionListData,
+  SectionListProps,
+} from 'react-native';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import screenNames from '../../constants/screenNames';
 import Fab from '../../components/Fab';
@@ -15,45 +23,12 @@ import { theme } from '../../constants/theme';
 import { HStack, Icon } from '@gluestack-ui/themed';
 import { Fuel } from 'lucide-react-native';
 import { useSelector } from 'react-redux';
+import * as R from 'ramda';
+import { fuelEntryType } from '../../redux/slices/fuelLedgerSlice';
 
 interface Props {
   navigation: NavigationProp<ParamListBase>;
 }
-
-const DATA = [
-  {
-    title: 'Januray, 2024',
-    data: [
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-    ],
-  },
-  {
-    title: 'February, 2024',
-    data: [
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-    ],
-  },
-  {
-    title: 'March, 2024',
-    data: [
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-    ],
-  },
-  {
-    title: 'April, 2024',
-    data: [
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-    ],
-  },
-];
 
 const SCROLL_DISTANCE = theme.DIMENSIONS.MAX_HEADER_HEIGHT - theme.DIMENSIONS.MIN_HEADER_HEIGHT;
 
@@ -61,22 +36,41 @@ const FuelLedger = ({ navigation }: Props) => {
   const scrollOffsetY = useSharedValue(0);
   const [statusBarColor, setStatusBarColor] = useState(theme.COLORS.cardBg1);
   const { ledgerList } = useSelector((state: any) => state.fuelLedger);
+  const [data, setData] = useState<any>([]);
 
+  const sortByDate = (list: fuelEntryType[]): fuelEntryType[] => {
+    const sortData = list;
+    return sortData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  };
   const formatList = () => {
-    console.log(
-      ledgerList.map((value) => {
-        const temp = ledgerList.filter((filterVal) => {
-          return filterVal.time === value.time;
-        });
+    const sortedDates = sortByDate(ledgerList);
+    const groupedTransactions = {};
+
+    sortedDates.forEach((transaction: fuelEntryType) => {
+      const date = new Date(transaction.date).toDateString();
+      if (!groupedTransactions[date]) {
+        groupedTransactions[date] = [];
+      }
+      groupedTransactions[date].push(transaction);
+    });
+
+    const finalResult = Object.keys(groupedTransactions).map((date) => {
+      if (date === new Date().toDateString()) {
         return {
-          title: value.time,
-          data: temp,
+          title: 'Today',
+          data: groupedTransactions[date],
         };
-      })
-    );
+      } else {
+        return {
+          title: date,
+          data: groupedTransactions[date],
+        };
+      }
+    });
+    setData(finalResult);
   };
 
-  useEffect(formatList, []);
+  useEffect(formatList, [ledgerList]);
 
   const rStyle = useAnimatedStyle(() => {
     return {
@@ -123,7 +117,7 @@ const FuelLedger = ({ navigation }: Props) => {
       </Animated.View>
 
       <SectionList
-        sections={DATA}
+        sections={data}
         keyExtractor={(item, index) => item + index}
         style={{ marginTop: StatusBar.currentHeight }}
         contentContainerStyle={{ marginHorizontal: 16 }}
@@ -146,10 +140,10 @@ const FuelLedger = ({ navigation }: Props) => {
                 <Icon as={Fuel} color="#81B2CA" style={{ padding: 14 }} />
               </View>
 
-              <Text style={styles.title}>{item.date}</Text>
+              <Text style={styles.title}>{new Date(item.time).toLocaleTimeString()}</Text>
             </HStack>
 
-            <Text style={styles.cost}>${item.cost}</Text>
+            <Text style={styles.cost}>${item.amount}</Text>
           </View>
         )}
         renderSectionHeader={({ section: { title } }) => <Text style={styles.header}>{title}</Text>}
