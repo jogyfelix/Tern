@@ -13,6 +13,7 @@ import { Fuel } from 'lucide-react-native';
 import { theme } from '../../constants/theme';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import screenNames from '../../constants/screenNames';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface Props {
   navigation: NavigationProp<ParamListBase>;
@@ -58,6 +59,8 @@ const SCROLL_DISTANCE = theme.DIMENSIONS.MAX_HEADER_HEIGHT - theme.DIMENSIONS.MI
 const Service = ({ navigation }: Props) => {
   const { width } = useWindowDimensions();
   const scrollOffsetY = useSharedValue(0);
+  const vehicles = useSelector((state: any) => state.vehicles.vehiclesList);
+  console.log(vehicles);
 
   const rStyle = useAnimatedStyle(() => {
     return {
