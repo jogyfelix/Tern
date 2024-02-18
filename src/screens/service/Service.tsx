@@ -60,7 +60,7 @@ const Service = ({ navigation }: Props) => {
   const { width } = useWindowDimensions();
   const scrollOffsetY = useSharedValue(0);
   const vehicles = useSelector((state: any) => state.vehicles.vehiclesList);
-  console.log(vehicles);
+  const services = useSelector((state: any) => state.services.services);
 
   const rStyle = useAnimatedStyle(() => {
     return {

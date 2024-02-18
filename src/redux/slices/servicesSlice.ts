@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type serviceType = {
+export type serviceType = {
   id: number;
   vehicleId: number;
-  nextServiceDate: Date;
-  addedDate: Date;
+  nextServiceDate: string;
+  nextServiceTime: string;
+  addedDate: string;
   note: string;
 };
 
@@ -20,12 +21,12 @@ export const servicesSlice = createSlice({
   name: 'services',
   initialState,
   reducers: {
-    setServices: (_, action) => {
-      return action.payload;
+    addService: (state, action) => {
+      state.services = [...state.services, action.payload];
     },
   },
 });
 
-export const { setServices } = servicesSlice.actions;
+export const { addService } = servicesSlice.actions;
 
 export default servicesSlice.reducer;
