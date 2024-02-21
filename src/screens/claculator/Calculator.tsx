@@ -14,12 +14,15 @@ import { useSharedValue, withSpring } from 'react-native-reanimated';
 import strings from '../../constants/strings';
 import { AddPeople, TopMenu } from './components';
 import { Banknote, LandPlot, Sparkles } from 'lucide-react-native';
+import { useDispatch } from 'react-redux';
+import { setFuelCalculator } from '../../redux/slices/fuelCalculatorSlice';
 
 interface Props {
   navigation: NavigationProp<ParamListBase>;
 }
 
 const Calculator = ({ navigation }: Props): ReactElement => {
+  const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const [showCustomPeople, setCustomPeople] = useState(false);
   const [enableCalc, setEnableCalc] = useState(true);
@@ -70,6 +73,12 @@ const Calculator = ({ navigation }: Props): ReactElement => {
         setTotalQuantity(Math.ceil(requiredFuel));
         setTotalPrice(Math.ceil(cost));
         setSharePerPerson(Math.ceil(share));
+        dispatch(
+          setFuelCalculator({
+            lastCalculated: Math.ceil(cost),
+            lastDate: new Date().toISOString(),
+          })
+        );
       } else {
         const requiredFuel = (distance * 0.621371) / fuelEffeciency;
         const cost = requiredFuel * fuelPrice;
@@ -77,6 +86,12 @@ const Calculator = ({ navigation }: Props): ReactElement => {
         setTotalQuantity(Math.ceil(requiredFuel));
         setTotalPrice(Math.ceil(cost));
         setSharePerPerson(Math.ceil(share));
+        dispatch(
+          setFuelCalculator({
+            lastCalculated: Math.ceil(cost),
+            lastDate: new Date().toISOString(),
+          })
+        );
       }
       setEnableCalc(false);
     } else {

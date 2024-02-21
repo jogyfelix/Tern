@@ -6,14 +6,23 @@ type userDetailsType = {
   email: string;
   currency: string;
   unit: string;
+  imageId: imageId;
 };
+
+enum imageId {
+  Up = 'UP',
+  Down = 'DOWN',
+  Left = 'LEFT',
+  Right = 'RIGHT',
+}
 
 const initialState: userDetailsType = {
   id: 0,
-  name: '',
+  name: 'Guest',
   email: '',
   currency: '',
   unit: '',
+  imageId: imageId.Down,
 };
 
 export const userSlice = createSlice({

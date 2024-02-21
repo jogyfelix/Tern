@@ -4,6 +4,7 @@ import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import { theme } from '../../../constants/theme';
 import Scooter from '../../../../assets/svg/scooter.svg';
 import Ledger from '../../../../assets/svg/ledger.svg';
+import strings from '../../../constants/strings';
 
 type props = {
   type: 'garage' | 'ledger';
@@ -22,12 +23,10 @@ const EmptyCard = ({ type, onPress }: props) => {
       >
         <VStack alignItems="flex-start" flex={2}>
           <Text style={styles.title}>
-            {type == 'garage' ? 'Add your first vehicle' : 'Add your first fuel entry'}
+            {type == 'garage' ? strings.ADD_NEW_VEHICLE : strings.RECORD_FUEL_EXPENSES}
           </Text>
           <Text style={styles.subTitle}>
-            {type == 'garage'
-              ? 'Lorem ipsum dolor sit amet, consectetur adipisci.'
-              : 'Lorem ipsum dolor sit amet, consectetur adipisci.'}
+            {type == 'garage' ? strings.ADD_VEHICLE_SUB_TITLE : strings.ADD_FUEL_SUB_TITLE}
           </Text>
         </VStack>
         <View style={styles.icon}>{type == 'garage' ? <Scooter /> : <Ledger />}</View>

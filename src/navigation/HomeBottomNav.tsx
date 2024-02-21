@@ -24,7 +24,7 @@ const HomeBottomNav = () => {
       <Tab.Screen
         name={screenNames.SERVICE_SCREEN}
         component={Service}
-        options={{ title: strings.SERVICE }}
+        options={{ title: strings.GARAGE }}
       />
       <Tab.Screen
         name={screenNames.FUEL_LEDGER_SCREEN}

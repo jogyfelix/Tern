@@ -4,8 +4,10 @@ import { theme } from '../../constants/theme';
 import { Icon, VStack } from '@gluestack-ui/themed';
 import { User2 } from 'lucide-react-native';
 import SecondaryBtn from '../../components/SecondaryBtn';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
+  const userDetails = useSelector((state: any) => state.user);
   return (
     <VStack
       flex={1}
@@ -19,7 +21,7 @@ const Profile = () => {
         </View>
 
         <Text style={{ fontFamily: theme.FONTS.default, color: theme.COLORS.text, fontSize: 24 }}>
-          Jogy Felix
+          {userDetails.name}
         </Text>
       </VStack>
       <SecondaryBtn title="Sync data" />

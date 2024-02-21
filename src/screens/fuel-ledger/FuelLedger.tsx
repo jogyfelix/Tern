@@ -23,7 +23,6 @@ import { theme } from '../../constants/theme';
 import { HStack, Icon } from '@gluestack-ui/themed';
 import { Fuel } from 'lucide-react-native';
 import { useSelector } from 'react-redux';
-import * as R from 'ramda';
 import { fuelEntryType } from '../../redux/slices/fuelLedgerSlice';
 
 interface Props {

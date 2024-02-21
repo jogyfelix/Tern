@@ -8,6 +8,7 @@ import AddFuelEntry from '../screens/fuel-ledger/AddFuelEntry';
 import AddVehicle from '../screens/service/AddVehicle';
 import AddService from '../screens/service/AddService';
 import Login from '../screens/login/Login';
+import EditProfile from '../screens/profile/EditProfile';
 
 const Stack = createStackNavigator();
 
@@ -59,6 +60,14 @@ const MainStackNav = () => {
         component={Login}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name={screenNames.EDIT_PROFILE_SCREEN}
+        component={EditProfile}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
         }}
       />
     </Stack.Navigator>
