@@ -38,7 +38,7 @@ const FuelLedger = ({ navigation }: Props) => {
   const [data, setData] = useState<any>([]);
 
   const sortByDate = (list: fuelEntryType[]): fuelEntryType[] => {
-    const sortData = list;
+    const sortData = list.slice();
     return sortData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   };
   const formatList = () => {

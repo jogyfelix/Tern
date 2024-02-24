@@ -8,8 +8,8 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { AddIcon, HStack, Icon } from '@gluestack-ui/themed';
-import { Fuel } from 'lucide-react-native';
+import { AddIcon, HStack, Icon, VStack } from '@gluestack-ui/themed';
+import { Fuel, Wrench } from 'lucide-react-native';
 import { theme } from '../../constants/theme';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import screenNames from '../../constants/screenNames';
@@ -27,18 +27,18 @@ const SCROLL_DISTANCE = theme.DIMENSIONS.MAX_HEADER_HEIGHT - theme.DIMENSIONS.MI
 
 const Service = ({ navigation }: Props) => {
   const { width, height } = useWindowDimensions();
-  const scrollOffsetY = useSharedValue(0);
   const vehicles = useSelector((state: any) => state.vehicles.vehiclesList);
   const services = useSelector((state: any) => state.services.services);
 
   const [serviceList, setServiceList] = useState<any>([]);
 
-  const sortByDate = (list: serviceType[]) => {
-    const sortData = list;
+  const sortByDate = (list: serviceType[]): serviceType[] => {
+    const sortData = list.slice();
     return sortData.sort(
-      (a, b) => new Date(a.nextServiceDate).getTime() - new Date(b.nextServiceDate).getTime()
+      (a, b) => new Date(a.nextServiceTime).getTime() - new Date(b.nextServiceTime).getTime()
     );
   };
+
   const formatList = () => {
     const sortedDates = sortByDate(services);
     const groupedTransactions = {};
@@ -66,13 +66,9 @@ const Service = ({ navigation }: Props) => {
     });
     setServiceList(finalResult);
   };
+
   useEffect(formatList, [services]);
 
-  const fadeStyle = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(scrollOffsetY.value, [0, SCROLL_DISTANCE], [1, 0], Extrapolate.CLAMP),
-    };
-  });
   return (
     <View style={{ backgroundColor: theme.COLORS.black, flex: 1 }}>
       <StatusBar backgroundColor={theme.COLORS.black} />
@@ -93,6 +89,7 @@ const Service = ({ navigation }: Props) => {
       <SectionList
         sections={serviceList}
         keyExtractor={(item, index) => item + index}
+        ListFooterComponent={<View style={{ margin: 100 }} />}
         contentContainerStyle={{
           marginTop: 16,
           marginHorizontal: 16,
@@ -102,7 +99,6 @@ const Service = ({ navigation }: Props) => {
             <AddVehicleList
               data={vehicles}
               onPress={() => navigation.navigate(screenNames.ADD_VEHICLE_SCREEN)}
-              addServicePress={() => navigation.navigate(screenNames.ADD_SERVICE_SCREEN)}
             />
           ) : null
         }
@@ -133,14 +129,6 @@ const Service = ({ navigation }: Props) => {
           ) : null
         }
         scrollEventThrottle={16}
-        onScroll={(event) => {
-          scrollOffsetY.value = withTiming(event.nativeEvent.contentOffset.y, { duration: 100 });
-          // if (event.nativeEvent.contentOffset.y > theme.DIMENSIONS.MIN_HEADER_HEIGHT) {
-          //   setStatusBarColor(theme.COLORS.cardBg);
-          // } else {
-          //   setStatusBarColor(theme.COLORS.cardBg1);
-          // }
-        }}
         renderItem={({ item }) => {
           // console.log(item);
           return (
@@ -149,14 +137,17 @@ const Service = ({ navigation }: Props) => {
                 <View
                   style={{
                     padding: 12,
-                    backgroundColor: 'rgba(129,178,202,0.4)',
+                    backgroundColor: theme.COLORS.black,
                     borderRadius: 10,
                   }}
                 >
-                  <Icon as={Fuel} color="#81B2CA" style={{ padding: 14 }} />
+                  <Icon as={Wrench} color={theme.COLORS.primary} style={{ padding: 14 }} />
                 </View>
 
-                <Text style={styles.title}>{item.vehicleName}</Text>
+                <VStack>
+                  <Text style={styles.title}>{item.vehicleName}</Text>
+                  <Text style={styles.cost}>{item.service}</Text>
+                </VStack>
               </HStack>
             </View>
           );

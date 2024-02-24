@@ -4,6 +4,9 @@ export type serviceType = {
   id: number;
   vehicleId: number;
   vehicleName: string;
+  service: string;
+  odometer: string;
+  status: 'upcoming' | 'complete';
   nextServiceDate: string;
   nextServiceTime: string;
   addedDate: string;
