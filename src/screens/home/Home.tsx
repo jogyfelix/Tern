@@ -42,7 +42,11 @@ const Home = ({ navigation }: Props) => {
       />
       <CalcCard
         lastSum={`${userDetails.currency}${lastCalculated === 0 ? '' : lastCalculated}`}
-        lastDate={moment(lastDate).format('DD MMM')}
+        lastDate={
+          moment(lastDate).format('DD MMM') === 'Invalid date'
+            ? ''
+            : moment(lastDate).format('DD MMM')
+        }
         onPress={() => navigation.navigate(screenNames.CALCULATOR_SCREEN)}
       />
     </ParentView>

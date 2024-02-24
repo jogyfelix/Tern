@@ -53,6 +53,7 @@ const AddService = ({ navigation }: Props) => {
     const newEntry: serviceType = {
       id: newId,
       vehicleId: 1,
+      vehicleName: 'Honda Hornet',
       nextServiceDate: date.toISOString(),
       nextServiceTime: time.toISOString(),
       addedDate: new Date().toISOString(),

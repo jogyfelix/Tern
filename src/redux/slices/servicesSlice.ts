@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export type serviceType = {
   id: number;
   vehicleId: number;
+  vehicleName: string;
   nextServiceDate: string;
   nextServiceTime: string;
   addedDate: string;
