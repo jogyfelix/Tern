@@ -24,7 +24,7 @@ const CalcCard = ({ lastSum, lastDate, onPress }: props) => {
       >
         <HStack alignItems="center" gap={12}>
           <View style={{ padding: 18, backgroundColor: theme.COLORS.black, borderRadius: 28 }}>
-            <Icon as={Fuel} color={theme.COLORS.primary} size="xl" />
+            <Icon as={Fuel} color={theme.COLORS.secondary} size="xl" />
           </View>
 
           <Text style={styles.title}>{strings.FUEL_CALCULATOR}</Text>

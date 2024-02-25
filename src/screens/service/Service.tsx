@@ -141,7 +141,7 @@ const Service = ({ navigation }: Props) => {
                     borderRadius: 10,
                   }}
                 >
-                  <Icon as={Wrench} color={theme.COLORS.primary} style={{ padding: 14 }} />
+                  <Icon as={Wrench} color={theme.COLORS.secondary} style={{ padding: 14 }} />
                 </View>
 
                 <VStack>
