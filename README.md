@@ -1,7 +1,7 @@
 <h1 align="center" style="font-size:28px; line-height:1"><b>Tern</b></h1>
 
  <div align="center">
-    <img width="40%" height="40%" src="tern-app/assets/svg/tern-logo.svg" alt="App icon">
+    <img width="40%" height="40%" src="assets/svg/tern-logo.svg" alt="App icon">
   </div>
 
   <a href="https://play.google.com/store/apps/details?id=com.jo.tern">
