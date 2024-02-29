@@ -43,7 +43,6 @@ const AddVehicleList = ({ data, onPress }: props) => {
             width: width * 0.4,
             borderRadius: 18,
             marginEnd: 12,
-            justifyContent: 'center',
           }}
           onTouchEnd={() =>
             navigation.navigate(screenNames.ADD_SERVICE_SCREEN, {
@@ -58,6 +57,7 @@ const AddVehicleList = ({ data, onPress }: props) => {
               fontFamily: theme.FONTS.default,
               fontSize: 24,
               marginStart: 16,
+              marginTop: 16,
             }}
           >
             {item.name}
