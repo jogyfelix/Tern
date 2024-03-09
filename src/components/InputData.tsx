@@ -37,7 +37,7 @@ const InputData = ({
         isInvalid={false}
         isReadOnly={false}
         borderWidth={0}
-        height={44}
+        height={52}
         borderRadius={theme.DIMENSIONS.inputBorder}
       >
         <InputField

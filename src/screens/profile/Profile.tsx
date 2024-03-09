@@ -5,6 +5,7 @@ import { Icon, VStack } from '@gluestack-ui/themed';
 import { User2 } from 'lucide-react-native';
 import { useSelector } from 'react-redux';
 import GoogleIcon from '../../../assets/svg/google.svg';
+import User1 from '../../../assets/svg/userIcons/User1.svg';
 
 const Profile = () => {
   const userDetails = useSelector((state: any) => state.user);
@@ -29,17 +30,9 @@ const Profile = () => {
             borderBottomRightRadius: 18,
           }}
         />
-        <View
-          style={{
-            backgroundColor: theme.COLORS.cardBg,
-            position: 'absolute',
-            bottom: 0,
-            padding: 10,
-            borderRadius: 20,
-          }}
-        >
-          <Icon as={User2} style={{ padding: 16 }} color={theme.COLORS.text} />
-        </View>
+
+        <User1 height={60} width={60} />
+        {/* <Icon as={User2} style={{ padding: 16 }} color={theme.COLORS.text} /> */}
       </VStack>
       <Text
         style={{

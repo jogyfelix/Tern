@@ -4,8 +4,18 @@ import { theme } from '../../constants/theme';
 import InputData from '../../components/InputData';
 import InputDataLarge from '../../components/InputDataLarge';
 import PrimaryBtn from '../../components/PrimaryBtn';
-import { InputIcon, VStack } from '@gluestack-ui/themed';
-import { Banknote, Fuel, Wallet } from 'lucide-react-native';
+import {
+  Actionsheet,
+  ActionsheetBackdrop,
+  ActionsheetContent,
+  ActionsheetDragIndicator,
+  ActionsheetDragIndicatorWrapper,
+  ActionsheetItem,
+  ActionsheetItemText,
+  InputIcon,
+  VStack,
+} from '@gluestack-ui/themed';
+import { Banknote, Droplets, Fuel, Wallet } from 'lucide-react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import TopTabBar from '../../components/TopTabBar';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
@@ -101,7 +111,7 @@ const AddFuelEntry = ({ navigation }: Props) => {
             keyType="next"
             onSubmitEditing={() => totalQuantityRef.current?.focus()}
             setValue={(value: string) => setAmount(Number(value))}
-            rightIcon={<InputIcon as={Banknote} color={theme.COLORS.text} />}
+            rightIcon={<InputIcon as={Wallet} color={theme.COLORS.text} />}
           />
           <InputData
             reference={totalQuantityRef}
@@ -110,7 +120,7 @@ const AddFuelEntry = ({ navigation }: Props) => {
             keyType="next"
             onSubmitEditing={() => noteRef.current?.focus()}
             setValue={(value: string) => setQuantity(Number(value))}
-            rightIcon={<InputIcon as={Wallet} color={theme.COLORS.text} />}
+            rightIcon={<InputIcon as={Droplets} color={theme.COLORS.text} />}
           />
           <InputDataLarge
             reference={noteRef}
@@ -123,6 +133,23 @@ const AddFuelEntry = ({ navigation }: Props) => {
         <PrimaryBtn title="Add entry" marginHorizontal={16} onPress={onPress} />
         {showDate && <RNDateTimePicker mode="date" value={date} onChange={onDateChange} />}
         {showTime && <RNDateTimePicker mode="time" value={time} onChange={onTimeChange} />}
+        <Actionsheet isOpen={false}>
+          <ActionsheetBackdrop />
+          <ActionsheetContent zIndex={999} bgColor={theme.COLORS.cardBg}>
+            <ActionsheetDragIndicatorWrapper>
+              <ActionsheetDragIndicator />
+            </ActionsheetDragIndicatorWrapper>
+            <ActionsheetItem>
+              <ActionsheetItemText color={theme.COLORS.text}>Petrol</ActionsheetItemText>
+            </ActionsheetItem>
+            <ActionsheetItem>
+              <ActionsheetItemText color={theme.COLORS.text}>Diesel</ActionsheetItemText>
+            </ActionsheetItem>
+            <ActionsheetItem>
+              <ActionsheetItemText color={theme.COLORS.text}>Other</ActionsheetItemText>
+            </ActionsheetItem>
+          </ActionsheetContent>
+        </Actionsheet>
       </KeyboardAwareScrollView>
     </View>
   );

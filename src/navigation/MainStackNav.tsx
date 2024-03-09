@@ -66,8 +66,11 @@ const MainStackNav = () => {
         name={screenNames.EDIT_PROFILE_SCREEN}
         component={EditProfile}
         options={{
-          headerShown: false,
-          presentation: 'modal',
+          headerTitle: 'Settings',
+
+          headerStyle: { backgroundColor: theme.COLORS.black },
+          headerTintColor: 'white',
+          headerTitleStyle: { fontFamily: theme.FONTS.default },
         }}
       />
     </Stack.Navigator>
