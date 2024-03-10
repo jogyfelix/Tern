@@ -4,10 +4,17 @@ import { theme } from '../../../constants/theme';
 import { Text } from 'react-native';
 import { ArrowRight } from 'lucide-react-native';
 
-const EditSettings = () => {
+type props = {
+  currencyPress: () => void;
+  distancePress: () => void;
+  fuelPress: () => void;
+  currency: string;
+};
+
+const EditSettings = ({ currencyPress, distancePress, fuelPress, currency }: props) => {
   return (
     <VStack style={{ backgroundColor: theme.COLORS.cardBg1, padding: 12, borderRadius: 12 }}>
-      <HStack justifyContent="space-between">
+      <HStack justifyContent="space-between" onTouchEnd={currencyPress}>
         <Text
           style={{
             fontFamily: theme.FONTS.default,
@@ -26,7 +33,7 @@ const EditSettings = () => {
               fontSize: 16,
             }}
           >
-            Rupee
+            {currency}
           </Text>
           <Icon as={ArrowRight} color={theme.COLORS.text1} marginTop={4} />
         </HStack>
@@ -37,7 +44,7 @@ const EditSettings = () => {
         marginVertical={10}
         alignSelf="center"
       />
-      <HStack justifyContent="space-between">
+      <HStack justifyContent="space-between" onTouchEnd={distancePress}>
         <Text
           style={{
             fontFamily: theme.FONTS.default,
@@ -67,7 +74,7 @@ const EditSettings = () => {
         marginVertical={10}
         alignSelf="center"
       />
-      <HStack justifyContent="space-between">
+      <HStack justifyContent="space-between" onTouchEnd={fuelPress}>
         <Text
           style={{
             fontFamily: theme.FONTS.default,

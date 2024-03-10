@@ -5,21 +5,45 @@ import {
   ActionsheetContent,
   ActionsheetDragIndicator,
   ActionsheetDragIndicatorWrapper,
-  ActionsheetItem,
-  ActionsheetItemText,
+  ActionsheetFlatList,
 } from '@gluestack-ui/themed';
+import { Dispatch, UnknownAction } from 'redux';
+import { theme } from '../../../constants/theme';
+import { currencies, setCurrency } from '../../../redux/slices/userSlice';
+import { Text, TouchableOpacity } from 'react-native';
 
-const CurrencyPicker = () => {
+type props = { onOpen: boolean; onClose: () => void; dispatch: Dispatch<UnknownAction> };
+
+const CurrencyPicker = ({ onOpen, onClose, dispatch }: props) => {
   return (
-    <Actionsheet isOpen={false} zIndex={999}>
+    <Actionsheet isOpen={onOpen} onClose={onClose} zIndex={999}>
       <ActionsheetBackdrop />
-      <ActionsheetContent h="$72" zIndex={999}>
+      <ActionsheetContent height={'90%'} bgColor={theme.COLORS.cardBg}>
         <ActionsheetDragIndicatorWrapper>
           <ActionsheetDragIndicator />
         </ActionsheetDragIndicatorWrapper>
-        <ActionsheetItem>
-          <ActionsheetItemText>Delete</ActionsheetItemText>
-        </ActionsheetItem>
+        <ActionsheetFlatList
+          data={currencies}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(setCurrency(item));
+                onClose();
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: theme.FONTS.default,
+                  color: theme.COLORS.text,
+                  fontSize: 16,
+                  margin: 16,
+                }}
+              >
+                {item.name} ({item.code}) {item.symbol}
+              </Text>
+            </TouchableOpacity>
+          )}
+        />
       </ActionsheetContent>
     </Actionsheet>
   );

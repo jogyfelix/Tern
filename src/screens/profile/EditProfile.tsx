@@ -4,20 +4,19 @@ import ParentView from '../../components/ParentView';
 import { theme } from '../../constants/theme';
 import InputData from '../../components/InputData';
 import { VStack } from '@gluestack-ui/themed';
-import User1 from '../../../assets/svg/userIcons/User1.svg';
 import CurrencyPicker from './components/CurrencyPicker';
 import DistanceUnitPicker from './components/DistanceUnitPicker';
 import PhotoPicker, { PICTURES } from './components/PhotoPicker';
 import EditSettings from './components/EditSettings';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProfilePicture } from '../../redux/slices/userSlice';
+import { setUserName } from '../../redux/slices/userSlice';
 
 const EditProfile = () => {
   const dispatch = useDispatch();
   const [showPhotoPicker, setShowPhotoPicker] = useState(false);
   const [showCurrencyPicker, setShowCurrencyPicker] = useState(false);
   const [showDistancePicker, setShowDistancePicker] = useState(false);
-  const { imageId } = useSelector((state: any) => state.user);
+  const { imageId, name, currency } = useSelector((state: any) => state.user);
 
   const PrPic = PICTURES.find((value) => {
     return value.imageId === imageId;
@@ -45,11 +44,26 @@ const EditProfile = () => {
         </TouchableOpacity>
 
         <VStack gap={22}>
-          <InputData placeholder="Name" keyboardType="default" keyType="next" />
-          <EditSettings />
+          <InputData
+            value={name}
+            setValue={(value) => dispatch(setUserName(value))}
+            placeholder="Enter name"
+            keyboardType="default"
+            keyType="done"
+          />
+          <EditSettings
+            currencyPress={() => setShowCurrencyPicker(true)}
+            distancePress={() => setShowDistancePicker(true)}
+            fuelPress={() => console.log('fuel press')}
+            currency={`${currency.name} (${currency.symbol})`}
+          />
         </VStack>
       </VStack>
-      <CurrencyPicker />
+      <CurrencyPicker
+        onOpen={showCurrencyPicker}
+        onClose={() => setShowCurrencyPicker(!showCurrencyPicker)}
+        dispatch={dispatch}
+      />
       <DistanceUnitPicker />
       <PhotoPicker
         onOpen={showPhotoPicker}
