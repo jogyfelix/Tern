@@ -9,11 +9,11 @@ type userDetailsType = {
   imageId: imageId;
 };
 
-enum imageId {
-  Up = 'UP',
-  Down = 'DOWN',
-  Left = 'LEFT',
-  Right = 'RIGHT',
+export enum imageId {
+  User1 = 'User1',
+  User2 = 'User2',
+  User3 = 'User3',
+  User4 = 'User4',
 }
 
 const initialState: userDetailsType = {
@@ -22,7 +22,7 @@ const initialState: userDetailsType = {
   email: '',
   currency: '',
   unit: '',
-  imageId: imageId.Down,
+  imageId: imageId.User1,
 };
 
 export const userSlice = createSlice({
@@ -32,9 +32,12 @@ export const userSlice = createSlice({
     setUserDetails: (_, action) => {
       return action.payload;
     },
+    setProfilePicture: (state, action) => {
+      state.imageId = action.payload;
+    },
   },
 });
 
-export const { setUserDetails } = userSlice.actions;
+export const { setUserDetails, setProfilePicture } = userSlice.actions;
 
 export default userSlice.reducer;

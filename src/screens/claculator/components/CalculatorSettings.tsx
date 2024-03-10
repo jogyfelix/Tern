@@ -63,12 +63,7 @@ const CalculatorSettings = ({
     );
   }, [distanceUnit]);
 
-  const fling = Gesture.Fling()
-    .direction(Directions.DOWN)
-    .runOnJS(true)
-    .onStart(() => {
-      onClose();
-    });
+  const fling = Gesture.Fling().direction(Directions.DOWN).runOnJS(true).onStart(onClose);
 
   return (
     <Actionsheet isOpen={isOpen} onClose={onClose} zIndex={999}>

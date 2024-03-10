@@ -7,19 +7,31 @@ import { VStack } from '@gluestack-ui/themed';
 import User1 from '../../../assets/svg/userIcons/User1.svg';
 import CurrencyPicker from './components/CurrencyPicker';
 import DistanceUnitPicker from './components/DistanceUnitPicker';
-import PhotoPicker from './components/PhotoPicker';
+import PhotoPicker, { PICTURES } from './components/PhotoPicker';
 import EditSettings from './components/EditSettings';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProfilePicture } from '../../redux/slices/userSlice';
 
 const EditProfile = () => {
+  const dispatch = useDispatch();
   const [showPhotoPicker, setShowPhotoPicker] = useState(false);
   const [showCurrencyPicker, setShowCurrencyPicker] = useState(false);
   const [showDistancePicker, setShowDistancePicker] = useState(false);
+  const { imageId } = useSelector((state: any) => state.user);
+
+  const PrPic = PICTURES.find((value) => {
+    return value.imageId === imageId;
+  });
+
   return (
     <ParentView type="flex-start">
       <StatusBar backgroundColor={theme.COLORS.black} />
       <VStack justifyContent="space-evenly" flex={0.8}>
-        <TouchableOpacity style={{ alignSelf: 'center', alignItems: 'center' }}>
-          <User1 height={60} width={60} />
+        <TouchableOpacity
+          onPress={() => setShowPhotoPicker(true)}
+          style={{ alignSelf: 'center', alignItems: 'center' }}
+        >
+          {PrPic?.Image}
           <Text
             style={{
               fontFamily: theme.FONTS.default,
@@ -39,7 +51,11 @@ const EditProfile = () => {
       </VStack>
       <CurrencyPicker />
       <DistanceUnitPicker />
-      <PhotoPicker />
+      <PhotoPicker
+        onOpen={showPhotoPicker}
+        onClose={() => setShowPhotoPicker(!showPhotoPicker)}
+        dispatch={dispatch}
+      />
     </ParentView>
   );
 };
