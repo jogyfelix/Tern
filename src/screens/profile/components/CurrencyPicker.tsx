@@ -13,6 +13,7 @@ import { currencies, setCurrency } from '../../../redux/slices/userSlice';
 import { Text, TouchableOpacity } from 'react-native';
 
 type props = { onOpen: boolean; onClose: () => void; dispatch: Dispatch<UnknownAction> };
+const ITEM_HEIGHT = 70;
 
 const CurrencyPicker = ({ onOpen, onClose, dispatch }: props) => {
   return (
@@ -24,6 +25,12 @@ const CurrencyPicker = ({ onOpen, onClose, dispatch }: props) => {
         </ActionsheetDragIndicatorWrapper>
         <ActionsheetFlatList
           data={currencies}
+          initialNumToRender={12}
+          getItemLayout={(data, index) => ({
+            length: ITEM_HEIGHT,
+            offset: ITEM_HEIGHT * index,
+            index,
+          })}
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => {
@@ -36,7 +43,8 @@ const CurrencyPicker = ({ onOpen, onClose, dispatch }: props) => {
                   fontFamily: theme.FONTS.default,
                   color: theme.COLORS.text,
                   fontSize: 16,
-                  margin: 16,
+                  height: ITEM_HEIGHT,
+                  marginHorizontal: 16,
                 }}
               >
                 {item.name} ({item.code}) {item.symbol}

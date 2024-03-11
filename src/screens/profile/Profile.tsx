@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
 import { theme } from '../../constants/theme';
 import { Icon, VStack } from '@gluestack-ui/themed';
-import { User2 } from 'lucide-react-native';
 import { useSelector } from 'react-redux';
 import GoogleIcon from '../../../assets/svg/google.svg';
-import User1 from '../../../assets/svg/userIcons/User1.svg';
+import { PICTURES } from './components/PhotoPicker';
 
 const Profile = () => {
   const userDetails = useSelector((state: any) => state.user);
+  const [PrPic, setPrPic] = useState<ReactElement>();
+
+  useEffect(() => {
+    const component = PICTURES.find((value) => {
+      return value.imageId === userDetails.imageId;
+    });
+    setPrPic(component?.Image);
+  }, [userDetails.imageId]);
   return (
     <VStack flex={1} backgroundColor={theme.COLORS.black}>
       <StatusBar backgroundColor={theme.COLORS.secondary} />
@@ -31,8 +38,7 @@ const Profile = () => {
           }}
         />
 
-        <User1 height={60} width={60} />
-        {/* <Icon as={User2} style={{ padding: 16 }} color={theme.COLORS.text} /> */}
+        {PrPic && <>{PrPic}</>}
       </VStack>
       <Text
         style={{

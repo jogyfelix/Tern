@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import ParentView from '../../components/ParentView';
 import { theme } from '../../constants/theme';
@@ -18,10 +18,14 @@ const EditProfile = () => {
   const [showDistancePicker, setShowDistancePicker] = useState(false);
   const { imageId, name, currency, unit } = useSelector((state: any) => state.user);
   const toast = useToast();
+  const [PrPic, setPrPic] = useState<ReactElement>();
 
-  const PrPic = PICTURES.find((value) => {
-    return value.imageId === imageId;
-  });
+  useEffect(() => {
+    const component = PICTURES.find((value) => {
+      return value.imageId === imageId;
+    });
+    setPrPic(component?.Image);
+  }, [imageId]);
 
   return (
     <ParentView type="flex-start">
@@ -31,7 +35,7 @@ const EditProfile = () => {
           onPress={() => setShowPhotoPicker(true)}
           style={{ alignSelf: 'center', alignItems: 'center' }}
         >
-          {PrPic?.Image}
+          {PrPic && <>{PrPic}</>}
           <Text
             style={{
               fontFamily: theme.FONTS.default,

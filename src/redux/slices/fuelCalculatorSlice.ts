@@ -3,11 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 type fuelCalculatorType = {
   lastCalculated: number;
   lastDate: string;
+  lastCurrency: string;
 };
 
 const initialState: fuelCalculatorType = {
   lastCalculated: 0,
   lastDate: '',
+  lastCurrency: '',
 };
 
 export const fuelCalculatorSlice = createSlice({
