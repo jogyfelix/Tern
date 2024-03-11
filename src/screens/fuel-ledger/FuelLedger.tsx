@@ -39,11 +39,12 @@ const FuelLedger = ({ navigation }: Props) => {
   const scrollOffsetY = useSharedValue(0);
   const [statusBarColor, setStatusBarColor] = useState(theme.COLORS.cardBg1);
   const { ledgerList } = useSelector((state: any) => state.fuelLedger);
+  const userDetails = useSelector((state: any) => state.user);
   const [data, setData] = useState<any>([]);
 
   const sortByDate = (list: fuelEntryType[]): fuelEntryType[] => {
     const sortData = list.slice();
-    return sortData.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    return sortData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   };
   const formatList = () => {
     const sortedDates = sortByDate(ledgerList);
@@ -165,7 +166,10 @@ const FuelLedger = ({ navigation }: Props) => {
               </VStack>
             </HStack>
 
-            <Text style={styles.cost}>${item.amount}</Text>
+            <Text style={styles.cost}>
+              {userDetails.currency.symbol}
+              {item.amount}
+            </Text>
           </View>
         )}
         renderSectionHeader={({ section: { title } }) => <Text style={styles.header}>{title}</Text>}

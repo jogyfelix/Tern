@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { View, useWindowDimensions, StyleSheet } from 'react-native';
+import { View, useWindowDimensions, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { theme } from '../../constants/theme';
 import InputData from '../../components/InputData';
 import InputDataLarge from '../../components/InputDataLarge';
@@ -13,9 +13,20 @@ import {
   ActionsheetItem,
   ActionsheetItemText,
   InputIcon,
+  Toast,
+  ToastDescription,
   VStack,
+  useToast,
 } from '@gluestack-ui/themed';
-import { Banknote, Droplets, Fuel, Wallet } from 'lucide-react-native';
+import {
+  ArrowDown,
+  ArrowDown01,
+  ArrowDownIcon,
+  Banknote,
+  Droplets,
+  Fuel,
+  Wallet,
+} from 'lucide-react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import TopTabBar from '../../components/TopTabBar';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
@@ -24,6 +35,8 @@ import { useKeyboardVisiblity } from '../../utils/useKeyboardVisiblity';
 import RNDateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFuelEntry, fuelEntryType } from '../../redux/slices/fuelLedgerSlice';
+import FuelTypePicker from './components/FuelTypePicker';
+import strings from '../../constants/strings';
 
 interface Props {
   navigation: NavigationProp<ParamListBase>;
@@ -35,17 +48,18 @@ const AddFuelEntry = ({ navigation }: Props) => {
   const dispatch = useDispatch();
   const [showDate, setShowDate] = useState(false);
   const [showTime, setShowTime] = useState(false);
+  const [showFuelPicker, setShowFuelPicker] = useState(false);
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
-  const [type, setType] = useState('');
+  const [type, setType] = useState('Select fuel type');
   const [amount, setAmount] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [note, setNote] = useState('');
   const ledger = useSelector((state: any) => state.fuelLedger.ledgerList);
-  const fuelTypeRef = useRef();
   const totalAmountRef = useRef();
   const totalQuantityRef = useRef();
   const noteRef = useRef();
+  const toast = useToast();
 
   const datePress = () => {
     setShowDate(true);
@@ -66,17 +80,52 @@ const AddFuelEntry = ({ navigation }: Props) => {
   };
 
   const onPress = () => {
-    const newId = (ledger[ledger.length - 1]?.id ?? 0) + 1;
-    const newEntry: fuelEntryType = {
-      id: newId,
-      type,
-      amount,
-      quantity,
-      date: date.toISOString(),
-      time: time.toISOString(),
-      note,
-    };
-    dispatch(addFuelEntry(newEntry));
+    if (type != 'Select fuel type' && amount > 0 && quantity > 0) {
+      const newId = (ledger[ledger.length - 1]?.id ?? 0) + 1;
+      const newEntry: fuelEntryType = {
+        id: newId,
+        type,
+        amount,
+        quantity,
+        date: date.toISOString(),
+        time: time.toISOString(),
+        note,
+      };
+      dispatch(addFuelEntry(newEntry));
+      navigation.goBack();
+      toast.show({
+        placement: 'top',
+        render: ({ id }) => {
+          const toastId = 'toast-' + id;
+          return (
+            <Toast nativeID={toastId} action="info" variant="solid" bg={theme.COLORS.cardBg}>
+              <VStack space="xs">
+                <ToastDescription color={theme.COLORS.text}>
+                  Fuel Entry added successfully
+                </ToastDescription>
+              </VStack>
+            </Toast>
+          );
+        },
+      });
+    } else {
+      console.log(type, amount, quantity);
+      toast.show({
+        placement: 'top',
+        render: ({ id }) => {
+          const toastId = 'toast-' + id;
+          return (
+            <Toast nativeID={toastId} action="info" variant="solid" bg={theme.COLORS.cardBg}>
+              <VStack space="xs">
+                <ToastDescription color={theme.COLORS.text}>
+                  {strings.ADD_DETAILS_GENERAL_TOAST}
+                </ToastDescription>
+              </VStack>
+            </Toast>
+          );
+        },
+      });
+    }
   };
   return (
     <View style={styles.container}>
@@ -94,19 +143,33 @@ const AddFuelEntry = ({ navigation }: Props) => {
       >
         <VStack gap={28} marginTop={28} marginHorizontal={16}>
           <DateSelector datePress={datePress} timePress={timePress} date={date} time={time} />
-          <InputData
-            reference={fuelTypeRef}
-            placeholder="Fuel Type"
-            value={type}
-            setValue={setType}
-            keyboardType="default"
-            keyType="next"
-            onSubmitEditing={() => totalAmountRef.current?.focus()}
-            rightIcon={<InputIcon as={Fuel} color={theme.COLORS.text} />}
-          />
+          <TouchableOpacity
+            onPress={() => setShowFuelPicker(true)}
+            style={{
+              height: 52,
+              borderRadius: theme.DIMENSIONS.inputBorder,
+              backgroundColor: theme.COLORS.cardBg1,
+              justifyContent: 'space-between',
+              paddingStart: 10,
+              paddingEnd: 5,
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: theme.FONTS.default,
+                fontSize: 14,
+                color: type === 'Select fuel type' ? theme.COLORS.text1 : theme.COLORS.white,
+              }}
+            >
+              {type}
+            </Text>
+            <InputIcon as={ArrowDownIcon} color={theme.COLORS.text} />
+          </TouchableOpacity>
           <InputData
             reference={totalAmountRef}
-            placeholder="Total amount"
+            placeholder="Total amount paid"
             value={amount.toString()}
             keyType="next"
             onSubmitEditing={() => totalQuantityRef.current?.focus()}
@@ -133,24 +196,12 @@ const AddFuelEntry = ({ navigation }: Props) => {
         <PrimaryBtn title="Add entry" marginHorizontal={16} onPress={onPress} />
         {showDate && <RNDateTimePicker mode="date" value={date} onChange={onDateChange} />}
         {showTime && <RNDateTimePicker mode="time" value={time} onChange={onTimeChange} />}
-        <Actionsheet isOpen={false}>
-          <ActionsheetBackdrop />
-          <ActionsheetContent zIndex={999} bgColor={theme.COLORS.cardBg}>
-            <ActionsheetDragIndicatorWrapper>
-              <ActionsheetDragIndicator />
-            </ActionsheetDragIndicatorWrapper>
-            <ActionsheetItem>
-              <ActionsheetItemText color={theme.COLORS.text}>Petrol</ActionsheetItemText>
-            </ActionsheetItem>
-            <ActionsheetItem>
-              <ActionsheetItemText color={theme.COLORS.text}>Diesel</ActionsheetItemText>
-            </ActionsheetItem>
-            <ActionsheetItem>
-              <ActionsheetItemText color={theme.COLORS.text}>Other</ActionsheetItemText>
-            </ActionsheetItem>
-          </ActionsheetContent>
-        </Actionsheet>
       </KeyboardAwareScrollView>
+      <FuelTypePicker
+        onOpen={showFuelPicker}
+        onClose={() => setShowFuelPicker(!showFuelPicker)}
+        setType={setType}
+      />
     </View>
   );
 };

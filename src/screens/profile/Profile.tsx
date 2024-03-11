@@ -1,14 +1,18 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
 import { theme } from '../../constants/theme';
-import { Icon, VStack } from '@gluestack-ui/themed';
+import { HStack, Icon, VStack } from '@gluestack-ui/themed';
 import { useSelector } from 'react-redux';
 import GoogleIcon from '../../../assets/svg/google.svg';
 import { PICTURES } from './components/PhotoPicker';
+import { ArrowRight } from 'lucide-react-native';
+import screenNames from '../../constants/screenNames';
+import { useNavigation } from '@react-navigation/native';
 
 const Profile = () => {
   const userDetails = useSelector((state: any) => state.user);
   const [PrPic, setPrPic] = useState<ReactElement>();
+  const navigation = useNavigation();
 
   useEffect(() => {
     const component = PICTURES.find((value) => {
@@ -53,36 +57,51 @@ const Profile = () => {
       </Text>
       <VStack marginHorizontal={theme.DIMENSIONS.defaultHorizontalMargin} gap={16} marginTop={28}>
         <VStack style={{ backgroundColor: theme.COLORS.cardBg, padding: 12, borderRadius: 12 }}>
-          <Text
-            style={{
-              fontFamily: theme.FONTS.default,
-              color: theme.COLORS.text,
-              fontSize: 18,
-              marginVertical: 16,
-            }}
+          <HStack
+            justifyContent="space-between"
+            alignItems="center"
+            onTouchEnd={() => navigation.navigate(screenNames.EDIT_PROFILE_SCREEN)}
           >
-            Settings
-          </Text>
-          <Text
-            style={{
-              fontFamily: theme.FONTS.default,
-              color: theme.COLORS.text,
-              fontSize: 18,
-              marginVertical: 16,
-            }}
-          >
-            Privacy Policy
-          </Text>
-          <Text
-            style={{
-              fontFamily: theme.FONTS.default,
-              color: theme.COLORS.text,
-              fontSize: 18,
-              marginVertical: 16,
-            }}
-          >
-            About
-          </Text>
+            <Text
+              style={{
+                fontFamily: theme.FONTS.default,
+                color: theme.COLORS.text,
+                fontSize: 18,
+                marginVertical: 16,
+              }}
+            >
+              Settings
+            </Text>
+
+            <Icon as={ArrowRight} color={theme.COLORS.text1} marginTop={4} />
+          </HStack>
+          <HStack justifyContent="space-between" alignItems="center">
+            <Text
+              style={{
+                fontFamily: theme.FONTS.default,
+                color: theme.COLORS.text,
+                fontSize: 18,
+                marginVertical: 16,
+              }}
+            >
+              Privacy Policy
+            </Text>
+
+            <Icon as={ArrowRight} color={theme.COLORS.text1} marginTop={4} />
+          </HStack>
+          <HStack justifyContent="space-between" alignItems="center">
+            <Text
+              style={{
+                fontFamily: theme.FONTS.default,
+                color: theme.COLORS.text,
+                fontSize: 18,
+                marginVertical: 16,
+              }}
+            >
+              About
+            </Text>
+            <Icon as={ArrowRight} color={theme.COLORS.text1} marginTop={4} />
+          </HStack>
         </VStack>
         <TouchableOpacity
           style={{

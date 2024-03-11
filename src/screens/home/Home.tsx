@@ -33,12 +33,7 @@ const Home = ({ navigation }: Props) => {
 
   return (
     <ParentView type="flex-start" paddingBottom={112}>
-      <HStack
-        justifyContent="space-between"
-        alignItems="center"
-        marginBottom={16}
-        onTouchEnd={() => navigation.navigate(screenNames.EDIT_PROFILE_SCREEN)}
-      >
+      <HStack justifyContent="space-between" alignItems="center" marginBottom={16}>
         <VStack space="sm">
           <Text style={styles.greetingText}>{strings.GREETING}</Text>
           <Text style={styles.nameText}>{userDetails.name}</Text>
