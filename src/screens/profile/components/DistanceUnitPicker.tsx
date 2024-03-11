@@ -8,18 +8,41 @@ import {
   ActionsheetItem,
   ActionsheetItemText,
 } from '@gluestack-ui/themed';
+import { Dispatch, UnknownAction } from 'redux';
+import { theme } from '../../../constants/theme';
+import { setUnit, unit } from '../../../redux/slices/userSlice';
+import { Text, TouchableOpacity } from 'react-native';
 
-const DistanceUnitPicker = () => {
+type props = { onOpen: boolean; onClose: () => void; dispatch: Dispatch<UnknownAction> };
+
+const DistanceUnitPicker = ({ onOpen, onClose, dispatch }: props) => {
   return (
-    <Actionsheet isOpen={false} zIndex={999}>
+    <Actionsheet isOpen={onOpen} onClose={onClose} zIndex={999}>
       <ActionsheetBackdrop />
-      <ActionsheetContent h="$72" zIndex={999}>
+      <ActionsheetContent bgColor={theme.COLORS.cardBg}>
         <ActionsheetDragIndicatorWrapper>
           <ActionsheetDragIndicator />
         </ActionsheetDragIndicatorWrapper>
-        <ActionsheetItem>
-          <ActionsheetItemText>Delete</ActionsheetItemText>
-        </ActionsheetItem>
+        {unit.map((value, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => {
+              dispatch(setUnit(value));
+              onClose();
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: theme.FONTS.default,
+                color: theme.COLORS.text,
+                fontSize: 16,
+                margin: 16,
+              }}
+            >
+              {value}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </ActionsheetContent>
     </Actionsheet>
   );

@@ -21,7 +21,7 @@ export const currencies = [
   { name: 'Hong Kong Dollar', code: 'HKD', symbol: '$' },
 ];
 
-export const unit = ['Miles', 'Kilometer'];
+export const unit = ['Miles', 'Kilometers'];
 export type currencyType = { name: string; code: string; symbol: string };
 
 type userDetailsType = {

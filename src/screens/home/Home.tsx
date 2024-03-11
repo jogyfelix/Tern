@@ -41,7 +41,7 @@ const Home = ({ navigation }: Props) => {
         onPress={() => navigation.navigate(screenNames.FUEL_LEDGER_SCREEN)}
       />
       <CalcCard
-        lastSum={`${userDetails.currency}${lastCalculated === 0 ? '' : lastCalculated}`}
+        lastSum={`${userDetails.currency.symbol}${lastCalculated === 0 ? '' : lastCalculated}`}
         lastDate={
           moment(lastDate).format('DD MMM') === 'Invalid date'
             ? ''

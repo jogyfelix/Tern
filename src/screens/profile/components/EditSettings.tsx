@@ -9,9 +9,10 @@ type props = {
   distancePress: () => void;
   fuelPress: () => void;
   currency: string;
+  unit: string;
 };
 
-const EditSettings = ({ currencyPress, distancePress, fuelPress, currency }: props) => {
+const EditSettings = ({ currencyPress, distancePress, fuelPress, currency, unit }: props) => {
   return (
     <VStack style={{ backgroundColor: theme.COLORS.cardBg1, padding: 12, borderRadius: 12 }}>
       <HStack justifyContent="space-between" onTouchEnd={currencyPress}>
@@ -63,7 +64,7 @@ const EditSettings = ({ currencyPress, distancePress, fuelPress, currency }: pro
               fontSize: 16,
             }}
           >
-            Kilometer
+            {unit}
           </Text>
           <Icon as={ArrowRight} color={theme.COLORS.text1} marginTop={4} />
         </HStack>
@@ -93,7 +94,7 @@ const EditSettings = ({ currencyPress, distancePress, fuelPress, currency }: pro
               fontSize: 16,
             }}
           >
-            Liter
+            {unit === 'Kilometers' ? 'Liters' : 'Gallons'}
           </Text>
           <Icon as={ArrowRight} color={theme.COLORS.text1} marginTop={4} />
         </HStack>

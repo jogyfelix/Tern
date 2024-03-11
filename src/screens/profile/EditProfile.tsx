@@ -3,7 +3,7 @@ import { Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import ParentView from '../../components/ParentView';
 import { theme } from '../../constants/theme';
 import InputData from '../../components/InputData';
-import { VStack } from '@gluestack-ui/themed';
+import { Toast, ToastDescription, VStack, useToast } from '@gluestack-ui/themed';
 import CurrencyPicker from './components/CurrencyPicker';
 import DistanceUnitPicker from './components/DistanceUnitPicker';
 import PhotoPicker, { PICTURES } from './components/PhotoPicker';
@@ -16,7 +16,8 @@ const EditProfile = () => {
   const [showPhotoPicker, setShowPhotoPicker] = useState(false);
   const [showCurrencyPicker, setShowCurrencyPicker] = useState(false);
   const [showDistancePicker, setShowDistancePicker] = useState(false);
-  const { imageId, name, currency } = useSelector((state: any) => state.user);
+  const { imageId, name, currency, unit } = useSelector((state: any) => state.user);
+  const toast = useToast();
 
   const PrPic = PICTURES.find((value) => {
     return value.imageId === imageId;
@@ -54,8 +55,30 @@ const EditProfile = () => {
           <EditSettings
             currencyPress={() => setShowCurrencyPicker(true)}
             distancePress={() => setShowDistancePicker(true)}
-            fuelPress={() => console.log('fuel press')}
+            fuelPress={() => {
+              toast.show({
+                placement: 'top',
+                render: ({ id }) => {
+                  const toastId = 'toast-' + id;
+                  return (
+                    <Toast
+                      nativeID={toastId}
+                      action="info"
+                      variant="solid"
+                      bg={theme.COLORS.cardBg}
+                    >
+                      <VStack space="xs">
+                        <ToastDescription color={theme.COLORS.text}>
+                          Fuel unit is chosen based on distance unit
+                        </ToastDescription>
+                      </VStack>
+                    </Toast>
+                  );
+                },
+              });
+            }}
             currency={`${currency.name} (${currency.symbol})`}
+            unit={unit}
           />
         </VStack>
       </VStack>
@@ -64,7 +87,11 @@ const EditProfile = () => {
         onClose={() => setShowCurrencyPicker(!showCurrencyPicker)}
         dispatch={dispatch}
       />
-      <DistanceUnitPicker />
+      <DistanceUnitPicker
+        onOpen={showDistancePicker}
+        onClose={() => setShowDistancePicker(!showDistancePicker)}
+        dispatch={dispatch}
+      />
       <PhotoPicker
         onOpen={showPhotoPicker}
         onClose={() => setShowPhotoPicker(!showPhotoPicker)}
