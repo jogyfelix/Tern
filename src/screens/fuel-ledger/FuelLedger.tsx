@@ -166,10 +166,15 @@ const FuelLedger = ({ navigation }: Props) => {
               </VStack>
             </HStack>
 
-            <Text style={styles.cost}>
-              {userDetails.currency.symbol}
-              {item.amount}
-            </Text>
+            <VStack alignItems="center">
+              <Text style={styles.cost}>
+                {item.currency}
+                {item.amount}
+              </Text>
+              <Text style={styles.cost}>
+                {item.quantity} {item.quantityUnit}
+              </Text>
+            </VStack>
           </View>
         )}
         renderSectionHeader={({ section: { title } }) => <Text style={styles.header}>{title}</Text>}

@@ -5,6 +5,8 @@ export type fuelEntryType = {
   type: string;
   amount: number;
   quantity: number;
+  quantityUnit: string;
+  currency: string;
   date: string;
   time: string;
   note: string;

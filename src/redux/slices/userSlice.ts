@@ -22,6 +22,7 @@ export const currencies = [
 ];
 
 export const unit = ['Miles', 'Kilometers'];
+export const fuelUnit = ['Gallons', 'Liters'];
 export type currencyType = { name: string; code: string; symbol: string };
 
 type userDetailsType = {
@@ -30,6 +31,7 @@ type userDetailsType = {
   email: string;
   currency: currencyType;
   unit: string;
+  fuelUnit: string;
   imageId: imageId;
 };
 
@@ -46,6 +48,7 @@ const initialState: userDetailsType = {
   email: '',
   currency: currencies[8],
   unit: unit[1],
+  fuelUnit: fuelUnit[1],
   imageId: imageId.User1,
 };
 
@@ -67,6 +70,7 @@ export const userSlice = createSlice({
     },
     setUnit: (state, action) => {
       state.unit = action.payload;
+      state.fuelUnit = action.payload === unit[0] ? fuelUnit[0] : fuelUnit[1];
     },
   },
 });

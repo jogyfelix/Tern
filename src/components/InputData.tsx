@@ -10,7 +10,7 @@ interface Props {
   value: string;
   setValue: (value: string) => void;
   onSubmitEditing?: () => void;
-  keyboardType?: 'decimal-pad' | 'default';
+  keyboardType?: 'decimal-pad' | 'default' | 'numeric';
 }
 
 const InputData = ({

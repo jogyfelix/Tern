@@ -4,29 +4,8 @@ import { theme } from '../../constants/theme';
 import InputData from '../../components/InputData';
 import InputDataLarge from '../../components/InputDataLarge';
 import PrimaryBtn from '../../components/PrimaryBtn';
-import {
-  Actionsheet,
-  ActionsheetBackdrop,
-  ActionsheetContent,
-  ActionsheetDragIndicator,
-  ActionsheetDragIndicatorWrapper,
-  ActionsheetItem,
-  ActionsheetItemText,
-  InputIcon,
-  Toast,
-  ToastDescription,
-  VStack,
-  useToast,
-} from '@gluestack-ui/themed';
-import {
-  ArrowDown,
-  ArrowDown01,
-  ArrowDownIcon,
-  Banknote,
-  Droplets,
-  Fuel,
-  Wallet,
-} from 'lucide-react-native';
+import { InputIcon, Toast, ToastDescription, VStack, useToast } from '@gluestack-ui/themed';
+import { ArrowDownIcon, Droplets, Wallet } from 'lucide-react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import TopTabBar from '../../components/TopTabBar';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
@@ -56,6 +35,7 @@ const AddFuelEntry = ({ navigation }: Props) => {
   const [quantity, setQuantity] = useState(0);
   const [note, setNote] = useState('');
   const ledger = useSelector((state: any) => state.fuelLedger.ledgerList);
+  const userDetails = useSelector((state: any) => state.user);
   const totalAmountRef = useRef();
   const totalQuantityRef = useRef();
   const noteRef = useRef();
@@ -87,6 +67,8 @@ const AddFuelEntry = ({ navigation }: Props) => {
         type,
         amount,
         quantity,
+        quantityUnit: userDetails.fuelUnit,
+        currency: userDetails.currency.symbol,
         date: date.toISOString(),
         time: time.toISOString(),
         note,
@@ -109,7 +91,6 @@ const AddFuelEntry = ({ navigation }: Props) => {
         },
       });
     } else {
-      console.log(type, amount, quantity);
       toast.show({
         placement: 'top',
         render: ({ id }) => {
@@ -181,6 +162,7 @@ const AddFuelEntry = ({ navigation }: Props) => {
             placeholder="Total quantity"
             value={quantity.toString()}
             keyType="next"
+            keyboardType="numeric"
             onSubmitEditing={() => noteRef.current?.focus()}
             setValue={(value: string) => setQuantity(Number(value))}
             rightIcon={<InputIcon as={Droplets} color={theme.COLORS.text} />}
