@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addFuelEntry, fuelEntryType } from '../../redux/slices/fuelLedgerSlice';
 import FuelTypePicker from './components/FuelTypePicker';
 import strings from '../../constants/strings';
+import DropDownSelect from '../../components/DropDownSelect';
 
 interface Props {
   navigation: NavigationProp<ParamListBase>;
@@ -124,30 +125,11 @@ const AddFuelEntry = ({ navigation }: Props) => {
       >
         <VStack gap={28} marginTop={28} marginHorizontal={16}>
           <DateSelector datePress={datePress} timePress={timePress} date={date} time={time} />
-          <TouchableOpacity
+          <DropDownSelect
             onPress={() => setShowFuelPicker(true)}
-            style={{
-              height: 52,
-              borderRadius: theme.DIMENSIONS.inputBorder,
-              backgroundColor: theme.COLORS.cardBg1,
-              justifyContent: 'space-between',
-              paddingStart: 10,
-              paddingEnd: 5,
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: theme.FONTS.default,
-                fontSize: 14,
-                color: type === 'Select fuel type' ? theme.COLORS.text1 : theme.COLORS.white,
-              }}
-            >
-              {type}
-            </Text>
-            <InputIcon as={ArrowDownIcon} color={theme.COLORS.text} />
-          </TouchableOpacity>
+            text={type}
+            color={type === 'Select fuel type' ? theme.COLORS.text1 : theme.COLORS.white}
+          />
           <InputData
             reference={totalAmountRef}
             placeholder="Total amount paid"

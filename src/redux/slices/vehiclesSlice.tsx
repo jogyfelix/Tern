@@ -3,9 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 export type vehiclesType = {
   id: number;
   type: string;
-  name: string;
-  make: string;
-  note: string;
+  model: string;
+  year: string;
+  odometerReading: string;
 };
 
 type vehiclesListType = {
