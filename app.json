@@ -1,4 +1,11 @@
 {
   "name": "Tern",
-  "displayName": "Tern"
+  "displayName": "Tern",
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "bf455875-f8b7-42c5-aca5-9ff164e27f0e"
+      }
+    }
+  }
 }

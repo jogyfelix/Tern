@@ -24,7 +24,7 @@
     "@react-native-community/datetimepicker": "^7.6.2",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.8",
-    "@react-navigation/stack": "^6.3.25",
+    "@react-navigation/stack": "^6.3.29",
     "@reduxjs/toolkit": "^2.1.0",
     "expo": "^49.0.0",
     "lucide-react-native": "^0.284.0",
