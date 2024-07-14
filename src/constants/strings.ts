@@ -3,11 +3,17 @@ export default {
   APP_TAG_LINE: 'Simplify Your Drive, Empower Your Journey with Tern!',
   FUEL_PRICE: 'Fuel price',
   FUEL_EFFECIENCY: 'Fuel effeciency',
+  FUEL_CALCULATOR: 'Fuel Calculator',
   DISTANCE: 'Distance',
   ADD_PEOPLE: 'Add people',
+  ADD_NEW_VEHICLE: 'Add New Vehicle',
+  RECORD_FUEL_EXPENSES: 'Record Fuel Expenses',
+  ADD_VEHICLE_SUB_TITLE: 'Expand your fleet or update existing vehicle details',
+  ADD_FUEL_SUB_TITLE: `Track your vehicle's fuel consumption effortlessly`,
   CLEAR: 'Clear',
   CALCULATE: 'Calculate',
   ADD_DETAILS_TOAST: 'Please provide the necessary details to proceed with the calculation.',
+  ADD_DETAILS_GENERAL_TOAST: 'Please provide the necessary details to proceed',
   NUMBER_OF_PEOPLE: 'Number of people',
   ADD: 'Add',
   PER: 'per',
@@ -20,5 +26,9 @@ export default {
   HOME: 'Home',
   PROFILE: 'Profile',
   SERVICE: 'Service',
+  GARAGE: 'Garage',
   LEDGER: 'Ledger',
+  GREETING: 'Hey there..',
 };
+
+export const RESET_APP = 'reset_application';

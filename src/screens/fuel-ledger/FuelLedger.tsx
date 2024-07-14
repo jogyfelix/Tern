@@ -1,5 +1,14 @@
-import React, { useState } from 'react';
-import { View, Text, SectionList, StyleSheet, StatusBar } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  SectionList,
+  StyleSheet,
+  StatusBar,
+  SectionListData,
+  SectionListProps,
+  useWindowDimensions,
+} from 'react-native';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import screenNames from '../../constants/screenNames';
 import Fab from '../../components/Fab';
@@ -12,53 +21,60 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { theme } from '../../constants/theme';
-import { HStack, Icon } from '@gluestack-ui/themed';
-import { Fuel } from 'lucide-react-native';
+import { HStack, Icon, VStack } from '@gluestack-ui/themed';
+import { Droplet, Fuel } from 'lucide-react-native';
+import { useSelector } from 'react-redux';
+import { fuelEntryType } from '../../redux/slices/fuelLedgerSlice';
+import FuelEmpty from '../../../assets/svg/fuel-ledger-empty.svg';
+import moment from 'moment';
 
 interface Props {
   navigation: NavigationProp<ParamListBase>;
 }
 
-const DATA = [
-  {
-    title: 'Januray, 2024',
-    data: [
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-    ],
-  },
-  {
-    title: 'February, 2024',
-    data: [
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-    ],
-  },
-  {
-    title: 'March, 2024',
-    data: [
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-    ],
-  },
-  {
-    title: 'April, 2024',
-    data: [
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-    ],
-  },
-];
-
 const SCROLL_DISTANCE = theme.DIMENSIONS.MAX_HEADER_HEIGHT - theme.DIMENSIONS.MIN_HEADER_HEIGHT;
 
 const FuelLedger = ({ navigation }: Props) => {
+  const { height } = useWindowDimensions();
   const scrollOffsetY = useSharedValue(0);
   const [statusBarColor, setStatusBarColor] = useState(theme.COLORS.cardBg1);
+  const { ledgerList } = useSelector((state: any) => state.fuelLedger);
+  const userDetails = useSelector((state: any) => state.user);
+  const [data, setData] = useState<any>([]);
+
+  const sortByDate = (list: fuelEntryType[]): fuelEntryType[] => {
+    const sortData = list.slice();
+    return sortData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  };
+  const formatList = () => {
+    const sortedDates = sortByDate(ledgerList);
+    const groupedTransactions = {};
+
+    sortedDates.forEach((transaction: fuelEntryType) => {
+      const date = new Date(transaction.date).toDateString();
+      if (!groupedTransactions[date]) {
+        groupedTransactions[date] = [];
+      }
+      groupedTransactions[date].push(transaction);
+    });
+
+    const finalResult = Object.keys(groupedTransactions).map((date) => {
+      if (date === new Date().toDateString()) {
+        return {
+          title: 'Today',
+          data: groupedTransactions[date],
+        };
+      } else {
+        return {
+          title: date,
+          data: groupedTransactions[date],
+        };
+      }
+    });
+    setData(finalResult);
+  };
+
+  useEffect(formatList, [ledgerList]);
 
   const rStyle = useAnimatedStyle(() => {
     return {
@@ -84,28 +100,22 @@ const FuelLedger = ({ navigation }: Props) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar animated backgroundColor={statusBarColor} />
-      <Animated.View style={[rStyle]}>
-        <Animated.Text
-          style={[
-            {
-              color: theme.COLORS.text,
-              fontSize: 24,
-              marginHorizontal: 16,
-              textAlign: 'center',
-              position: 'absolute',
-              bottom: 16,
-              fontFamily: theme.FONTS.default,
-            },
-            textStyle,
-          ]}
+      <StatusBar animated backgroundColor={theme.COLORS.black} />
+      <View style={{ height: theme.DIMENSIONS.MIN_HEADER_HEIGHT, justifyContent: 'center' }}>
+        <Text
+          style={{
+            fontSize: 22,
+            color: theme.COLORS.text,
+            fontFamily: theme.FONTS.default,
+            marginHorizontal: theme.DIMENSIONS.defaultHorizontalMargin,
+          }}
         >
           Fuel Ledger
-        </Animated.Text>
-      </Animated.View>
+        </Text>
+      </View>
 
       <SectionList
-        sections={DATA}
+        sections={data}
         keyExtractor={(item, index) => item + index}
         style={{ marginTop: StatusBar.currentHeight }}
         contentContainerStyle={{ marginHorizontal: 16 }}
@@ -119,19 +129,52 @@ const FuelLedger = ({ navigation }: Props) => {
             setStatusBarColor(theme.COLORS.cardBg1);
           }
         }}
+        ListEmptyComponent={
+          <View
+            style={{
+              height: height * 0.8,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <FuelEmpty />
+            <Text
+              style={{
+                color: theme.COLORS.white,
+                fontFamily: theme.FONTS.default,
+                fontSize: 18,
+                marginTop: 8,
+                textAlign: 'center',
+              }}
+            >
+              Your fuel ledger is empty{'\n'}
+              <Text
+                style={{ color: theme.COLORS.text1 }}
+              >{`Tap the '+' button to add fuel entries`}</Text>
+            </Text>
+          </View>
+        }
         renderItem={({ item }) => (
           <View style={styles.item}>
             <HStack alignItems="center" gap={10}>
-              <View
-                style={{ padding: 12, backgroundColor: 'rgba(129,178,202,0.4)', borderRadius: 10 }}
-              >
-                <Icon as={Fuel} color="#81B2CA" style={{ padding: 14 }} />
+              <View style={{ padding: 12, backgroundColor: theme.COLORS.black, borderRadius: 10 }}>
+                <Icon as={Droplet} color={theme.COLORS.secondary} style={{ padding: 14 }} />
               </View>
-
-              <Text style={styles.title}>{item.date}</Text>
+              <VStack>
+                <Text style={styles.title}>{item.type}</Text>
+                <Text style={styles.title}>{moment(item.time).format('hh:mm a')}</Text>
+              </VStack>
             </HStack>
 
-            <Text style={styles.cost}>${item.cost}</Text>
+            <VStack alignItems="center">
+              <Text style={styles.cost}>
+                {item.currency}
+                {item.amount}
+              </Text>
+              <Text style={styles.cost}>
+                {item.quantity} {item.quantityUnit}
+              </Text>
+            </VStack>
           </View>
         )}
         renderSectionHeader={({ section: { title } }) => <Text style={styles.header}>{title}</Text>}

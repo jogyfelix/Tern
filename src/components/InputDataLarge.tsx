@@ -30,9 +30,6 @@ const InputData = ({
   onSubmitEditing,
 }: Props): ReactElement => {
   const onChange = (text: string): void => {
-    if (isNaN(Number(text))) {
-      return;
-    }
     setValue(text);
   };
 

@@ -5,7 +5,10 @@ import Calculator from '../screens/claculator/Calculator';
 import { theme } from '../constants/theme';
 import HomeBottomNav from './HomeBottomNav';
 import AddFuelEntry from '../screens/fuel-ledger/AddFuelEntry';
+import AddVehicle from '../screens/service/AddVehicle';
+import AddService from '../screens/service/AddService';
 import Login from '../screens/login/Login';
+import EditProfile from '../screens/profile/EditProfile';
 
 const Stack = createStackNavigator();
 
@@ -33,7 +36,23 @@ const MainStackNav = () => {
         component={AddFuelEntry}
         options={{
           headerShown: false,
-          presentation: 'fullScreenModal',
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name={screenNames.ADD_VEHICLE_SCREEN}
+        component={AddVehicle}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name={screenNames.ADD_SERVICE_SCREEN}
+        component={AddService}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
         }}
       />
       <Stack.Screen
@@ -41,6 +60,17 @@ const MainStackNav = () => {
         component={Login}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name={screenNames.EDIT_PROFILE_SCREEN}
+        component={EditProfile}
+        options={{
+          headerTitle: 'Settings',
+
+          headerStyle: { backgroundColor: theme.COLORS.black },
+          headerTintColor: 'white',
+          headerTitleStyle: { fontFamily: theme.FONTS.default },
         }}
       />
     </Stack.Navigator>

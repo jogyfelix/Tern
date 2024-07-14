@@ -94,13 +94,19 @@ const CustomBottomTab = ({ state, descriptors, navigation }: props) => {
               style={styles.itemParent}
             >
               {index == 0 ? (
-                <Icon as={HomeIcon} color={theme.COLORS.white} />
+                <Icon as={HomeIcon} color={isFocused ? theme.COLORS.white : theme.COLORS.black1} />
               ) : index == 1 ? (
-                <Icon as={WrenchIcon} color={theme.COLORS.white} />
+                <Icon
+                  as={WrenchIcon}
+                  color={isFocused ? theme.COLORS.white : theme.COLORS.black1}
+                />
               ) : index == 2 ? (
-                <Icon as={PaperclipIcon} color={theme.COLORS.white} />
+                <Icon
+                  as={PaperclipIcon}
+                  color={isFocused ? theme.COLORS.white : theme.COLORS.black1}
+                />
               ) : (
-                <Icon as={UserIcon} color={theme.COLORS.white} />
+                <Icon as={UserIcon} color={isFocused ? theme.COLORS.white : theme.COLORS.black1} />
               )}
 
               {isFocused && (
@@ -128,7 +134,7 @@ const styles = StyleSheet.create({
   navContainer: {
     width: NAV_WIDTH,
     height: 82,
-    backgroundColor: theme.COLORS.secondary,
+    backgroundColor: theme.COLORS.primary,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 16,

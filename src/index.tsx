@@ -5,6 +5,9 @@ import { config } from '@gluestack-ui/config';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ViewStyle } from 'react-native';
 import MainStackNav from './navigation/MainStackNav';
+import { Provider } from 'react-redux';
+import Store, { Persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const App = () => {
   return (
@@ -12,7 +15,11 @@ const App = () => {
       <GluestackUIProvider config={config}>
         <StyledProvider config={config}>
           <GestureHandlerRootView style={$container}>
-            <MainStackNav />
+            <Provider store={Store}>
+              <PersistGate persistor={Persistor}>
+                <MainStackNav />
+              </PersistGate>
+            </Provider>
           </GestureHandlerRootView>
         </StyledProvider>
       </GluestackUIProvider>

@@ -14,7 +14,7 @@ interface Props {
   totalPrice: number;
   totalQuantity: number;
   currency: string;
-  distanceUnit: distanceUnittType;
+  distanceUnit: string;
   scale: SharedValue<any>;
 }
 
@@ -49,7 +49,7 @@ const CalculatorMain = ({
         }}
       >
         <TextComponent fontSize={48} textAlign="center" numberOfLines={1} ellipsizeMode="tail">
-          {currency.startsWith('I') ? '₹' : currency.startsWith('U') ? '$' : '£'}
+          {currency}
           {totalPrice}
         </TextComponent>
         <TextComponent
@@ -81,7 +81,7 @@ const CalculatorMain = ({
               textAlign="center"
               color={theme.COLORS.text}
             >
-              {currency.startsWith('I') ? '₹' : currency.startsWith('U') ? '$' : '£'}
+              {currency}
               {fuelPrice}
             </TextComponent>
           </View>
@@ -94,7 +94,7 @@ const CalculatorMain = ({
               textAlign="center"
               color={theme.COLORS.text}
             >
-              {currency.startsWith('I') ? '₹' : currency.startsWith('U') ? '$' : '£'}
+              {currency}
               {sharePerPerson}
             </TextComponent>
           </View>

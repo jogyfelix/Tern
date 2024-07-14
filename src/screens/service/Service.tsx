@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, SectionList, StatusBar, StyleSheet, useWindowDimensions } from 'react-native';
 import Fab from '../../components/Fab';
 import Animated, {
@@ -8,143 +8,152 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { HStack, Icon } from '@gluestack-ui/themed';
-import { Fuel } from 'lucide-react-native';
+import { AddIcon, HStack, Icon, VStack } from '@gluestack-ui/themed';
+import { Fuel, Wrench } from 'lucide-react-native';
 import { theme } from '../../constants/theme';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import screenNames from '../../constants/screenNames';
+import { useDispatch, useSelector } from 'react-redux';
+import AddVehicleList from './components/AddVehicleList';
+import strings from '../../constants/strings';
+import GarageEmpty from '../../../assets/svg/garage-empty.svg';
+import { serviceType } from '../../redux/slices/servicesSlice';
 
-const DATA = [
-  {
-    title: 'Januray, 2024',
-    data: [
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-    ],
-  },
-  {
-    title: 'February, 2024',
-    data: [
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-    ],
-  },
-  {
-    title: 'March, 2024',
-    data: [
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-    ],
-  },
-  {
-    title: 'April, 2024',
-    data: [
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-      { date: '10 Jan 2024', cost: 200 },
-    ],
-  },
-];
+interface Props {
+  navigation: NavigationProp<ParamListBase>;
+}
 
 const SCROLL_DISTANCE = theme.DIMENSIONS.MAX_HEADER_HEIGHT - theme.DIMENSIONS.MIN_HEADER_HEIGHT;
 
-const Service = () => {
-  const { width } = useWindowDimensions();
-  const scrollOffsetY = useSharedValue(0);
+const Service = ({ navigation }: Props) => {
+  const { width, height } = useWindowDimensions();
+  const vehicles = useSelector((state: any) => state.vehicles.vehiclesList);
+  const services = useSelector((state: any) => state.services.services);
 
-  const rStyle = useAnimatedStyle(() => {
-    return {
-      height: interpolate(
-        scrollOffsetY.value,
-        [0, SCROLL_DISTANCE],
-        [theme.DIMENSIONS.MAX_HEADER_HEIGHT, theme.DIMENSIONS.MIN_HEADER_HEIGHT],
-        Extrapolate.CLAMP
-      ),
-      // backgroundColor: interpolateColor(
-      //   scrollOffsetY.value,
-      //   [0, SCROLL_DISTANCE],
-      //   [theme.COLORS.cardBg1, theme.COLORS.cardBg]
-      // ),
-    };
-  });
+  const [serviceList, setServiceList] = useState<any>([]);
 
-  const fadeStyle = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(scrollOffsetY.value, [0, SCROLL_DISTANCE], [1, 0], Extrapolate.CLAMP),
-    };
-  });
+  const sortByDate = (list: serviceType[]): serviceType[] => {
+    const sortData = list.slice();
+    return sortData.sort(
+      (a, b) => new Date(a.nextServiceTime).getTime() - new Date(b.nextServiceTime).getTime()
+    );
+  };
+
+  const formatList = () => {
+    const sortedDates = sortByDate(services);
+    const groupedTransactions = {};
+
+    sortedDates.forEach((transaction: serviceType) => {
+      const date = new Date(transaction.nextServiceDate).toDateString();
+      if (!groupedTransactions[date]) {
+        groupedTransactions[date] = [];
+      }
+      groupedTransactions[date].push(transaction);
+    });
+
+    const finalResult = Object.keys(groupedTransactions).map((date) => {
+      if (date === new Date().toDateString()) {
+        return {
+          title: 'Today',
+          data: groupedTransactions[date],
+        };
+      } else {
+        return {
+          title: date,
+          data: groupedTransactions[date],
+        };
+      }
+    });
+    setServiceList(finalResult);
+  };
+
+  useEffect(formatList, [services]);
+
   return (
     <View style={{ backgroundColor: theme.COLORS.black, flex: 1 }}>
       <StatusBar backgroundColor={theme.COLORS.black} />
-      <Animated.View style={rStyle}>
-        <View style={{ height: theme.DIMENSIONS.MIN_HEADER_HEIGHT, justifyContent: 'center' }}>
-          <Text
-            style={{
-              fontSize: 22,
-              color: theme.COLORS.text,
-              fontFamily: theme.FONTS.default,
-              marginHorizontal: theme.DIMENSIONS.defaultHorizontalMargin,
-            }}
-          >
-            Your Vehicles
-          </Text>
-        </View>
-        <Animated.View style={fadeStyle}>
-          <HStack marginStart={16} gap={16} marginVertical={16}>
-            <View
-              style={{
-                backgroundColor: theme.COLORS.cardBg,
-                height: 160,
-                width: width * 0.4,
-                borderRadius: 18,
-              }}
-            />
-            <View
-              style={{
-                backgroundColor: theme.COLORS.cardBg,
-                height: 160,
-                width: width * 0.4,
-                borderRadius: 18,
-              }}
-            />
-          </HStack>
-        </Animated.View>
-      </Animated.View>
+
+      <View style={{ height: theme.DIMENSIONS.MIN_HEADER_HEIGHT, justifyContent: 'center' }}>
+        <Text
+          style={{
+            fontSize: 22,
+            color: theme.COLORS.text,
+            fontFamily: theme.FONTS.default,
+            marginHorizontal: theme.DIMENSIONS.defaultHorizontalMargin,
+          }}
+        >
+          {strings.GARAGE}
+        </Text>
+      </View>
+
       <SectionList
-        sections={DATA}
+        sections={serviceList}
         keyExtractor={(item, index) => item + index}
-        style={{ marginTop: StatusBar.currentHeight }}
-        contentContainerStyle={{ marginHorizontal: 16 }}
-        scrollEventThrottle={16}
-        ListFooterComponent={() => <View style={{ marginVertical: 110 }} />}
-        onScroll={(event) => {
-          scrollOffsetY.value = withTiming(event.nativeEvent.contentOffset.y, { duration: 100 });
-          // if (event.nativeEvent.contentOffset.y > theme.DIMENSIONS.MIN_HEADER_HEIGHT) {
-          //   setStatusBarColor(theme.COLORS.cardBg);
-          // } else {
-          //   setStatusBarColor(theme.COLORS.cardBg1);
-          // }
+        ListFooterComponent={<View style={{ margin: 100 }} />}
+        contentContainerStyle={{
+          marginTop: 16,
+          marginHorizontal: 16,
         }}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <HStack alignItems="center" gap={10}>
-              <View
-                style={{ padding: 12, backgroundColor: 'rgba(129,178,202,0.4)', borderRadius: 10 }}
+        ListHeaderComponent={
+          vehicles.length > 0 ? (
+            <AddVehicleList
+              data={vehicles}
+              onPress={() => navigation.navigate(screenNames.ADD_VEHICLE_SCREEN)}
+            />
+          ) : null
+        }
+        ListEmptyComponent={
+          vehicles.length <= 0 ? (
+            <View
+              style={{
+                height: height * 0.8,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              onTouchEnd={() => navigation.navigate(screenNames.ADD_VEHICLE_SCREEN)}
+            >
+              <GarageEmpty />
+              <Text
+                style={{
+                  color: theme.COLORS.white,
+                  fontFamily: theme.FONTS.default,
+                  fontSize: 18,
+                  marginTop: 8,
+                  textAlign: 'center',
+                }}
               >
-                <Icon as={Fuel} color="#81B2CA" style={{ padding: 14 }} />
-              </View>
+                Your garage is empty{'\n'}
+                <Text style={{ color: theme.COLORS.text1 }}>Tap to add vehicles</Text>
+              </Text>
+            </View>
+          ) : null
+        }
+        scrollEventThrottle={16}
+        renderItem={({ item }) => {
+          // console.log(item);
+          return (
+            <View style={styles.item}>
+              <HStack alignItems="center" gap={10}>
+                <View
+                  style={{
+                    padding: 12,
+                    backgroundColor: theme.COLORS.black,
+                    borderRadius: 10,
+                  }}
+                >
+                  <Icon as={Wrench} color={theme.COLORS.secondary} style={{ padding: 14 }} />
+                </View>
 
-              <Text style={styles.title}>{item.date}</Text>
-            </HStack>
-
-            <Text style={styles.cost}>${item.cost}</Text>
-          </View>
-        )}
+                <VStack>
+                  <Text style={styles.title}>{item.vehicleName}</Text>
+                  <Text style={styles.cost}>{item.service}</Text>
+                </VStack>
+              </HStack>
+            </View>
+          );
+        }}
         renderSectionHeader={({ section: { title } }) => <Text style={styles.header}>{title}</Text>}
       />
-
-      <Fab />
     </View>
   );
 };
@@ -168,7 +177,7 @@ const styles = StyleSheet.create({
     color: theme.COLORS.text,
     fontFamily: theme.FONTS.default,
     textAlign: 'center',
-    marginVertical: 8,
+    marginVertical: 12,
   },
   title: {
     fontSize: 16,

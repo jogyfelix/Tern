@@ -1,26 +1,38 @@
-import { HStack, VStack } from '@gluestack-ui/themed';
+import { HStack, Icon, VStack } from '@gluestack-ui/themed';
 import React from 'react';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, View } from 'react-native';
 import { theme } from '../../../constants/theme';
+import strings from '../../../constants/strings';
+import { Fuel } from 'lucide-react-native';
 
 type props = {
+  lastSum: string;
+  lastDate: string;
   onPress: () => void;
 };
 
-const CalcCard = ({ onPress }: props) => {
+const CalcCard = ({ lastSum, lastDate, onPress }: props) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <HStack
         alignItems="center"
         justifyContent="space-between"
         backgroundColor={theme.COLORS.cardBg}
-        padding={16}
+        paddingHorizontal={16}
+        paddingVertical={16}
         borderRadius={theme.DIMENSIONS.cardBorder}
       >
-        <Text style={styles.title}>Fuel Calculator</Text>
+        <HStack alignItems="center" gap={12}>
+          <View style={{ padding: 18, backgroundColor: theme.COLORS.black, borderRadius: 28 }}>
+            <Icon as={Fuel} color={theme.COLORS.secondary} size="xl" />
+          </View>
+
+          <Text style={styles.title}>{strings.FUEL_CALCULATOR}</Text>
+        </HStack>
+
         <VStack alignItems="center">
-          <Text style={styles.cost}>$160</Text>
-          <Text style={styles.date}>14 Jan</Text>
+          <Text style={styles.cost}>{lastSum}</Text>
+          <Text style={styles.date}>{lastDate}</Text>
         </VStack>
       </HStack>
     </TouchableOpacity>
